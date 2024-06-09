@@ -11,6 +11,7 @@ import NewScreen from "../src/driverLicense/NewScreen";
 import indexCapacity from "../src/driverLicense/IndexCapacity";
 import Examination from "../src/driverLicense/Examination";
 import Category from "../src/driverLicense/Category";
+import Questions from "../src/driverLicense/Questions";
 import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -95,6 +96,20 @@ export default function App() {
           component={Category}
           options={({ navigation }) => ({
             title: "ข้อสอบใบขับขี่",
+            headerBackTitleVisible: false,
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+          })}
+        />
+        <Stack.Screen
+          name="Questions"
+          component={Questions}
+          options={({ navigation }) => ({
+            title: "ตอบคำถาม",
             headerBackTitleVisible: false,
             headerShadowVisible: false,
             headerStyle: {
