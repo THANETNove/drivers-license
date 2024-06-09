@@ -138,7 +138,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.white,
         marginHorizontal: 16,
-        paddingBottom: 50,
         borderRadius: 6,
         paddingHorizontal: 16,
 
@@ -193,6 +192,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
+        marginBottom: 150
     },
     categoryIndex: {
         color: Colors.black,
