@@ -13,7 +13,6 @@ import Category_4 from '../questionsCategory/category_4.json'; // ปรับ�
 
 
 
-
 const Questions = ({ route, navigation }) => {
     const { category, categoryIndex } = route.params;
 
@@ -83,10 +82,13 @@ const Questions = ({ route, navigation }) => {
                     showsHorizontalScrollIndicator={false}>
                     {questions.map((question, questionIndex) => (
                         <View key={questionIndex} style={styles.questionContainer}>
-                            <Text style={styles.questionText}>{question.index}. {question.question}</Text>
+                            {/*  <Text style={styles.questionText}>{question.index}. {question.question}</Text>
                             {question.img && (
                                 <Image source={{ uri: question.img }} style={styles.image} />
-                            )}
+                            )} */}
+                            <Image source={{ uri: question.img }} style={styles.imageQue} />
+
+                            <Text>{question.img}</Text>
                             <RadioButton.Group
                                 onValueChange={(newValue) => handleSelect(questionIndex, newValue)}
                                 value={selectedAnswers[questionIndex]?.enterAnswer}
@@ -205,6 +207,11 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
     },
+    imageQue: {
+        width: "100%",
+        height: "auto"
+    }
+
 });
 
 export default Questions;
