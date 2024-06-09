@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { Colors } from "@/constants/Colors";
@@ -12,6 +12,8 @@ import indexCapacity from "../src/capacity/IndexCapacity";
 import Examination from "../src/capacity/Examination";
 import Category from "../src/capacity/Category";
 import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
+import { useColorScheme } from "@/hooks/useColorScheme";
+
 
 const Stack = createNativeStackNavigator();
 // ฟังก์ชันโหลดฟอนต์
@@ -29,6 +31,7 @@ const loadFonts = async () => {
 
 
 export default function App() {
+  const colorScheme = useColorScheme();
 
   const [fontsLoaded, setFontsLoaded] = React.useState(false);
 
@@ -42,6 +45,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        barStyle="light-content" // ตั้งค่าสีของข้อความและไอคอนในแถบสถานะเป็นสีขาว
+        backgroundColor={Colors[colorScheme ?? "light"].background} // ตั้งค่าสีพื้นหลังของแถบสถานะ
+      />
       <Stack.Navigator initialRouteName="IndexCapacity">
         <Stack.Screen
           name="indexCapacity"
@@ -75,6 +82,7 @@ export default function App() {
           options={({ navigation }) => ({
             title: "หมวดหมู่ข้อสอบใบขับขี่",
             headerShadowVisible: false,
+            headerBackTitleVisible: false,
             headerStyle: {
               backgroundColor: Colors.primary,
             },
@@ -86,7 +94,8 @@ export default function App() {
           name="Category"
           component={Category}
           options={({ navigation }) => ({
-            title: "หมวดหมู่",
+            title: "ข้อสอบใบขับขี่",
+            headerBackTitleVisible: false,
             headerShadowVisible: false,
             headerStyle: {
               backgroundColor: Colors.primary,

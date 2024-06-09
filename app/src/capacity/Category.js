@@ -19,10 +19,7 @@ const Category = ({ route, navigation }) => {
         <ScreenContainer>
             <View style={styles.container}>
                 {buttons.map((button, index) => (
-                    <Pressable key={index} onPress={() => navigation.navigate('Category', {
-                        category: button.category,
-                        index: button.categoryIndex,
-                    })}>
+                    <Pressable key={index} >
                         <LinearGradient
                             colors={['#8B317E', '#662D91']}
                             start={{ x: 0, y: 0 }}

@@ -14,11 +14,11 @@ const Examination = ({ navigation }) => {
         { text: 'ข้อสอบใบขับขี่หมวดที่ 2', category: 'กฎหมายว่าด้วยจราจรทางบก', categoryIndex: 2 },
         { text: 'ข้อสอบใบขับขี่หมวดที่ 3', category: 'เครื่องหมายพื้นทาง', categoryIndex: 3 },
         { text: 'ข้อสอบใบขับขี่หมวดที่ 4', category: ' ป้ายบังคับ', categoryIndex: 4 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 5', category: 'Category C', categoryIndex: 5 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 6', category: 'Category D', categoryIndex: 6 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 7', category: 'Category E', categoryIndex: 7 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 8', category: 'Category F', categoryIndex: 8 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 9', category: 'Category G', categoryIndex: 9 },
+        { text: 'ข้อสอบใบขับขี่หมวดที่ 5', category: 'ป้ายเตือน', categoryIndex: 5 },
+        { text: 'ข้อสอบใบขับขี่หมวดที่ 6', category: 'ป้ายแนะนำ', categoryIndex: 6 },
+        { text: 'ข้อสอบใบขับขี่หมวดที่ 7', category: 'มารยาทและจติสานึก', categoryIndex: 7 },
+        { text: 'ข้อสอบใบขับขี่หมวดที่ 8', category: 'เทคนิคการขับรถอย่างปลอดภัย', categoryIndex: 8 },
+        { text: 'ข้อสอบใบขับขี่หมวดที่ 9', category: 'การบำรุงรักษารถ', categoryIndex: 9 },
     ];
     return (
         <ScreenContainer>

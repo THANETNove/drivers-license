@@ -1,7 +1,7 @@
 // Capacity.js
 import { Colors } from "@/constants/Colors";
 import React from "react";
-import { Image, ScrollView, View, Text, Button, StyleSheet, Pressable } from "react-native";
+import { Image, ScrollView, View, Text, Button, StyleSheet, Pressable,StatusBar } from "react-native";
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
 
 
