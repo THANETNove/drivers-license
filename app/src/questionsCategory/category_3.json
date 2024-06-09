@@ -8,7 +8,7 @@
       "ค. ขับรถให้ช้าลงถ้าเห็นว่าจะไม่ปลอดภัยต่อรถคันอื่นหรือคนเดินเท้าในทางข้างหน้า ต้องหยุดรถก่อนถึงเส้นให้ทาง",
       "ง. เพิ่มความระมัดระวังแล้วจอดรถ"
     ],
-    "img": "./categoryImage/category3/1.jpeg",
+    "img": "../../../assets/images/category3/1.jpeg",
     "enterAnswer": null,
     "answer": "ค"
   },
@@ -21,7 +21,7 @@
       "ค. ห้ามเลี้ยวรถ",
       "ง. ให้จอดรถได้"
     ],
-    "img": "./categoryImage/category3/2.jpeg",
+    "img": "../../../assets/images/category3/2.jpeg",
     "enterAnswer": null,
     "answer": "ก"
   },
@@ -34,7 +34,7 @@
       "ค. ให้ผู้ขับขี่ขับรถอย่างรวดเร็ว",
       "ง. ให้ผู้ขับขี่ ขับรถให้ช้าลงแล้วแซงได้"
     ],
-    "img": "./categoryImage/category3/3.jpeg",
+    "img": "../../../assets/images/category3/3.jpeg",
     "enterAnswer": null,
     "answer": "ข"
   },
@@ -47,7 +47,7 @@
       "ค. ขับรถไปทางด้านขวา ให้เลี้ยวซ้าย",
       "ง. เพิ่มความระมัดระวังห้ามเลี้ยวซ้าย"
     ],
-    "img": "./categoryImage/category3/4.jpeg",
+    "img": "../../../assets/images/category3/4.jpeg",
     "enterAnswer": null,
     "answer": "ก"
   },
@@ -60,7 +60,7 @@
       "ค. เพิ่มความระมัดระวังห้ามเปลี่ยนช่องการจราจร",
       "ง. ขับรถให้ช้าลงขับรถคร่อมเส้นได้"
     ],
-    "img": "./categoryImage/category3/5.jpeg",
+    "img": "../../../assets/images/category3/5.jpeg",
     "enterAnswer": null,
     "answer": "ก"
   },
@@ -73,7 +73,7 @@
       "ค. รถยนต์ทุกชนิด หยุดรถได้",
       "ง. รถยนต์ทุกชนิด กลับรถได้"
     ],
-    "img": "./categoryImage/category3/6.jpeg",
+    "img": "../../../assets/images/category3/6.jpeg",
     "enterAnswer": null,
     "answer": "ก"
   }
