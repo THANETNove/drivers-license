@@ -28,6 +28,8 @@ export const Colors = {
   green:"#009244",
   blue:"#0171BC",
   yellow:"#EACE09",
-  black:"#00000"
+  black:"#00000",
+  light_green:"#d4edda",
+  light_red:"#f8d7da",
   
 };

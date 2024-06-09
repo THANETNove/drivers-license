@@ -16,7 +16,11 @@ import Category_4 from '../questionsCategory/category_4.json'; // ปรับ�
 
 const Questions = ({ route, navigation }) => {
     const { category, categoryIndex } = route.params;
+
     const [questions, setQuestions] = useState([]);
+    const [selectedAnswers, setSelectedAnswers] = useState({});
+    const [score, setScore] = useState(0);
+    const [results, setResults] = useState({});
 
     useEffect(() => {
         // Load questions from JSON file
@@ -37,8 +41,7 @@ const Questions = ({ route, navigation }) => {
          */
     }, []);
 
-    const [selectedAnswers, setSelectedAnswers] = useState({});
-    const [score, setScore] = useState(0);
+
 
     const handleSelect = (questionIndex, choiceLetter) => {
         setSelectedAnswers(prevAnswers => ({
@@ -52,13 +55,22 @@ const Questions = ({ route, navigation }) => {
 
     const calculateScore = () => {
         let newScore = 0;
-        questions.forEach((question) => {
-            const userAnswer = Object.values(selectedAnswers).find(answer => answer.index === question.index);
-            if (userAnswer && userAnswer.enterAnswer === question.answer) {
-                newScore += 1;
+        const newResults = {};
+        questions.forEach((question, questionIndex) => {
+            const userAnswer = selectedAnswers[questionIndex];
+            if (userAnswer) {
+                if (userAnswer.enterAnswer === question.answer) {
+                    newScore += 1;
+                    newResults[questionIndex] = 'correct';
+                } else {
+                    newResults[questionIndex] = 'incorrect';
+                }
+            } else {
+                newResults[questionIndex] = 'unanswered';
             }
         });
         setScore(newScore);
+        setResults(newResults);
     };
     return (
         <ScreenContainer>
@@ -66,41 +78,56 @@ const Questions = ({ route, navigation }) => {
                 <Text style={styles.categoryIndex}>ข้อสอบใบขับขี่หมวดที่ {categoryIndex}</Text>
                 <Text style={styles.category1}>{category}</Text>
 
-                <ScrollView>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}>
                     {questions.map((question, questionIndex) => (
                         <View key={questionIndex} style={styles.questionContainer}>
                             <Text style={styles.questionText}>{question.index}. {question.question}</Text>
+                            {question.img && (
+                                <Image source={{ uri: question.img }} style={styles.image} />
+                            )}
                             <RadioButton.Group
                                 onValueChange={(newValue) => handleSelect(questionIndex, newValue)}
                                 value={selectedAnswers[questionIndex]?.enterAnswer}
                             >
-                                {question.choices.map((choice, choiceIndex) => (
-                                    <Pressable
-                                        key={choiceIndex}
-                                        style={styles.choiceContainer}
-                                        onPress={() => {
-                                            const choiceLetter = choice.charAt(0);
-                                            handleSelect(questionIndex, choiceLetter);
-                                        }}
-                                    >
-                                        <View style={styles.radioButtonWrapper}>
-                                            <RadioButton
-                                                value={choice.charAt(0)}
-                                                status={selectedAnswers[questionIndex]?.enterAnswer === choice.charAt(0) ? 'checked' : 'unchecked'}
-                                                color={Colors.primary}
-                                            />
-                                        </View>
-                                        <Text style={styles.choiceText}>{choice}</Text>
-                                    </Pressable>
-                                ))}
+                                {question.choices.map((choice, choiceIndex) => {
+                                    const choiceLetter = choice.charAt(0);
+                                    const isCorrectAnswer = question.answer === choiceLetter;
+                                    const isSelectedAnswer = selectedAnswers[questionIndex]?.enterAnswer === choiceLetter;
+                                    const isIncorrectSelection = results[questionIndex] === 'incorrect' && isSelectedAnswer;
+
+                                    return (
+                                        <Pressable
+                                            key={choiceIndex}
+                                            style={[
+                                                styles.choiceContainer,
+                                                isSelectedAnswer && results[questionIndex] === 'correct' ? styles.correctChoice : null,
+                                                isIncorrectSelection ? styles.incorrectChoice : null,
+                                                results[questionIndex] === 'incorrect' && isCorrectAnswer ? styles.correctAnswer : null
+                                            ]}
+                                            onPress={() => handleSelect(questionIndex, choiceLetter)}
+                                        >
+                                            <View style={styles.radioButtonWrapper}>
+                                                <RadioButton
+                                                    value={choiceLetter}
+                                                    status={isSelectedAnswer ? 'checked' : 'unchecked'}
+                                                    color={Colors.primary}
+                                                />
+                                            </View>
+                                            <Text style={styles.choiceText}>{choice}</Text>
+                                        </Pressable>
+                                    );
+                                })}
                             </RadioButton.Group>
                         </View>
                     ))}
+                    <Pressable style={styles.button} onPress={calculateScore}>
+                        <Text style={styles.buttonText}>ตรวจสอบคะแนน</Text>
+                    </Pressable>
+                    <Text style={styles.scoreText}>คะแนน: {score}</Text>
                 </ScrollView>
-                <Pressable style={styles.button} onPress={calculateScore}>
-                    <Text style={styles.buttonText}>ตรวจสอบคะแนน</Text>
-                </Pressable>
-                <Text style={styles.scoreText}>คะแนน: {score}</Text>
+
             </View>
         </ScreenContainer>
     );
@@ -111,9 +138,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.white,
         marginHorizontal: 16,
-        padding: 16,
         paddingBottom: 50,
         borderRadius: 6,
+        paddingHorizontal: 16,
+
     },
     questionContainer: {
         marginBottom: 20,
@@ -125,19 +153,20 @@ const styles = StyleSheet.create({
     },
     choiceContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
         marginBottom: 5,
-        padding: 5,
-        borderRadius: 20,
+        borderRadius: 8,
+        paddingRight: 32,
+        paddingVertical: 8
     },
     radioButtonWrapper: {
         backgroundColor: Colors.lightGray,
         borderRadius: 20,
         padding: 5,
+
     },
     choiceText: {
         fontSize: 16,
-        marginLeft: 10,
+        width: '90%', // จำกัดความกว้างสูงสุดของ container
     },
     button: {
         marginTop: 20,
@@ -149,6 +178,15 @@ const styles = StyleSheet.create({
     buttonText: {
         color: Colors.white,
         fontSize: 18,
+    },
+    correctChoice: {
+        backgroundColor: Colors.light_green, // สีเขียวอ่อน
+    },
+    incorrectChoice: {
+        backgroundColor: Colors.light_red, // สีแดงอ่อน
+    },
+    correctAnswer: {
+        backgroundColor: Colors.light_green, // สีเขียวอ่อน
     },
     scoreText: {
         marginTop: 20,
