@@ -2,6 +2,11 @@ import { Colors } from "@/constants/Colors";
 import React from "react";
 import { Image, ScrollView, View, Text, Button, StyleSheet } from "react-native";
 
+import Animated51 from "../../../assets/images/coverImg/Artboard51.png";
+import Animated52 from "../../../assets/images/coverImg/Artboard52.png";
+import Animated53 from "../../../assets/images/coverImg/Artboard53.png";
+import Animated54 from "../../../assets/images/coverImg/Artboard54.png";
+
 const Capacity = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}
@@ -9,12 +14,29 @@ const Capacity = ({ navigation }) => {
       showsHorizontalScrollIndicator={false} // Hide horizontal scrollbar
     >
       <View style={styles.row}>
-        <View style={styles.box}></View>
-        <View style={styles.box}></View>
+        <View style={styles.box}>
+          <Image source={Animated51} // ใช้ source แทน src
+            style={styles.image} // กำหนดขนาดของภาพ
+          />
+
+        </View>
+        <View style={styles.box}>
+          <Image source={Animated52} // ใช้ source แทน src
+            style={styles.image} // กำหนดขนาดของภาพ
+          />
+        </View>
       </View>
       <View style={styles.row}>
-        <View style={styles.box}></View>
-        <View style={styles.box}></View>
+        <View style={styles.box}>
+          <Image source={Animated53} // ใช้ source แทน src
+            style={styles.image} // กำหนดขนาดของภาพ
+          />
+        </View>
+        <View style={styles.box}>
+          <Image source={Animated54} // ใช้ source แทน src
+            style={styles.image} // กำหนดขนาดของภาพ
+          />
+        </View>
       </View>
 
     </ScrollView>
@@ -27,16 +49,22 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    marginTop: "20%"
+
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+
     marginBottom: 16,
   },
   box: {
     width: '48%',
-    height: 350,
-    backgroundColor: Colors.red,
+    height: 200,
+  },
+  image: {
+    width: "100%",
+    height: "100%"
   }
 });
 
