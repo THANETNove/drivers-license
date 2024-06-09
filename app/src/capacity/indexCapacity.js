@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     marginHorizontal: 16,
     marginTop: "20%",
-    paddingTop: 80
+    paddingTop: 90,
+    borderRadius: 6, // 
 
   },
   row: {
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   image90: {
-    marginTop: -80,
+    marginTop: -70,
     marginLeft: "32%",
     width: 150,
     height: 150,

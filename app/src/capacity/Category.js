@@ -1,33 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Colors } from "@/constants/Colors";
 
 import { Image, ScrollView, View, Text, Button, StyleSheet, Pressable } from "react-native";
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
 import { LinearGradient } from 'expo-linear-gradient';
 
+const Category = ({ route, navigation }) => {
 
-
-const Examination = ({ navigation }) => {
+    const { category, categoryIndex } = route.params;
 
     const buttons = [
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 1', category: 'กฎหมายว่าด้วยรถยนต์', categoryIndex: 1 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 2', category: 'กฎหมายว่าด้วยจราจรทางบก', categoryIndex: 2 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 3', category: 'เครื่องหมายพื้นทาง', categoryIndex: 3 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 4', category: ' ป้ายบังคับ', categoryIndex: 4 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 5', category: 'Category C', categoryIndex: 5 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 6', category: 'Category D', categoryIndex: 6 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 7', category: 'Category E', categoryIndex: 7 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 8', category: 'Category F', categoryIndex: 8 },
-        { text: 'ข้อสอบใบขับขี่หมวดที่ 9', category: 'Category G', categoryIndex: 9 },
+        {
+            text: `ข้อสอบใบขับขี่หมวดที่ ${categoryIndex}`, category: category,
+        },
+        { text: `เฉลย ข้อสอบใบขับขี่หมวดที่ ${categoryIndex}`, category: category },
     ];
     return (
         <ScreenContainer>
-            <ScrollView contentContainerStyle={styles.container}>
-
+            <View style={styles.container}>
                 {buttons.map((button, index) => (
                     <Pressable key={index} onPress={() => navigation.navigate('Category', {
                         category: button.category,
-                        categoryIndex: button.categoryIndex,
+                        index: button.categoryIndex,
                     })}>
                         <LinearGradient
                             colors={['#8B317E', '#662D91']}
@@ -42,9 +36,8 @@ const Examination = ({ navigation }) => {
                         </LinearGradient>
                     </Pressable>
                 ))}
-
-            </ScrollView>
-        </ScreenContainer >
+            </View>
+        </ScreenContainer>
     )
 }
 
@@ -53,11 +46,11 @@ const styles = StyleSheet.create({
         flex: "auto",
         backgroundColor: Colors.white,
         marginHorizontal: 16,
-
         alignItems: 'center', // จัดตำแหน่งตรงกลางในแนวนอน
         paddingTop: 60,
         paddingBottom: 50,
         borderRadius: 6, // 
+        marginTop: "35%"
     },
     button: {
         marginBottom: 16,
@@ -82,4 +75,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Examination;
+export default Category;

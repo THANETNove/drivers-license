@@ -2,13 +2,16 @@ import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import NewScreen from "../src/capacity/NewScreen";
-import indexCapacity from "../src/capacity/IndexCapacity";
-import Examination from "../src/capacity/Examination";
 import { Colors } from "@/constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
+
+import NewScreen from "../src/capacity/NewScreen";
+import indexCapacity from "../src/capacity/IndexCapacity";
+import Examination from "../src/capacity/Examination";
+import Category from "../src/capacity/Category";
+import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
 
 const Stack = createNativeStackNavigator();
 // ฟังก์ชันโหลดฟอนต์
@@ -79,7 +82,21 @@ export default function App() {
             showLabel: false,
           })}
         />
+        <Stack.Screen
+          name="Category"
+          component={Category}
+          options={({ navigation }) => ({
+            title: "หมวดหมู่",
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+          })}
+        />
       </Stack.Navigator>
+      <Box />
     </View>
   );
 }
