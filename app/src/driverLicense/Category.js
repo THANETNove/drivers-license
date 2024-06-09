@@ -44,7 +44,6 @@ const Category = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: "auto",
         backgroundColor: Colors.white,
         marginHorizontal: 16,
         alignItems: 'center', // จัดตำแหน่งตรงกลางในแนวนอน

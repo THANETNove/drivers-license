@@ -22,38 +22,42 @@ const Examination = ({ navigation }) => {
     ];
     return (
         <ScreenContainer>
-            <ScrollView contentContainerStyle={styles.container}>
+            <View style={styles.scrollViewContent}>
+                <ScrollView
+                    contentContainerStyle={styles.container}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}>
 
-                {buttons.map((button, index) => (
-                    <Pressable key={index} onPress={() => navigation.navigate('Category', {
-                        category: button.category,
-                        categoryIndex: button.categoryIndex,
-                    })}>
-                        <LinearGradient
-                            colors={['#8B317E', '#662D91']}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 1 }}
-                            style={styles.button}
-                        >
-                            <View style={styles.buttonContent}>
-                                <Text style={styles.buttonText}>{button.text}</Text>
-                                <Text style={styles.categoryText}>{button.category}</Text>
-                            </View>
-                        </LinearGradient>
-                    </Pressable>
-                ))}
+                    {buttons && buttons.map((button, index) => (
+                        <Pressable key={index} onPress={() => navigation.navigate('Category', {
+                            category: button.category,
+                            categoryIndex: button.categoryIndex,
+                        })}>
+                            <LinearGradient
+                                colors={['#8B317E', '#662D91']}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 1 }}
+                                style={styles.button}
+                            >
+                                <View style={styles.buttonContent}>
+                                    <Text style={styles.buttonText}>{button.text}</Text>
+                                    <Text style={styles.categoryText}>{button.category}</Text>
+                                </View>
+                            </LinearGradient>
+                        </Pressable>
+                    ))}
 
-            </ScrollView>
-        </ScreenContainer >
+                </ScrollView>
+            </View>
+        </ScreenContainer>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: "auto",
+
         backgroundColor: Colors.white,
         marginHorizontal: 16,
-
         alignItems: 'center', // จัดตำแหน่งตรงกลางในแนวนอน
         paddingTop: 60,
         paddingBottom: 50,
