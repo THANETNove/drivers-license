@@ -1,9 +1,11 @@
+// App.js
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import newScreen from "../src/capacity/NewScreen"; // Adjust the path as needed
-import indexCapacity from "../src/capacity/IndexCapacity"; // Adjust the path as needed
+import ScreenContainer from "../src/ScreenContainer"; // Adjust the path as needed
 import { Colors } from "@/constants/Colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 import Box from "../src/Box"; // ปรับเส้นทางตามที่ถูกต้อง
 
@@ -12,10 +14,10 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <View style={styles.container}>
-      <Stack.Navigator initialRouteName="TabTwo">
+      <Stack.Navigator initialRouteName="ScreenContainer">
         <Stack.Screen
-          name="IndexCapacity"
-          component={indexCapacity}
+          name="ScreenContainer"
+          component={ScreenContainer}
           options={({ route, navigation }) => ({
             title: "",
             headerShadowVisible: false,
@@ -40,6 +42,7 @@ export default function App() {
           })}
         />
       </Stack.Navigator>
+
       <Box />
     </View>
   );

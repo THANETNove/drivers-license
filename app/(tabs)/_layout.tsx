@@ -15,34 +15,18 @@ export default function TabLayout() {
   return (
     <View style={{ flex: 1 }}>
       <StatusBar
-        barStyle="light-content" // ตั้งค่าสีของข้อความและไอคอนในแถบสถานะเป็นสีขาว
-        backgroundColor={Colors[colorScheme ?? "light"].background} // ตั้งค่าสีพื้นหลังของแถบสถานะ
+        barStyle="light-content" // สีของข้อความและไอคอนในแถบสถานะเป็นสีขาว
+        backgroundColor="transparent" // ตั้งค่าสีพื้นหลังของแถบสถานะให้โปร่งใส
+        translucent={true} // ให้แถบสถานะโปร่งใส
       />
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
           headerShown: false,
           tabBarStyle: hideTabBar ? styles.hiddenTabBar : {},
-          headerTintColor: Colors.white, // สีของข้อความใน headerd
-
-          headerStyle: {
-            backgroundColor: Colors[colorScheme ?? "light"].background, // เปลี่ยนสีพื้นหลังของ header
-          },
+          headerTintColor: Colors.white, // Change this to your desired color
         }}
-      >
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: "สอบใบขับขี่",
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "home" : "home-outline"}
-                color={color}
-              />
-            ),
-          }}
-        />
-      </Tabs>
+      ></Tabs>
     </View>
   );
 }
