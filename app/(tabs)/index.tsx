@@ -1,24 +1,22 @@
-// App.js
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import newScreen from "../src/capacity/NewScreen"; // Adjust the path as needed
-import ScreenContainer from "../src/ScreenContainer"; // Adjust the path as needed
+import { NavigationContainer } from "@react-navigation/native";
+import NewScreen from "../src/capacity/NewScreen";
+import indexCapacity from "../src/capacity/indexCapacity";
 import { Colors } from "@/constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
-
-import Box from "../src/Box"; // ปรับเส้นทางตามที่ถูกต้อง
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Stack.Navigator initialRouteName="ScreenContainer">
+      <Stack.Navigator initialRouteName="IndexCapacity">
         <Stack.Screen
-          name="ScreenContainer"
-          component={ScreenContainer}
-          options={({ route, navigation }) => ({
+          name="indexCapacity"
+          component={indexCapacity}
+          options={({ navigation }) => ({
             title: "",
             headerShadowVisible: false,
             headerStyle: {
@@ -30,20 +28,18 @@ export default function App() {
         />
         <Stack.Screen
           name="NewScreen"
-          component={newScreen}
-          options={({ route, navigation }) => ({
+          component={NewScreen}
+          options={({ navigation }) => ({
             title: "ทดสอบสมรรณภาพ",
             headerShadowVisible: false,
             headerStyle: {
               backgroundColor: Colors.primary,
             },
-            headerTintColor: Colors.white, // Change this to your desired color
+            headerTintColor: Colors.white,
             showLabel: false,
           })}
         />
       </Stack.Navigator>
-
-      <Box />
     </View>
   );
 }

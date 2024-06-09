@@ -12,5 +12,5 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "app/src/capacity/IndexCapacity.js"
-, "app/src/Box.js"  ]
+, "app/src/Box.js", "app/(tabs)/index.tsx"  ]
 }
