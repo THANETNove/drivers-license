@@ -21,36 +21,50 @@ const Questions = ({ route, navigation }) => {
     useEffect(() => {
         // Load questions from JSON file
         setQuestions(Category_3);
+        /* 
+                if (categoryIndex == 1) {
+                    setQuestions(Category_1);
+                }
+                if (categoryIndex == 2) {
+                    setQuestions(Category_2);
+                }
+                if (categoryIndex == 3) {
+                    setQuestions(Category_3);
+                }
+                if (categoryIndex == 4) {
+                    setQuestions(Category_4);
+                }
+         */
     }, []);
 
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [score, setScore] = useState(0);
 
-    const handleSelect = (questionIndex, choiceIndex, choiceLetter) => {
+    const handleSelect = (questionIndex, choiceLetter) => {
         setSelectedAnswers(prevAnswers => ({
             ...prevAnswers,
             [questionIndex]: {
-                selected: choiceIndex,
-                correct: questions[questionIndex].answer
+                index: questions[questionIndex].index,
+                enterAnswer: choiceLetter,
             }
         }));
     };
 
     const calculateScore = () => {
         let newScore = 0;
-        Object.keys(selectedAnswers).forEach(index => {
-            if (selectedAnswers[index].selected === selectedAnswers[index].correct) {
+        questions.forEach((question) => {
+            const userAnswer = Object.values(selectedAnswers).find(answer => answer.index === question.index);
+            if (userAnswer && userAnswer.enterAnswer === question.answer) {
                 newScore += 1;
             }
         });
         setScore(newScore);
     };
-
     return (
         <ScreenContainer>
             <View style={styles.container}>
                 <Text style={styles.categoryIndex}>ข้อสอบใบขับขี่หมวดที่ {categoryIndex}</Text>
-                <Text style={styles.category}>- {category}</Text>
+                <Text style={styles.category1}>{category}</Text>
 
                 <ScrollView>
                     {questions.map((question, questionIndex) => (
@@ -58,17 +72,21 @@ const Questions = ({ route, navigation }) => {
                             <Text style={styles.questionText}>{question.index}. {question.question}</Text>
                             <RadioButton.Group
                                 onValueChange={(newValue) => handleSelect(questionIndex, newValue)}
-                                value={selectedAnswers[questionIndex]?.selected}
+                                value={selectedAnswers[questionIndex]?.enterAnswer}
                             >
                                 {question.choices.map((choice, choiceIndex) => (
                                     <Pressable
                                         key={choiceIndex}
                                         style={styles.choiceContainer}
-                                        onPress={() => handleSelect(questionIndex, choiceIndex.toString(), choice.charAt(0))}
+                                        onPress={() => {
+                                            const choiceLetter = choice.charAt(0);
+                                            handleSelect(questionIndex, choiceLetter);
+                                        }}
                                     >
                                         <View style={styles.radioButtonWrapper}>
                                             <RadioButton
-                                                value={choiceIndex.toString()}
+                                                value={choice.charAt(0)}
+                                                status={selectedAnswers[questionIndex]?.enterAnswer === choice.charAt(0) ? 'checked' : 'unchecked'}
                                                 color={Colors.primary}
                                             />
                                         </View>
@@ -141,11 +159,13 @@ const styles = StyleSheet.create({
     categoryIndex: {
         color: Colors.black,
         fontSize: 20,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
     },
-    category: {
+    category1: {
         color: Colors.black,
         fontSize: 18,
-        marginBottom: 16
+        marginBottom: 16,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
     },
 });
 
