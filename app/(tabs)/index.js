@@ -7,10 +7,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
 
-import NewScreen from "../src/capacity/NewScreen";
-import indexCapacity from "../src/capacity/IndexCapacity";
-import Examination from "../src/capacity/Examination";
-import Category from "../src/capacity/Category";
+import NewScreen from "../src/driverLicense/NewScreen";
+import indexCapacity from "../src/driverLicense/IndexCapacity";
+import Examination from "../src/driverLicense/Examination";
+import Category from "../src/driverLicense/Category";
 import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
 import { useColorScheme } from "@/hooks/useColorScheme";
 
