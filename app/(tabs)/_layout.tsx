@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Button, StyleSheet, StatusBar } from "react-native";
+import { View, Button, StyleSheet, StatusBar, Text } from "react-native";
 import { Tabs } from "expo-router";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
@@ -10,7 +10,7 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   // State เพื่อควบคุมการแสดงผลของแถบแท็บ
-  const [hideTabBar, setHideTabBar] = useState(true);
+  const [hideTabBar, setHideTabBar] = useState(false);
 
   return (
     <View style={{ flex: 1 }}>
@@ -25,6 +25,24 @@ export default function TabLayout() {
           headerShown: false,
           tabBarStyle: hideTabBar ? styles.hiddenTabBar : {},
           headerTintColor: Colors.white, // Change this to your desired color
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "home" : "home-outline"}
+              color={color}
+            />
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                marginBottom: -16,
+                color: focused
+                  ? Colors[colorScheme ?? "light"].tint
+                  : Colors.primary,
+              }}
+            >
+              หน้าเเรก
+            </Text>
+          ),
         }}
       ></Tabs>
     </View>

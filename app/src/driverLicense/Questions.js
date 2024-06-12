@@ -71,6 +71,15 @@ const Questions = ({ route, navigation }) => {
         setScore(newScore);
         setResults(newResults);
     };
+
+    const imageMap = {
+        "assets/images/categoryImage/category3/1.jpeg": require('../../../assets/images/categoryImage/category3/1.jpeg'),
+        // เพิ่มเส้นทางภาพอื่นๆ ที่คุณใช้
+    };
+
+    const getImageSource = (imgPath) => {
+        return imageMap[imgPath];
+    };
     return (
         <ScreenContainer>
             <View style={styles.container}>
@@ -82,13 +91,11 @@ const Questions = ({ route, navigation }) => {
                     showsHorizontalScrollIndicator={false}>
                     {questions.map((question, questionIndex) => (
                         <View key={questionIndex} style={styles.questionContainer}>
-                            {/*  <Text style={styles.questionText}>{question.index}. {question.question}</Text>
-                            {question.img && (
-                                <Image source={{ uri: question.img }} style={styles.image} />
-                            )} */}
-                            <Image source={{ uri: question.img }} style={styles.imageQue} />
+                            <Text style={styles.questionText}>{question.index}. {question.question}</Text>
+                            {question.img && getImageSource(question.img) && (
+                                <Image source={getImageSource(question.img)} style={styles.imageQue} />
+                            )}
 
-                            <Text>{question.img}</Text>
                             <RadioButton.Group
                                 onValueChange={(newValue) => handleSelect(questionIndex, newValue)}
                                 value={selectedAnswers[questionIndex]?.enterAnswer}

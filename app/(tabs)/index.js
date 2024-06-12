@@ -51,7 +51,7 @@ export default function App() {
       />
       <Stack.Navigator initialRouteName="IndexCapacity">
         <Stack.Screen
-          name="indexCapacity"
+          name="Home"
           component={indexCapacity}
           options={({ navigation }) => ({
             title: "",
@@ -63,6 +63,8 @@ export default function App() {
             showLabel: false,
           })}
         />
+
+
         <Stack.Screen
           name="NewScreen"
           component={NewScreen}
