@@ -9,7 +9,7 @@ const Box = () => {
 const styles = StyleSheet.create({
     box: {
         width: '100%',
-        height: 65,
+        height: 54,
         backgroundColor: Colors.green, // เปลี่ยนสีตามที่ต้องการ
     },
 });

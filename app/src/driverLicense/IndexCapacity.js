@@ -10,6 +10,9 @@ import Animated54 from "../../../assets/images/coverImg/Artboard54.png";
 import Animated90 from "../../../assets/images/coverImg/Artboard90.png";
 
 const Capacity = ({ navigation }) => {
+
+
+
   return (
     <ScreenContainer >
       <View style={styles.absoluteContainer}>

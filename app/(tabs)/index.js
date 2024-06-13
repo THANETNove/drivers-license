@@ -12,6 +12,7 @@ import indexCapacity from "../src/driverLicense/IndexCapacity";
 import ExaminationQ from "../src/driverLicense/Examination";
 import Category from "../src/driverLicense/Category";
 import Questions from "../src/driverLicense/Questions";
+import HomeDriver from "../src/driverLicense/HomeDriver";
 import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -51,7 +52,20 @@ export default function App() {
       />
       <Stack.Navigator initialRouteName="IndexCapacity">
         <Stack.Screen
-          name="Home"
+          name="HomeDriver"
+          component={HomeDriver}
+          options={({ navigation }) => ({
+            title: "",
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+          })}
+        />
+        <Stack.Screen
+          name="indexCapacity"
           component={indexCapacity}
           options={({ navigation }) => ({
             title: "",
@@ -63,7 +77,6 @@ export default function App() {
             showLabel: false,
           })}
         />
-
 
         <Stack.Screen
           name="NewScreen"
