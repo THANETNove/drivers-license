@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Dimensions, View, Image, Pressable, Animated, StyleSheet, StatusBar } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
@@ -43,35 +43,12 @@ const HomeDriver = ({ navigation }) => {
   ];
 
   // Handle animation for image press
-  const handlePressIn = (animatedValue, index) => {
-
+  const handlePressIn = (animatedValue) => {
     Animated.spring(animatedValue, {
-      toValue: 1.3, // Scale to 110%
+      toValue: 1.1, // Scale to 130%
       useNativeDriver: true, // Use native driver for better performance
     }).start();
 
-
-    let navigationIndex = index + 1;
-
-    if (navigationIndex == 1) {
-      navigation.navigate('indexCapacity');
-    }
-    if (navigationIndex == 2) {
-      /*  navigation.navigate('QualificationsTaker'); */
-
-    }
-    if (navigationIndex == 3) {
-
-    }
-    if (navigationIndex == 4) {
-
-    }
-    if (navigationIndex == 5) {
-
-    }
-    if (navigationIndex == 6) {
-
-    }
   };
 
   const handlePressOut = (animatedValue) => {
@@ -81,9 +58,39 @@ const HomeDriver = ({ navigation }) => {
     }).start();
   };
 
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      // Simulate press on the button at current index
+      handlePressIn(buttonScales[index], index);
+      setTimeout(() => handlePressOut(buttonScales[index]), 500);
+
+      // Move to next index
+      index = (index + 1) % 6; // Loop back to 0 after reaching 5
+    }, 1000);
+
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, []); // Run effect only once on component mount
+
+  const handleNext = (index) => {
+
+    // Navigate based on button index
+    let navigationIndex = index + 1;
+    switch (navigationIndex) {
+      case 1:
+        navigation.navigate('indexCapacity');
+        break;
+      case 2:
+        /* navigation.navigate('QualificationsTaker'); */
+        break;
+      // Add more cases for other navigation indexes as needed
+      default:
+        break;
+    }
+  }
+
   return (
     <View style={{ flex: 1, marginTop: 52 }}>
-
       <Carousel
         loop
         width={width}
@@ -104,8 +111,7 @@ const HomeDriver = ({ navigation }) => {
             {buttons.map((button, index) => (
               <Pressable
                 key={index}
-                onPressIn={() => handlePressIn(button.scale, index)}
-                onPressOut={() => handlePressOut(button.scale)}
+                onPress={() => handleNext(index)}
                 style={button.style}
               >
                 <Animated.Image
