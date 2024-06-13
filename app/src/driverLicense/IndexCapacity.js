@@ -15,12 +15,6 @@ const Capacity = ({ navigation }) => {
 
   return (
     <ScreenContainer >
-      <View style={styles.absoluteContainer}>
-        <Image
-          source={Animated90} // ใช้ source แทน src
-          style={styles.image90} // กำหนดขนาดของภาพ
-        />
-      </View>
       <ScrollView contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}>
@@ -71,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: Colors.white,
     marginHorizontal: 16,
-    marginTop: "20%",
+    marginTop: "10%",
     paddingTop: 90,
     borderRadius: 6,
     zIndex: 0
