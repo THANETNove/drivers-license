@@ -16,7 +16,7 @@ export default function TabLayout() {
     <View style={{ flex: 1 }}>
       <StatusBar
         barStyle="light-content" // สีของข้อความและไอคอนในแถบสถานะเป็นสีขาว
-        backgroundColor="transparent" // ตั้งค่าสีพื้นหลังของแถบสถานะให้โปร่งใส
+        backgroundColor="red" // ตั้งค่าสีพื้นหลังของแถบสถานะให้โปร่งใส
         translucent={true} // ให้แถบสถานะโปร่งใส
       />
       <Tabs

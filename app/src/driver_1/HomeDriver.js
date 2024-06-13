@@ -82,13 +82,13 @@ const HomeDriver = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1}}>
+    <View style={{ flex: 1, marginTop: 52 }}>
 
       <Carousel
         loop
         width={width}
         height={"100%"}
-        autoPlay={true}
+        autoPlay={false}
         data={images}
         scrollAnimationDuration={1000}
         renderItem={({ item }) => (
@@ -132,16 +132,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginLeft: "27%",
     top: 0,
-    marginTop: "35%"
+    marginTop: "37%"
   },
   boxNumber_2: {
     width: 50,
     height: 50,
     position: "absolute",
-    marginRight: "18%",
+    marginRight: "17%",
     top: 0,
     right: 0,
-    marginTop: "37%"
+    marginTop: "40%"
   },
   boxNumber_3: {
     width: 50,
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     marginRight: "0%",
     top: 0,
     right: 0,
-    marginTop: "59%"
+    marginTop: "64%"
   },
   boxNumber_4: {
     width: 50,
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     marginRight: "35%",
     top: 0,
     right: 0,
-    marginTop: "78%"
+    marginTop: "84%"
   },
   boxNumber_5: {
     width: 50,
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     marginRight: "43%",
     top: 0,
     right: 0,
-    marginTop: "102%"
+    marginTop: "110%"
   },
   boxNumber_6: {
     width: 50,
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     marginRight: "60%",
     top: 0,
     right: 0,
-    marginTop: "130%"
+    marginTop: "140%"
   },
 });
 

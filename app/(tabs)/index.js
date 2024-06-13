@@ -75,7 +75,7 @@ export default function App() {
             },
             headerTintColor: Colors.white,
             showLabel: false,
-
+            headerShown: false
           })}
         />
         <Stack.Screen
@@ -217,6 +217,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
   },
   image: {
     width: 70,
