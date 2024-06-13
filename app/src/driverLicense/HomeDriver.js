@@ -30,7 +30,7 @@ const HomeDriver = ({ navigation }) => {
         loop
         width={width}
         height={"100%"}
-        autoPlay={true} // Disable autoplay to control manually
+        autoPlay={false} // Disable autoplay to control manually
         data={images}
         scrollAnimationDuration={1000}
         renderItem={({ item }) => (
