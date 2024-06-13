@@ -11,6 +11,6 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "app/src/driverLicense/indexCapacity.js"
+    "app/src/driver_1/indexCapacity.js"
 , "app/src/Box.js", "app/(tabs)/index.js"  ]
 }

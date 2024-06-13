@@ -7,12 +7,12 @@ import { LinearGradient } from "expo-linear-gradient";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
 
-import NewScreen from "../src/driverLicense/NewScreen";
-import indexCapacity from "../src/driverLicense/IndexCapacity";
-import ExaminationQ from "../src/driverLicense/Examination";
-import Category from "../src/driverLicense/Category";
-import Questions from "../src/driverLicense/Questions";
-import HomeDriver from "../src/driverLicense/HomeDriver";
+import NewScreen from "../src/driver_1/NewScreen";
+import indexCapacity from "../src/driver_1/IndexCapacity";
+import ExaminationQ from "../src/driver_1/Examination";
+import Category from "../src/driver_1/Category";
+import Questions from "../src/driver_1/Questions";
+import HomeDriver from "../src/driver_1/HomeDriver";
 import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -142,5 +142,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  image: {
+    width: 70,
+    height: 70
   },
 });
