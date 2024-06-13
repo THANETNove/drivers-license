@@ -12,5 +12,5 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "app/src/driver_1/indexCapacity.js"
-, "app/src/Box.js", "app/(tabs)/index.js"  ]
+, "app/src/Box.js", "app/(tabs)/index.js", "app/(tabs)/_layout.tsx"  ]
 }

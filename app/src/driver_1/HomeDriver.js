@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Dimensions, View, Image, Pressable, Animated, StyleSheet } from 'react-native';
+import { Dimensions, View, Image, Pressable, Animated, StyleSheet, StatusBar } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
 // Import button images
@@ -57,6 +57,7 @@ const HomeDriver = ({ navigation }) => {
       navigation.navigate('indexCapacity');
     }
     if (navigationIndex == 2) {
+      /*  navigation.navigate('QualificationsTaker'); */
 
     }
     if (navigationIndex == 3) {
@@ -81,7 +82,8 @@ const HomeDriver = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1}}>
+
       <Carousel
         loop
         width={width}

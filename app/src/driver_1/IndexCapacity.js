@@ -21,7 +21,7 @@ const Capacity = ({ navigation }) => {
         <Text style={styles.knowing}>รอบรู้เรื่อง การสอบใบขับขี่</Text>
         <View style={styles.row}>
           <View style={styles.box}>
-            <Pressable onPress={() => navigation.navigate('NewScreen')}>
+            <Pressable onPress={() => navigation.navigate('InterestingDriverLicense')}>
               <Image
                 source={Animated51} // ใช้ source แทน src
                 style={styles.image} // กำหนดขนาดของภาพ
@@ -30,10 +30,12 @@ const Capacity = ({ navigation }) => {
           </View>
 
           <View style={styles.box}>
-            <Image
-              source={Animated52} // ใช้ source แทน src
-              style={styles.image} // กำหนดขนาดของภาพ
-            />
+            <Pressable onPress={() => navigation.navigate('QualificationsTaker')}>
+              <Image
+                source={Animated52} // ใช้ source แทน src
+                style={styles.image} // กำหนดขนาดของภาพ
+              />
+            </Pressable>
           </View>
         </View>
         <View style={styles.row}>
