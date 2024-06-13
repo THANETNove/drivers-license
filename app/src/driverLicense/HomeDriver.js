@@ -1,7 +1,8 @@
-import React from 'react';
-import { Dimensions, View, Image, Pressable, StyleSheet } from 'react-native';
+import React, { useRef } from 'react';
+import { Dimensions, View, Image, Pressable, Animated, StyleSheet } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
+// Import button images
 import button_1 from "../../../assets/images/home/button_1.png";
 import button_2 from "../../../assets/images/home/button_2.png";
 import button_3 from "../../../assets/images/home/button_3.png";
@@ -9,11 +10,8 @@ import button_4 from "../../../assets/images/home/button_4.png";
 import button_5 from "../../../assets/images/home/button_5.png";
 import button_6 from "../../../assets/images/home/button_6.png";
 
-
-
 const HomeDriver = ({ navigation }) => {
   const width = Dimensions.get('window').width;
-  const height = Dimensions.get('window').height;
 
   const images = [
     require('../../../assets/images/home/home_1.png'),
@@ -24,69 +22,100 @@ const HomeDriver = ({ navigation }) => {
     require('../../../assets/images/home/home_6.png'),
   ];
 
+  // Create animated values for scaling
+  const imageScale = useRef(new Animated.Value(1)).current;
+  const buttonScales = [
+    useRef(new Animated.Value(1)).current,
+    useRef(new Animated.Value(1)).current,
+    useRef(new Animated.Value(1)).current,
+    useRef(new Animated.Value(1)).current,
+    useRef(new Animated.Value(1)).current,
+    useRef(new Animated.Value(1)).current,
+  ];
+
+  const buttons = [
+    { image: button_1, scale: buttonScales[0], style: styles.boxNumber_1 },
+    { image: button_2, scale: buttonScales[1], style: styles.boxNumber_2 },
+    { image: button_3, scale: buttonScales[2], style: styles.boxNumber_3 },
+    { image: button_4, scale: buttonScales[3], style: styles.boxNumber_4 },
+    { image: button_5, scale: buttonScales[4], style: styles.boxNumber_5 },
+    { image: button_6, scale: buttonScales[5], style: styles.boxNumber_6 },
+  ];
+
+  // Handle animation for image press
+  const handlePressIn = (animatedValue, index) => {
+
+    Animated.spring(animatedValue, {
+      toValue: 1.3, // Scale to 110%
+      useNativeDriver: true, // Use native driver for better performance
+    }).start();
+
+
+    let navigationIndex = index + 1;
+
+    if (navigationIndex == 1) {
+      navigation.navigate('indexCapacity');
+    }
+    if (navigationIndex == 2) {
+
+    }
+    if (navigationIndex == 3) {
+
+    }
+    if (navigationIndex == 4) {
+
+    }
+    if (navigationIndex == 5) {
+
+    }
+    if (navigationIndex == 6) {
+
+    }
+  };
+
+  const handlePressOut = (animatedValue) => {
+    Animated.spring(animatedValue, {
+      toValue: 1, // Scale back to original size
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <Carousel
         loop
         width={width}
         height={"100%"}
-        autoPlay={false} // Disable autoplay to control manually
+        autoPlay={true}
         data={images}
         scrollAnimationDuration={1000}
         renderItem={({ item }) => (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-            }}
-          >
-            <Image
+          <View style={{ flex: 1, justifyContent: 'center' }}>
+            <Animated.Image
               source={item}
-              style={{ width: '100%', height: '100%' }}
+              style={[
+                { width: '100%', height: '100%' },
+                { transform: [{ scale: imageScale }] }
+              ]}
               resizeMode="stretch"
             />
-            <View style={styles.boxNumber_1} >
-              <Image
-                source={button_1}
-                style={{ width: '100%', height: '100%' }}
-                resizeMode="stretch"
-              />
-            </View>
-            <View style={styles.boxNumber_2} >
-              <Image
-                source={button_2}
-                style={{ width: '100%', height: '100%' }}
-                resizeMode="stretch"
-              />
-            </View>
-            <View style={styles.boxNumber_3} >
-              <Image
-                source={button_3}
-                style={{ width: '100%', height: '100%' }}
-                resizeMode="stretch"
-              />
-            </View>
-            <View style={styles.boxNumber_4} >
-              <Image
-                source={button_4}
-                style={{ width: '100%', height: '100%' }}
-                resizeMode="stretch"
-              />
-            </View>
-            <View style={styles.boxNumber_5} >
-              <Image
-                source={button_5}
-                style={{ width: '100%', height: '100%' }}
-                resizeMode="stretch"
-              />
-            </View>
-            <View style={styles.boxNumber_6} >
-              <Image
-                source={button_6}
-                style={{ width: '100%', height: '100%' }}
-                resizeMode="stretch"
-              />
-            </View>
+            {buttons.map((button, index) => (
+              <Pressable
+                key={index}
+                onPressIn={() => handlePressIn(button.scale, index)}
+                onPressOut={() => handlePressOut(button.scale)}
+                style={button.style}
+              >
+                <Animated.Image
+                  source={button.image}
+                  style={[
+                    { width: '100%', height: '100%' },
+                    { transform: [{ scale: button.scale }] }
+                  ]}
+                  resizeMode="stretch"
+                />
+              </Pressable>
+            ))}
           </View>
         )}
       />
@@ -149,7 +178,5 @@ const styles = StyleSheet.create({
     marginTop: "130%"
   },
 });
-
-
 
 export default HomeDriver;
