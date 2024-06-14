@@ -81,7 +81,7 @@ const HomeDriver = ({ navigation }) => {
         navigation.navigate('indexCapacity');
         break;
       case 2:
-        /* navigation.navigate('QualificationsTaker'); */
+        navigation.navigate('ExaminationQ');
         break;
       // Add more cases for other navigation indexes as needed
       default:

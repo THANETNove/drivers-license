@@ -1,13 +1,13 @@
 import * as React from "react";
-import { View, StyleSheet, StatusBar } from "react-native";
+import { View, StyleSheet, StatusBar, Image } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer, useNavigation, useIsFocused } from "@react-navigation/native";
+import { NavigationContainer, useNavigationState } from "@react-navigation/native";
 import { Colors } from "@/constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Font from "expo-font";
-import AppLoading from "expo-app-loading";
+import AppLoading from "expo-app-loading"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
 import { useColorScheme } from "@/hooks/useColorScheme";
-import Box from "../src/Box";
+import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
 
 import NewScreen from "../src/driver_1/NewScreen";
 import indexCapacity from "../src/driver_1/IndexCapacity";
@@ -19,9 +19,12 @@ import InterestingDriverLicense from "../src/driver_1/InterestingDriverLicense";
 import StepsDriversLicense from "../src/driver_1/StepsDriversLicense";
 import PrepareBeforeExam from "../src/driver_1/PrepareBeforeExam";
 import QualificationsTaker from "../src/driver_1/QualificationsTaker";
+import Artboard90 from "../../assets/images/coverImg/Artboard90.png";
+
 
 const Stack = createNativeStackNavigator();
 
+// ฟังก์ชันโหลดฟอนต์
 const loadFonts = async () => {
   await Font.loadAsync({
     "SpaceMono-Regular": require("../../assets/fonts/SpaceMono-Regular.ttf"),
@@ -33,22 +36,10 @@ const loadFonts = async () => {
   });
 };
 
-function CurrentRouteName() {
-  const navigation = useNavigation();
-  const isFocused = useIsFocused();
-  const routeName = navigation.getState().routes[navigation.getState().index].name;
-
-  React.useEffect(() => {
-    if (isFocused) {
-      console.log('Current route name:', routeName);
-    }
-  }, [isFocused, routeName]);
-
-  return null;
-}
-
 export default function App() {
   const colorScheme = useColorScheme();
+  /*   const routeName = useNavigationState(state => state.routes[state.index]);
+   */
   const [fontsLoaded, setFontsLoaded] = React.useState(false);
 
   React.useEffect(() => {
@@ -57,19 +48,36 @@ export default function App() {
       .catch(console.error);
   }, []);
 
+  const routeName = useNavigationState(state => {
+    const route = state.routes[state.index];
+    return route && route.state && typeof route.state.index !== 'undefined' ? route.state.index : null;
+  });
+
+
   if (!fontsLoaded) {
     return <AppLoading />;
   }
 
+
+
   return (
     <View style={styles.container}>
+      {routeName != 0 &&
+        <View style={styles.boxImage}>
+          <Image
+            source={Artboard90} // ใช้ source แทน src
+            style={{ width: '100%', height: '100%' }}
+            resizeMode="stretch"
+          />
+        </View>
+      }
 
-      <CurrentRouteName />
+
       <Stack.Navigator initialRouteName="HomeDriver">
         <Stack.Screen
           name="HomeDriver"
           component={HomeDriver}
-          options={{
+          options={({ navigation }) => ({
             title: "",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
@@ -79,12 +87,12 @@ export default function App() {
             headerTintColor: Colors.white,
             showLabel: false,
             headerShown: false
-          }}
+          })}
         />
         <Stack.Screen
           name="indexCapacity"
           component={indexCapacity}
-          options={{
+          options={({ navigation }) => ({
             title: "รอบรู้เรื่อง การสอบใบขับขี่",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
@@ -94,14 +102,160 @@ export default function App() {
             headerTintColor: Colors.white,
             showLabel: false,
             headerTitleStyle: {
-              fontFamily: "SukhumvitSet-Bold",
-              fontSize: 20,
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
             },
-          }}
+          })}
         />
-        {/* Add other screens here similarly */}
-      </Stack.Navigator>
+        <Stack.Screen
+          name="InterestingDriverLicense"
+          component={InterestingDriverLicense}
+          options={({ navigation }) => ({
+            title: "ใบอนุญาติขับขี่น่ารู้",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+            /*    headerShown: false, // ซ่อน Navigation Bar ของหน้า Questions */
+          })}
 
+        />
+        <Stack.Screen
+          name="QualificationsTaker"
+          component={QualificationsTaker}
+          options={({ navigation }) => ({
+            title: "คุณสมบัติของผู้สอบ",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="StepsDriversLicense"
+          component={StepsDriversLicense}
+          options={({ navigation }) => ({
+            title: "ขั้นตอนการสอบใบขับขี่",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="PrepareBeforeExam"
+          component={PrepareBeforeExam}
+          options={({ navigation }) => ({
+            title: "การเตรียมตัวก่อนสอบ",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+
+
+        <Stack.Screen
+          name="NewScreen"
+          component={NewScreen}
+          options={({ navigation }) => ({
+            title: "ทดสอบสมรรณภาพ",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="ExaminationQ"
+          component={ExaminationQ}
+          options={({ navigation }) => ({
+            title: "หมวดหมู่ข้อสอบใบขับขี่",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="Category"
+          component={Category}
+          options={({ navigation }) => ({
+            title: "ข้อสอบใบขับขี่",
+            headerBackTitleVisible: false,
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="Questions"
+          component={Questions}
+          options={({ navigation }) => ({
+            title: "ตอบคำถาม",
+            headerBackTitleVisible: false,
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+      </Stack.Navigator>
       <Box />
     </View>
   );
@@ -110,9 +264,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    zIndex: 0
+
   },
-  image: {
-    width: 70,
-    height: 70
-  },
+  boxImage: {
+    width: 65,
+    height: 65,
+    right: 16,
+    top: 36,
+    zIndex: 1,
+    position: "absolute"
+  }
 });
