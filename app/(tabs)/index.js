@@ -54,16 +54,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-
-      {/*   {currentRouteName !== 'HomeDriver' && (
-        <View style={styles.image}>
-          <Image
-            source={Artboard90} // ใช้ source แทน src
-            style={{ width: '100%', height: '100%' }}
-            resizeMode="stretch"
-          />
-        </View>
-      )} */}
       <Stack.Navigator initialRouteName="HomeDriver">
         <Stack.Screen
           name="HomeDriver"

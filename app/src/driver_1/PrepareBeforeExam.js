@@ -52,32 +52,32 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     checkBok_1: {
-        width: 60,
+        width: 55,
         height: 60,
         top: 0,
         left: 0,
-        marginTop: "66%",
+        marginTop: "65%",
         marginLeft: "13%",
 
         position: "absolute",
         zIndex: 1
     },
     checkBok_2: {
-        width: 60,
+        width: 55,
         height: 60,
         top: 0,
         left: 0,
-        marginTop: "84%",
+        marginTop: "83%",
         marginLeft: "13%",
         position: "absolute",
         zIndex: 1
     },
     checkBok_3: {
-        width: 60,
+        width: 55,
         height: 60,
         top: 0,
         left: 0,
-        marginTop: "102%",
+        marginTop: "101%",
         marginLeft: "13%",
         position: "absolute",
         zIndex: 1
