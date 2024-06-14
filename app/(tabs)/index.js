@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, StatusBar, Image } from "react-native";
+import { View, StyleSheet, StatusBar, Image, Dimensions } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer, useNavigationState } from "@react-navigation/native";
 import { Colors } from "@/constants/Colors";
@@ -24,6 +24,7 @@ import Artboard90 from "../../assets/images/coverImg/Artboard90.png";
 
 const Stack = createNativeStackNavigator();
 
+
 // ฟังก์ชันโหลดฟอนต์
 const loadFonts = async () => {
   await Font.loadAsync({
@@ -47,11 +48,12 @@ export default function App() {
       .then(() => setFontsLoaded(true))
       .catch(console.error);
   }, []);
-
   const routeName = useNavigationState(state => {
     const route = state.routes[state.index];
     return route && route.state && typeof route.state.index !== 'undefined' ? route.state.index : null;
   });
+
+
 
 
   if (!fontsLoaded) {
@@ -59,9 +61,9 @@ export default function App() {
   }
 
 
-
   return (
     <View style={styles.container}>
+
       {routeName != 0 &&
         <View style={styles.boxImage}>
           <Image
@@ -72,8 +74,8 @@ export default function App() {
         </View>
       }
 
-
       <Stack.Navigator initialRouteName="HomeDriver">
+
         <Stack.Screen
           name="HomeDriver"
           component={HomeDriver}
@@ -94,6 +96,15 @@ export default function App() {
           component={indexCapacity}
           options={({ navigation }) => ({
             title: "รอบรู้เรื่อง การสอบใบขับขี่",
+            headerTitle: () => (
+              <View style={styles.boxImage90}>
+                <Image
+                  source={Artboard90} // ใช้ source แทน src
+                  style={{ width: '100%', height: '100%' }}
+                  resizeMode="cover"
+                />
+              </View>
+            ),
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {
@@ -123,7 +134,6 @@ export default function App() {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
               fontSize: 20, // ขนาดฟอนต์
             },
-            /*    headerShown: false, // ซ่อน Navigation Bar ของหน้า Questions */
           })}
 
         />
@@ -260,7 +270,7 @@ export default function App() {
     </View>
   );
 }
-
+const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -268,11 +278,12 @@ const styles = StyleSheet.create({
 
   },
   boxImage: {
-    width: 65,
-    height: 65,
+    width: 75,
+    height: 70,
+    zIndex: 10,
     right: 16,
-    top: 36,
-    zIndex: 1,
+    top: 35,
     position: "absolute"
+
   }
 });
