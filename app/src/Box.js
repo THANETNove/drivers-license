@@ -1,9 +1,11 @@
 // Box.js
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Colors } from "@/constants/Colors";
 const Box = () => {
-    return <View style={styles.box} />;
+    return <View style={styles.box} >
+        <Text style={{ fontSize: 20, paddingTop: 8, color: "#FFF", textAlign: "center" }}> โฆษณา Google</Text>
+    </View>;
 };
 
 const styles = StyleSheet.create({
