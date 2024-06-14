@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Dimensions, View, Image, Pressable, Animated, StyleSheet, StatusBar, Platform } from 'react-native';
+import { Dimensions, View, Image, Pressable, Animated, StyleSheet, StatusBar, Platform, SafeAreaView } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
 // Import button images
@@ -90,11 +90,11 @@ const HomeDriver = ({ navigation }) => {
   }
 
   return (
-    <View style={{
-      flex: 1, marginTop: Platform.select({
+    <SafeAreaView style={{
+      flex: 1,/*  marginTop: Platform.select({
         ios: 45,
         android: 32,
-      }),
+      }), */
     }}>
       <Carousel
         loop
@@ -132,7 +132,7 @@ const HomeDriver = ({ navigation }) => {
           </View>
         )}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
