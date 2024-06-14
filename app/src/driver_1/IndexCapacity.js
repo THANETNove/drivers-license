@@ -40,7 +40,7 @@ const Capacity = ({ navigation }) => {
         </View>
         <View style={styles.row}>
           <View style={styles.box}>
-            <Pressable onPress={() => navigation.navigate('ExaminationQ')}>
+            <Pressable onPress={() => navigation.navigate('StepsDriversLicense')}>
               <Image
                 source={Animated53} // ใช้ source แทน src
                 style={styles.image} // กำหนดขนาดของภาพ

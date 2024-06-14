@@ -16,6 +16,7 @@ import Category from "../src/driver_1/Category";
 import Questions from "../src/driver_1/Questions";
 import HomeDriver from "../src/driver_1/HomeDriver";
 import InterestingDriverLicense from "../src/driver_1/InterestingDriverLicense";
+import StepsDriversLicense from "../src/driver_1/StepsDriversLicense";
 import QualificationsTaker from "../src/driver_1/QualificationsTaker";
 
 
@@ -121,6 +122,24 @@ export default function App() {
           component={QualificationsTaker}
           options={({ navigation }) => ({
             title: "คุณสมบัติของผู้สอบ",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="StepsDriversLicense"
+          component={StepsDriversLicense}
+          options={({ navigation }) => ({
+            title: "ขั้นตอนการสอบใบขับขี่",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {
