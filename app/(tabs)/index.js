@@ -17,6 +17,7 @@ import Questions from "../src/driver_1/Questions";
 import HomeDriver from "../src/driver_1/HomeDriver";
 import InterestingDriverLicense from "../src/driver_1/InterestingDriverLicense";
 import StepsDriversLicense from "../src/driver_1/StepsDriversLicense";
+import PrepareBeforeExam from "../src/driver_1/PrepareBeforeExam";
 import QualificationsTaker from "../src/driver_1/QualificationsTaker";
 
 
@@ -49,7 +50,7 @@ export default function App() {
     return <AppLoading />;
   }
 
-  console.log("fontsLoaded", fontsLoaded);
+
 
   return (
     <View style={styles.container}>
@@ -140,6 +141,24 @@ export default function App() {
           component={StepsDriversLicense}
           options={({ navigation }) => ({
             title: "ขั้นตอนการสอบใบขับขี่",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="PrepareBeforeExam"
+          component={PrepareBeforeExam}
+          options={({ navigation }) => ({
+            title: "การเตรียมตัวก่อนสอบ",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {

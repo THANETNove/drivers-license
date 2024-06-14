@@ -48,11 +48,14 @@ const Capacity = ({ navigation }) => {
             </Pressable>
           </View>
           <View style={styles.box}>
-            <Image
-              source={Animated54} // ใช้ source แทน src
-              style={styles.image} // กำหนดขนาดของภาพ
-            />
+            <Pressable onPress={() => navigation.navigate('PrepareBeforeExam')}>
+              <Image
+                source={Animated54} // ใช้ source แทน src
+                style={styles.image} // กำหนดขนาดของภาพ
+              />
+            </Pressable>
           </View>
+
         </View>
 
       </ScrollView>
