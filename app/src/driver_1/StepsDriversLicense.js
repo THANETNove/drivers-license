@@ -7,12 +7,12 @@ const StepsDriversLicense = () => {
     const [stepsImg, setStepsImg] = useState(0);
 
     const images = [
-        require('../../../assets/images/coverImg/Artboard11_0.png'),
-        require('../../../assets/images/coverImg/Artboard12_0.png'),
-        require('../../../assets/images/coverImg/Artboard13_0.png'),
-        require('../../../assets/images/coverImg/Artboard14_0.png'),
-        require('../../../assets/images/coverImg/Artboard15_0.png'),
-        require('../../../assets/images/coverImg/Artboard16_0.png'),
+        require('../../../assets/images/coverImg/Artboard11_0.jpg'),
+        require('../../../assets/images/coverImg/Artboard12_0.jpg'),
+        require('../../../assets/images/coverImg/Artboard13_0.jpg'),
+        require('../../../assets/images/coverImg/Artboard14_0.jpg'),
+        require('../../../assets/images/coverImg/Artboard15_0.jpg'),
+        require('../../../assets/images/coverImg/Artboard16_0.jpg'),
     ];
 
     const handleNext = () => {

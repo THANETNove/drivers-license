@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, Image, Pressable } from 'react-native';
-import Artboard17_0 from "../../../assets/images/coverImg/Artboard17_0.png"
+import Artboard17_0 from "../../../assets/images/coverImg/Artboard17_0.jpg"
 import Artboard75 from "../../../assets/images/coverImg/Artboard75.png"
 
 
@@ -20,7 +20,7 @@ const PrepareBeforeExam = () => {
                 style={{ width: '100%', height: '100%', zIndex: 0 }}
                 resizeMode="stretch"
             />
-            <Pressable onPress={() => setClickBok_1(!clickBok_1)} style={styles.checkBok_1}>
+            {/*  <Pressable onPress={() => setClickBok_1(!clickBok_1)} style={styles.checkBok_1}>
                 {clickBok_1 && <Image
                     source={Artboard75} // ใช้ source แทน src
                     style={{ width: '100%', height: '100%' }}
@@ -40,7 +40,7 @@ const PrepareBeforeExam = () => {
                     style={{ width: '100%', height: '100%' }}
                     resizeMode="stretch"
                 />}
-            </Pressable>
+            </Pressable> */}
         </View>
     );
 }

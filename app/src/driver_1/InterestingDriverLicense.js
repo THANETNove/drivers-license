@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { View, Text, Button, StyleSheet, Image } from 'react-native';
-import Artboard9_0 from "../../../assets/images/coverImg/Artboard9_0.png"
+import Artboard9_0 from "../../../assets/images/coverImg/Artboard9_0.jpg"
 
 
 
