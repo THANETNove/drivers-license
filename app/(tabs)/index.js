@@ -9,6 +9,8 @@ import AppLoading from "expo-app-loading"; // ใช้ AppLoading เพื่�
 import { useColorScheme } from "@/hooks/useColorScheme";
 import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสดงระหว่างการโหลดฟอนต์
 
+
+import Artboard90 from "../../assets/images/coverImg/Artboard90.png";
 import NewScreen from "../src/driver_1/NewScreen";
 import indexCapacity from "../src/driver_1/IndexCapacity";
 import ExaminationQ from "../src/driver_1/Examination";
@@ -19,7 +21,8 @@ import InterestingDriverLicense from "../src/driver_1/InterestingDriverLicense";
 import StepsDriversLicense from "../src/driver_1/StepsDriversLicense";
 import PrepareBeforeExam from "../src/driver_1/PrepareBeforeExam";
 import QualificationsTaker from "../src/driver_1/QualificationsTaker";
-import Artboard90 from "../../assets/images/coverImg/Artboard90.png";
+import IdexFitnessTest from "../src/driver_2/IdexFitnessTest";
+
 
 
 const Stack = createNativeStackNavigator();
@@ -193,6 +196,24 @@ export default function App() {
         />
 
 
+        <Stack.Screen
+          name="IdexFitnessTest"
+          component={IdexFitnessTest}
+          options={({ navigation }) => ({
+            title: "ทดสอบสมรรณภาพ",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
         <Stack.Screen
           name="NewScreen"
           component={NewScreen}
