@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
-import { Dimensions, View, Image, Pressable, Animated, StyleSheet, StatusBar, Platform, SafeAreaView } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { Dimensions, View, Image, Pressable, Animated, StyleSheet, StatusBar, Platform, SafeAreaView, Modal, Text } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
 // Import button images
@@ -9,9 +9,15 @@ import button_3 from "../../../assets/images/home/button_3.png";
 import button_4 from "../../../assets/images/home/button_4.png";
 import button_5 from "../../../assets/images/home/button_5.png";
 import button_6 from "../../../assets/images/home/button_6.png";
+import purple from "../../../assets/images/coverImg/purple.png";
+import artboard26_0 from "../../../assets/images/coverImg/Artboard26_0.png";
+import { Colors } from '@/constants/Colors';
 
 const HomeDriver = ({ navigation }) => {
   const width = Dimensions.get('window').width;
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
+
 
   const images = [
     require('../../../assets/images/home/home_1.png'),
@@ -74,6 +80,8 @@ const HomeDriver = ({ navigation }) => {
 
   const handleNext = (index) => {
 
+
+    console.log("555", index);
     // Navigate based on button index
     let navigationIndex = index + 1;
     switch (navigationIndex) {
@@ -91,10 +99,8 @@ const HomeDriver = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{
-      flex: 1,/*  marginTop: Platform.select({
-        ios: 45,
-        android: 32,
-      }), */
+      flex: 1,
+      zIndex: 0
     }}>
       <Carousel
         loop
@@ -104,7 +110,7 @@ const HomeDriver = ({ navigation }) => {
         data={images}
         scrollAnimationDuration={1000}
         renderItem={({ item }) => (
-          <View style={{ flex: 1, justifyContent: 'center' }}>
+          <View style={{ flex: 1, justifyContent: 'center', zIndex: 0 }}>
             <Animated.Image
               source={item}
               style={[
@@ -132,10 +138,68 @@ const HomeDriver = ({ navigation }) => {
           </View>
         )}
       />
-    </SafeAreaView>
+      <Pressable style={styles.boxModel}
+        onPress={() => setModalVisible(true)} />
+      <Pressable style={styles.boxModel2}
+        onPress={() => setModalVisible2(true)} />
+
+      <Pressable style={styles.boxModel3}
+        onPress={() => handleNext(1)} />
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+
+            <Pressable
+              style={styles.buttonClose}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.textStyle}>X</Text>
+            </Pressable>
+            <Image
+              source={purple} // ใช้ source แทน src
+              style={{ width: '100%', height: '100%' }}
+              resizeMode="stretch"
+            />
+
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible2}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView2}>
+            <Image
+              source={artboard26_0} // ใช้ source แทน src
+              style={{ width: '100%', height: '100%' }}
+              resizeMode="stretch"
+            />
+          </View>
+          <Pressable style={styles.modalViewBox_1} />
+          <Pressable style={styles.modalViewBox_2} />
+          <Pressable style={styles.modalViewBox_3} />
+          <Pressable style={styles.modalViewBox_4} onPress={() => setModalVisible2(false)} />
+
+          {console.log("modalVisible", modalVisible)}
+
+        </View>
+      </Modal>
+    </SafeAreaView >
   );
 }
-
+const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   boxNumber_1: {
     width: 50,
@@ -152,7 +216,8 @@ const styles = StyleSheet.create({
     marginRight: "17%",
     top: 0,
     right: 0,
-    marginTop: "40%"
+    marginTop: "40%",
+
   },
   boxNumber_3: {
     width: 50,
@@ -188,8 +253,122 @@ const styles = StyleSheet.create({
     marginRight: "60%",
     top: 0,
     right: 0,
-    marginTop: "140%"
+    marginTop: "138%"
   },
+  boxModel: {
+    zIndex: 1,
+    width: 30,
+    height: 23,
+    position: "absolute",
+    bottom: 0
+  },
+  boxModel2: {
+    zIndex: 1,
+    width: 30,
+    height: 23,
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+  },
+  boxModel3: {
+    zIndex: 1,
+    width: width - 32,
+    height: 45,
+    marginLeft: 16,
+    position: "absolute",
+    bottom: 24,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'flex-end', // เปลี่ยนจาก 'center' เป็น 'flex-end'
+  },
+  modalView: {
+    height: 230,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    zIndex: 1,
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalView2: {
+    flex: 1,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    zIndex: 1,
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    marginTop: 6,
+    backgroundColor: Colors.primary3,
+    position: "absolute",
+    zIndex: 10,
+    borderRadius: 50,
+    right: 4
+  },
+  textStyle: {
+    color: Colors.white,
+    fontWeight: 'bold',
+    fontSize: 16,
+    padding: 6
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  modalViewBox_1: {
+    width: "100%",
+    height: 130,
+    backgroundColor: "red",
+    position: "absolute",
+    zIndex: 3,
+    top: 0,
+    marginTop: "75%"
+  },
+  modalViewBox_2: {
+    width: "100%",
+    height: 130,
+    backgroundColor: "red",
+    position: "absolute",
+    zIndex: 3,
+    top: 0,
+    marginTop: "114%"
+  },
+  modalViewBox_3: {
+    width: "100%",
+    height: 130,
+    backgroundColor: "red",
+    position: "absolute",
+    zIndex: 3,
+    top: 0,
+    marginTop: "152%"
+  },
+  modalViewBox_4: {
+    width: 80,
+    height: 80,
+    position: "absolute",
+    zIndex: 3,
+    bottom: 0,
+    left: "40%"
+  }
 });
 
 export default HomeDriver;

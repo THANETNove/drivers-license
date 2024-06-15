@@ -28,16 +28,14 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "home" : "home-outline"}
-              color={color}
+              color={Colors.primary2}
             />
           ),
           tabBarLabel: ({ focused }) => (
             <Text
               style={{
                 marginBottom: -16,
-                color: focused
-                  ? Colors[colorScheme ?? "light"].tint
-                  : Colors.primary,
+                color: Colors.primary2,
               }}
             >
               หน้าเเรก
