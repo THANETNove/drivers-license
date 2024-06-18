@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Dimensions, View, Image, Pressable, Animated, StyleSheet, StatusBar, Platform, SafeAreaView, Modal, Text } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-
+import { Colors } from '@/constants/Colors';
 // Import button images
 import button_1 from "../../../assets/images/home/button_1.png";
 import button_2 from "../../../assets/images/home/button_2.png";
@@ -10,8 +10,12 @@ import button_4 from "../../../assets/images/home/button_4.png";
 import button_5 from "../../../assets/images/home/button_5.png";
 import button_6 from "../../../assets/images/home/button_6.png";
 import purple from "../../../assets/images/coverImg/purple.png";
-import artboard26_0 from "../../../assets/images/coverImg/Artboard26_0.png";
-import { Colors } from '@/constants/Colors';
+import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
+import Artboard95 from "../../../assets/images/coverImg/Artboard95.png";
+import Artboard96 from "../../../assets/images/coverImg/Artboard96.png";
+import Artboard97 from "../../../assets/images/coverImg/Artboard97.png";
+import Artboard99 from "../../../assets/images/coverImg/Artboard99.png";
+
 
 const HomeDriver = ({ navigation }) => {
   const width = Dimensions.get('window').width;
@@ -182,17 +186,39 @@ const HomeDriver = ({ navigation }) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView2}>
             <Image
-              source={artboard26_0} // ใช้ source แทน src
-              style={{ width: '100%', height: '100%' }}
+              source={Artboard90} // ใช้ source แทน src
+              style={styles.artboard90}
               resizeMode="stretch"
             />
+            <Image
+              source={Artboard95} // ใช้ source แทน src
+              style={styles.artboard95}
+              resizeMode="stretch"
+            />
+            <Image
+              source={Artboard96} // ใช้ source แทน src
+              style={styles.artboard96}
+              resizeMode="stretch"
+            />
+            <Image
+              source={Artboard97} // ใช้ source แทน src
+              style={styles.artboard96}
+              resizeMode="stretch"
+            />
+            <Pressable onPress={() => setModalVisible2(false)} style={styles.container99}>
+              <Image
+                source={Artboard99} // ใช้ source แทน src
+                style={styles.artboard99}
+                resizeMode="stretch"
+              />
+            </Pressable>
           </View>
-          <Pressable style={styles.modalViewBox_1} />
+          {/*    <Pressable style={styles.modalViewBox_1} />
           <Pressable style={styles.modalViewBox_2} />
           <Pressable style={styles.modalViewBox_3} />
           <Pressable style={styles.modalViewBox_4} onPress={() => setModalVisible2(false)} />
 
-          {console.log("modalVisible", modalVisible)}
+          {console.log("modalVisible", modalVisible)} */}
 
         </View>
       </Modal>
@@ -307,6 +333,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)', // ใช้ rgba เพื่อทำให้ backgroundColor โปร่งใส
+    zIndex: 0,
+    paddingHorizontal: 16
   },
   button: {
     borderRadius: 20,
@@ -368,7 +397,38 @@ const styles = StyleSheet.create({
     zIndex: 3,
     bottom: 0,
     left: "40%"
-  }
+  },
+  artboard90: {
+    width: "100%",
+    height: "100%",
+    zIndex: 1,
+    maxWidth: 200,
+    maxHeight: 200,
+    top: 80
+  },
+  artboard95: {
+    width: "100%",
+    height: 130,
+    zIndex: 1,
+    marginTop: "25%"
+  },
+  artboard96: {
+    width: "100%",
+    height: 130,
+    zIndex: 1,
+    marginTop: 32
+  },
+  container99: {
+    flex: 1,
+    justifyContent: 'flex-end', // ใช้ justifyContent เพื่อดัน artboard99 ลงด้านล่าง
+    alignItems: 'center', // จัดให้อยู่ตรงกลางด้านล่างb
+    bottom: 32
+  },
+  artboard99: {
+    width: 70,
+    height: 70,
+    zIndex: 1,
+  },
 });
 
 export default HomeDriver;
