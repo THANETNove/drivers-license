@@ -15,6 +15,7 @@ const StepsTest = () => {
     const [countdown, setCountdown] = useState(5); // เวลานับถอยหลัง (5 วินาที)
     const [attemptResults, setAttemptResults] = useState(Array(5).fill(null)); // Initialize with 5 elements
     const [buttonPressed, setButtonPressed] = useState(false); // สำหรับตรวจสอบว่ากดปุ่มแล้วหรือยัง
+    const [isFinished, setIsFinished] = useState(false); // สำหรับตรวจสอบว่ากระบวนการเสร็จสิ้นหรือไม่
     const attemptsIntervalRef = useRef(null);
     const countdownIntervalRef = useRef(null);
 
@@ -40,7 +41,7 @@ const StepsTest = () => {
                 if (prev > 0) {
                     return prev - 1;
                 } else {
-                    // Update attempts when countdown reaches 5
+                    // Update attempts when countdown reaches 0
                     setAttempts(attempts => {
                         if (attempts < 5) {
                             setButtonPressed(false); // Reset button press state for the new attempt
@@ -48,6 +49,7 @@ const StepsTest = () => {
                             return attempts + 1;
                         } else {
                             clearInterval(countdownIntervalRef.current);
+                            setIsFinished(true); // Mark the process as finished
                             return attempts;
                         }
                     });
@@ -112,7 +114,9 @@ const StepsTest = () => {
                                         borderWidth: 2
                                     }
                                 ]}
-                            />
+                            >
+
+                            </View>
                         ))}
                     </View>
                     <View style={styles.progressContainer}>
@@ -132,7 +136,6 @@ const StepsTest = () => {
                     <View style={styles.boxButton}>
                         <View style={styles.buttonContainer2}>
                             {imagesRandom.map((img, index) => (
-
                                 <Pressable key={index} onPress={() => handleButtonPress(index + 1)} // index + 1 เพื่อให้ตรงกับ id ของภาพ
                                     disabled={buttonPressed || attempts >= 6}>
                                     <Image
@@ -140,16 +143,16 @@ const StepsTest = () => {
                                         style={styles.artboard6_1Button}
                                         resizeMode="stretch"
                                     />
-
-
                                 </Pressable>
-
-
                             ))}
                         </View>
                     </View>
+                    {isFinished && (
+                        <Text style={{ fontSize: 20, color: 'yellow', marginTop: 20 }}>
+                            กระบวนการเสร็จสิ้นแล้ว
+                        </Text>
+                    )}
                 </View>
-
             </ScreenContainer>
         );
     };
@@ -217,7 +220,6 @@ const styles = StyleSheet.create({
     buttonContainer2: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-
         width: width - 65,
     },
     scoreContainer: {
@@ -231,9 +233,16 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         margin: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
         borderColor: 'red',
         borderWidth: 2,
         borderRadius: 5,
+        backgroundColor: 'white',
+    },
+    attemptText: {
+        color: 'black',
+        fontSize: 16,
     },
     boxButton: {
         marginTop: 16,
@@ -241,7 +250,6 @@ const styles = StyleSheet.create({
         width: width - 64,
         height: 70,
         borderRadius: 50,
-
     }
 });
 
