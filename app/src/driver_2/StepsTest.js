@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, Image, Text, Dimensions, Button, TouchableOpacity, ScrollView, Animated, Pressable } from 'react-native';
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 import Artboard6 from "../../../assets/images/coverImg/Artboard6.png";
 import Artboard6_1 from "../../../assets/images/coverImg/Artboard6_1.png";
 import Artboard6_2 from "../../../assets/images/coverImg/Artboard6_2.png";
@@ -8,8 +9,10 @@ import Artboard6_3 from "../../../assets/images/coverImg/Artboard6_3.png";
 import { Colors } from '@/constants/Colors';
 import Previous from "../../../assets/images/coverImg/Artboard63.png";
 import Next from "../../../assets/images/coverImg/Artboard64.png";
+import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
 
 const StepsTest = () => {
+    const navigation = useNavigation(); // Initialize navigation
     const [randomImage, setRandomImage] = useState(null);
     const [buttonIndex, setButtonIndex] = useState(null);
     const [score, setScore] = useState(0); // สำหรับนับคะแนน
@@ -46,7 +49,7 @@ const StepsTest = () => {
 
     useEffect(() => {
         if (stepsImgCountdown) {
-            const timer = setTimeout(startCountdown, 1000); // Wait 5 seconds before starting the countdown
+            const timer = setTimeout(startCountdown, 1000); // Wait 1 second before starting the countdown
             return () => clearTimeout(timer);
         }
     }, [stepsImgCountdown]);
@@ -94,11 +97,8 @@ const StepsTest = () => {
         setAttemptResults(Array(5).fill(null));
         setButtonPressed(false);
         setIsFinished(false);
-        setStepsImgCountdown(false); // Reset this first
-
-        setTimeout(() => {
-            setStepsImgCountdown(true); // Set this after a short delay to restart the countdown correctly
-        }, 100);
+        const timer = setTimeout(startCountdown, 1000); // Wait 1 second before starting the countdown
+        return () => clearTimeout(timer);
     };
 
     const handleNext = () => {
@@ -128,14 +128,49 @@ const StepsTest = () => {
 
     const scoreSteps = () => {
         return (
-            <>
-                {isFinished && (
-                    <Text style={{ fontSize: 20, color: 'yellow', marginTop: 20 }}>
-                        กระบวนการเสร็จสิ้นแล้ว
+            <ScreenContainer>
+                <View style={styles.boxCenter2}>
+                    <Image
+                        source={Artboard90}
+                        style={styles.artboard90}
+                        resizeMode="stretch"
+                    />
+                    <Text style={styles.testResults}>
+                        ผลการทดสอบ
                     </Text>
-                )}
-                <Button title="เริ่มใหม่" onPress={resetGame} style={styles.restartButton} />
-            </>
+                    <View style={styles.attemptsContainer}>
+                        {attemptResults.map((result, index) => (
+                            <View
+                                key={index}
+                                style={[
+                                    styles.attemptBox,
+                                    {
+                                        backgroundColor: result === 'correct' ? 'green' : result === 'incorrect' ? 'red' : 'white',
+                                        borderColor: 'red',
+                                        borderWidth: 2
+                                    }
+                                ]}
+                            >
+                            </View>
+                        ))}
+                    </View>
+                    <Text style={styles.sourceUser}>{score} / 5</Text>
+                    {score >= 3 ? <Text style={styles.sourceUser}>ผ่านการทดสอบ</Text> : <Text style={styles.sourceUser}>ไม่ผ่านการทดสอบ</Text>}
+
+                    <View style={styles.attemptsContainer2}>
+                        <View style={styles.boxBack}>
+                            <Pressable onPress={() => navigation.goBack()}>
+                                <Text style={styles.textBack}>กลับสู่เมนู</Text>
+                            </Pressable>
+                        </View>
+                        <View style={styles.boxBack}>
+                            <Pressable onPress={resetGame}>
+                                <Text style={styles.textBack}>ทดสอบใหม่</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </View>
+            </ScreenContainer>
         )
     }
 
@@ -155,7 +190,7 @@ const StepsTest = () => {
                             resizeMode="stretch"
                         />
                     )}
-                    <Text style={{ fontSize: 20, color: "#FFF", marginTop: 22 }}>{`ครั้งที่สุ่ม: ${attempts}/5`}</Text>
+                    <Text style={{ fontSize: 20, color: "#FFF", marginTop: 22 }}>{`ครั้งที่: ${attempts}/5`}</Text>
                     <View style={styles.attemptsContainer}>
                         {attemptResults.map((result, index) => (
                             <View
@@ -173,7 +208,6 @@ const StepsTest = () => {
                         ))}
                     </View>
                     <View style={styles.progressContainer}>
-                        <Text style={{ color: Colors.white }}>สุ่มภาพใหม่ใน {countdown} วินาที</Text>
                         <Animated.View
                             style={[
                                 styles.progressBar,
@@ -304,6 +338,11 @@ const styles = StyleSheet.create({
         marginTop: 32,
         alignItems: 'center',
     },
+    boxCenter2: {
+        flex: 1,
+        marginTop: 16,
+        alignItems: 'center',
+    },
     artboard6: {
         width: 200,
         height: 350
@@ -359,6 +398,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 8,
     },
+    attemptsContainer2: {
+        flexDirection: 'row',
+        justifyContent: "space-evenly",
+        marginTop: 32,
+        width: "100%",
+        marginBottom: 32
+    },
     attemptBox: {
         width: 30,
         height: 30,
@@ -384,6 +430,42 @@ const styles = StyleSheet.create({
     restartButton: {
         marginTop: 20,
     },
+    testResults: {
+        marginTop: 8,
+        color: Colors.black,
+        textAlign: "center",
+        fontSize: 48,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+    },
+    artboard90: {
+        width: "100%",
+        height: "100%",
+        zIndex: 1,
+        maxWidth: 150,
+        maxHeight: 150,
+    },
+    sourceUser: {
+        marginTop: 32,
+        color: Colors.black,
+        fontSize: 48,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+    },
+    boxBack: {
+        width: 180,
+        height: 100,
+        marginTop: 6,
+        backgroundColor: Colors.primary2,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: Colors.white,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    textBack: {
+        color: Colors.white,
+        fontSize: 30,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+    }
 });
 
 export default StepsTest;
