@@ -25,7 +25,7 @@ const StepsTest = () => {
 
     const images = [
         require('../../../assets/images/coverImg/Artboard01.png'),
-        require('../../../assets/images/coverImg/Artboard02.png'),
+        require('../../../assets/images/coverImg/Artboard02.jpg'),
         require('../../../assets/images/coverImg/Artboard03.png'), // Ensure this path is correct
     ];
 
