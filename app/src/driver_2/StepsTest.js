@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, StyleSheet, Image, Text, Dimensions, Button, Alert, Animated, Pressable } from 'react-native';
+import { View, StyleSheet, Image, Text, Dimensions, Button, TouchableOpacity, ScrollView, Animated, Pressable } from 'react-native';
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
 import Artboard6 from "../../../assets/images/coverImg/Artboard6.png";
 import Artboard6_1 from "../../../assets/images/coverImg/Artboard6_1.png";
 import Artboard6_2 from "../../../assets/images/coverImg/Artboard6_2.png";
 import Artboard6_3 from "../../../assets/images/coverImg/Artboard6_3.png";
 import { Colors } from '@/constants/Colors';
+import Previous from "../../../assets/images/coverImg/Artboard63.png";
+import Next from "../../../assets/images/coverImg/Artboard64.png";
 
 const StepsTest = () => {
     const [randomImage, setRandomImage] = useState(null);
@@ -16,10 +18,18 @@ const StepsTest = () => {
     const [attemptResults, setAttemptResults] = useState(Array(5).fill(null)); // Initialize with 5 elements
     const [buttonPressed, setButtonPressed] = useState(false); // สำหรับตรวจสอบว่ากดปุ่มแล้วหรือยัง
     const [isFinished, setIsFinished] = useState(false); // สำหรับตรวจสอบว่ากระบวนการเสร็จสิ้นหรือไม่
+    const [stepsImg, setStepsImg] = useState(0);
+    const [stepsImgCountdown, setStepsImgCountdown] = useState(false);
     const attemptsIntervalRef = useRef(null);
     const countdownIntervalRef = useRef(null);
 
-    const progressAnim = useRef(new Animated.Value(0)).current;
+    const images = [
+        require('../../../assets/images/coverImg/Artboard01.png'),
+        require('../../../assets/images/coverImg/Artboard02.png'),
+        require('../../../assets/images/coverImg/Artboard03.png'), // Ensure this path is correct
+    ];
+
+    const progressAnim = useRef(new Animated.Value(5)).current;
 
     const imagesRandom = [
         { source: Artboard6_1, id: 1 },
@@ -35,11 +45,11 @@ const StepsTest = () => {
     };
 
     useEffect(() => {
-        startCountdown();
-        return () => {
-            clearInterval(countdownIntervalRef.current);
-        };
-    }, []);
+        if (stepsImgCountdown) {
+            const timer = setTimeout(startCountdown, 1000); // Wait 5 seconds before starting the countdown
+            return () => clearTimeout(timer);
+        }
+    }, [stepsImgCountdown]);
 
     useEffect(() => {
         // ทำ Progress Bar เคลื่อนที่
@@ -84,7 +94,23 @@ const StepsTest = () => {
         setAttemptResults(Array(5).fill(null));
         setButtonPressed(false);
         setIsFinished(false);
-        startCountdown();
+        setStepsImgCountdown(false); // Reset this first
+
+        setTimeout(() => {
+            setStepsImgCountdown(true); // Set this after a short delay to restart the countdown correctly
+        }, 100);
+    };
+
+    const handleNext = () => {
+        if (stepsImg < images.length - 1) {
+            setStepsImg(stepsImg + 1);
+        }
+    };
+
+    const handlePrevious = () => {
+        if (stepsImg > 0) {
+            setStepsImg(stepsImg - 1);
+        }
     };
 
     const handleButtonPress = (index) => {
@@ -99,6 +125,19 @@ const StepsTest = () => {
             setButtonPressed(true); // Mark the button as pressed for the current attempt
         }
     };
+
+    const scoreSteps = () => {
+        return (
+            <>
+                {isFinished && (
+                    <Text style={{ fontSize: 20, color: 'yellow', marginTop: 20 }}>
+                        กระบวนการเสร็จสิ้นแล้ว
+                    </Text>
+                )}
+                <Button title="เริ่มใหม่" onPress={resetGame} style={styles.restartButton} />
+            </>
+        )
+    }
 
     const testSteps = () => {
         return (
@@ -124,7 +163,7 @@ const StepsTest = () => {
                                 style={[
                                     styles.attemptBox,
                                     {
-                                        backgroundColor: result === 'correct' ? 'green' : result === 'incorrect' && 'red',
+                                        backgroundColor: result === 'correct' ? 'green' : result === 'incorrect' ? 'red' : 'white',
                                         borderColor: 'red',
                                         borderWidth: 2
                                     }
@@ -161,23 +200,64 @@ const StepsTest = () => {
                             ))}
                         </View>
                     </View>
-                    {isFinished && (
-                        <>
-                            {/*    <Text style={{ fontSize: 20, color: 'yellow', marginTop: 20 }}>
-                                กระบวนการเสร็จสิ้นแล้ว
-                            </Text> */}
-                            <Button title="เริ่มใหม่" onPress={resetGame} style={{ fontSize: 20, color: 'yellow', marginTop: 20 }} />
-                        </>
-                    )}
-
                 </View>
             </ScreenContainer>
         );
     };
 
+    const imgCount = () => {
+        setStepsImgCountdown(true);
+    }
+
+    const imageSteps = () => {
+        return (
+            <>
+                <ScrollView contentContainerStyle={styles.scrollViewContent}>
+                    {images.map((img, index) => (
+                        <View key={index} style={stepsImg === index ? styles.imageContainer : styles.hidden}>
+                            {stepsImg === index && (
+                                <Pressable onPress={() => stepsImg == 2 && imgCount()}>
+                                    <Image
+                                        source={img}
+                                        style={styles.image}
+                                        resizeMode="stretch"
+                                    />
+                                </Pressable>
+                            )}
+                        </View>
+                    ))}
+                </ScrollView>
+                <View style={styles.buttonContainerImg}>
+                    <TouchableOpacity onPress={handlePrevious} disabled={stepsImg === 0}>
+                        {stepsImg !== 0 &&
+                            <Image
+                                source={Previous}
+                                style={[
+                                    styles.buttonImage,
+                                    stepsImg === 0 && styles.disabledButton
+                                ]}
+                            />
+                        }
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleNext} disabled={stepsImg === images.length - 1}>
+                        {stepsImg !== images.length - 1 &&
+                            <Image
+                                source={Next}
+                                style={[
+                                    styles.buttonImage,
+                                    stepsImg === images.length - 1 && styles.disabledButton
+                                ]}
+                            />
+                        }
+                    </TouchableOpacity>
+                </View>
+            </>
+        );
+    }
+
     return (
         <View style={styles.container}>
-            {testSteps()}
+            {!stepsImgCountdown ? imageSteps() : isFinished ? scoreSteps() : testSteps()}
         </View>
     );
 }
@@ -186,6 +266,38 @@ const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    scrollViewContent: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    imageContainer: {
+        width: '100%',
+        height: "100%",
+    },
+    hidden: {
+        display: 'none',
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+    },
+    buttonContainerImg: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: width,
+        position: "absolute",
+        bottom: 0,
+    },
+    buttonImage: {
+        marginHorizontal: 16,
+        marginVertical: 8,
+        width: 50,
+        height: 50,
+    },
+    disabledButton: {
+        opacity: 0.5,
     },
     boxCenter: {
         flex: 1,
@@ -268,7 +380,10 @@ const styles = StyleSheet.create({
         width: width - 64,
         height: 70,
         borderRadius: 50,
-    }
+    },
+    restartButton: {
+        marginTop: 20,
+    },
 });
 
 export default StepsTest;
