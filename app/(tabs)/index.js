@@ -22,6 +22,7 @@ import StepsDriversLicense from "../src/driver_1/StepsDriversLicense";
 import PrepareBeforeExam from "../src/driver_1/PrepareBeforeExam";
 import QualificationsTaker from "../src/driver_1/QualificationsTaker";
 import IdexFitnessTest from "../src/driver_2/IdexFitnessTest";
+import StepsTest from "../src/driver_2/StepsTest";
 
 
 
@@ -199,6 +200,24 @@ export default function App() {
         <Stack.Screen
           name="IdexFitnessTest"
           component={IdexFitnessTest}
+          options={({ navigation }) => ({
+            title: "ทดสอบสมรรณภาพ",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="StepsTest"
+          component={StepsTest}
           options={({ navigation }) => ({
             title: "ทดสอบสมรรณภาพ",
             headerShadowVisible: false,

@@ -20,7 +20,7 @@ const Capacity = ({ navigation }) => {
                 showsHorizontalScrollIndicator={false}>
                 <View style={styles.row}>
                     <View style={styles.box}>
-                        <Pressable onPress={() => navigation.navigate('InterestingDriverLicense')}>
+                        <Pressable onPress={() => navigation.navigate('StepsTest')}>
                             <Image
                                 source={Animated56} // ใช้ source แทน src
                                 style={styles.image} // กำหนดขนาดของภาพ
