@@ -35,6 +35,22 @@ const StepsTest = () => {
     };
 
     useEffect(() => {
+        startCountdown();
+        return () => {
+            clearInterval(countdownIntervalRef.current);
+        };
+    }, []);
+
+    useEffect(() => {
+        // ทำ Progress Bar เคลื่อนที่
+        Animated.timing(progressAnim, {
+            toValue: countdown,
+            duration: 1000,
+            useNativeDriver: false,
+        }).start();
+    }, [countdown]);
+
+    const startCountdown = () => {
         getRandomImage();
         countdownIntervalRef.current = setInterval(() => {
             setCountdown(prev => {
@@ -57,20 +73,19 @@ const StepsTest = () => {
                 }
             });
         }, 1000);
+    };
 
-        return () => {
-            clearInterval(countdownIntervalRef.current);
-        };
-    }, []);
-
-    useEffect(() => {
-        // ทำ Progress Bar เคลื่อนที่
-        Animated.timing(progressAnim, {
-            toValue: countdown,
-            duration: 1000,
-            useNativeDriver: false,
-        }).start();
-    }, [countdown]);
+    const resetGame = () => {
+        setRandomImage(null);
+        setButtonIndex(null);
+        setScore(0);
+        setAttempts(1);
+        setCountdown(5);
+        setAttemptResults(Array(5).fill(null));
+        setButtonPressed(false);
+        setIsFinished(false);
+        startCountdown();
+    };
 
     const handleButtonPress = (index) => {
         if (!buttonPressed) {
@@ -101,7 +116,7 @@ const StepsTest = () => {
                             resizeMode="stretch"
                         />
                     )}
-                    <Text style={{ fontSize: 20, color: "#FFF", marginTop: 32 }}>{`ครั้งที่สุ่ม: ${attempts}/5`}</Text>
+                    <Text style={{ fontSize: 20, color: "#FFF", marginTop: 22 }}>{`ครั้งที่สุ่ม: ${attempts}/5`}</Text>
                     <View style={styles.attemptsContainer}>
                         {attemptResults.map((result, index) => (
                             <View
@@ -109,13 +124,12 @@ const StepsTest = () => {
                                 style={[
                                     styles.attemptBox,
                                     {
-                                        backgroundColor: result === 'correct' ? 'green' : result === 'incorrect' ? 'red' : 'transparent',
+                                        backgroundColor: result === 'correct' ? 'green' : result === 'incorrect' && 'red',
                                         borderColor: 'red',
                                         borderWidth: 2
                                     }
                                 ]}
                             >
-
                             </View>
                         ))}
                     </View>
@@ -148,10 +162,14 @@ const StepsTest = () => {
                         </View>
                     </View>
                     {isFinished && (
-                        <Text style={{ fontSize: 20, color: 'yellow', marginTop: 20 }}>
-                            กระบวนการเสร็จสิ้นแล้ว
-                        </Text>
+                        <>
+                            {/*    <Text style={{ fontSize: 20, color: 'yellow', marginTop: 20 }}>
+                                กระบวนการเสร็จสิ้นแล้ว
+                            </Text> */}
+                            <Button title="เริ่มใหม่" onPress={resetGame} style={{ fontSize: 20, color: 'yellow', marginTop: 20 }} />
+                        </>
                     )}
+
                 </View>
             </ScreenContainer>
         );
