@@ -84,8 +84,6 @@ const HomeDriver = ({ navigation }) => {
 
   const handleNext = (index) => {
 
-
-    console.log("555", index);
     // Navigate based on button index
     let navigationIndex = index + 1;
     switch (navigationIndex) {

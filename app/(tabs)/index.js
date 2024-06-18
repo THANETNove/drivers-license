@@ -219,7 +219,7 @@ export default function App() {
           name="StepsTest"
           component={StepsTest}
           options={({ navigation }) => ({
-            title: "ทดสอบสมรรณภาพ",
+            title: "การมองเห็นสัญญาณไฟจราจร",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {
