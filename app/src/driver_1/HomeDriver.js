@@ -164,7 +164,11 @@ const HomeDriver = ({ navigation }) => {
             <Pressable
               style={styles.buttonClose}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>X</Text>
+              <Image
+                source={Artboard99} // ใช้ source แทน src
+                style={styles.artboardx}
+                resizeMode="stretch"
+              />
             </Pressable>
             <Image
               source={purple} // ใช้ source แทน src
@@ -213,12 +217,7 @@ const HomeDriver = ({ navigation }) => {
               />
             </Pressable>
           </View>
-          {/*    <Pressable style={styles.modalViewBox_1} />
-          <Pressable style={styles.modalViewBox_2} />
-          <Pressable style={styles.modalViewBox_3} />
-          <Pressable style={styles.modalViewBox_4} onPress={() => setModalVisible2(false)} />
 
-          {console.log("modalVisible", modalVisible)} */}
 
         </View>
       </Modal>
@@ -309,7 +308,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end', // เปลี่ยนจาก 'center' เป็น 'flex-end'
   },
   modalView: {
-    height: 230,
+    height: 210,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -363,41 +362,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-  modalViewBox_1: {
-    width: "100%",
-    height: 130,
-    backgroundColor: "red",
-    position: "absolute",
-    zIndex: 3,
-    top: 0,
-    marginTop: "75%"
-  },
-  modalViewBox_2: {
-    width: "100%",
-    height: 130,
-    backgroundColor: "red",
-    position: "absolute",
-    zIndex: 3,
-    top: 0,
-    marginTop: "114%"
-  },
-  modalViewBox_3: {
-    width: "100%",
-    height: 130,
-    backgroundColor: "red",
-    position: "absolute",
-    zIndex: 3,
-    top: 0,
-    marginTop: "152%"
-  },
-  modalViewBox_4: {
-    width: 80,
-    height: 80,
-    position: "absolute",
-    zIndex: 3,
-    bottom: 0,
-    left: "40%"
-  },
+
   artboard90: {
     width: "100%",
     height: "100%",
@@ -427,6 +392,11 @@ const styles = StyleSheet.create({
   artboard99: {
     width: 70,
     height: 70,
+    zIndex: 1,
+  },
+  artboardx: {
+    width: 50,
+    height: 50,
     zIndex: 1,
   },
 });
