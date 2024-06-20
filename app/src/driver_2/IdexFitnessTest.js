@@ -39,7 +39,7 @@ const Capacity = ({ navigation }) => {
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}>
-                        <Pressable onPress={() => navigation.navigate('StepsDriversLicense')}>
+                        <Pressable onPress={() => navigation.navigate('InDepthLook')}>
                             <Image
                                 source={Animated58} // ใช้ source แทน src
                                 style={styles.image} // กำหนดขนาดของภาพ

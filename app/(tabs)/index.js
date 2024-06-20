@@ -24,6 +24,7 @@ import QualificationsTaker from "../src/driver_1/QualificationsTaker";
 import IdexFitnessTest from "../src/driver_2/IdexFitnessTest";
 import StepsTest from "../src/driver_2/StepsTest";
 import ReactionTest from "../src/driver_2/ReactionTest";
+import InDepthLook from "../src/driver_2/InDepthLook";
 
 
 
@@ -239,6 +240,24 @@ export default function App() {
           component={ReactionTest}
           options={({ navigation }) => ({
             title: "ทดสอบปฏิกริยา",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="InDepthLook"
+          component={InDepthLook}
+          options={({ navigation }) => ({
+            title: "ทดสอบการมองโนเชิงลึก",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {
