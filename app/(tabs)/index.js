@@ -23,6 +23,7 @@ import PrepareBeforeExam from "../src/driver_1/PrepareBeforeExam";
 import QualificationsTaker from "../src/driver_1/QualificationsTaker";
 import IdexFitnessTest from "../src/driver_2/IdexFitnessTest";
 import StepsTest from "../src/driver_2/StepsTest";
+import ReactionTest from "../src/driver_2/ReactionTest";
 
 
 
@@ -220,6 +221,24 @@ export default function App() {
           component={StepsTest}
           options={({ navigation }) => ({
             title: "การมองเห็นสัญญาณไฟจราจร",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="ReactionTest"
+          component={ReactionTest}
+          options={({ navigation }) => ({
+            title: "ทดสอบปฏิกริยา",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {
