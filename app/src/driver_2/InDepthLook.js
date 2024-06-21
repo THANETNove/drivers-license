@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions, ScrollView, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
 import Artboard32 from '../../../assets/images/coverImg/Artboard-17.png'; // Update the path as needed
 import Artboard18 from '../../../assets/images/coverImg/Artboard-18.png'; // Update the path as needed
 import Artboard14 from '../../../assets/images/coverImg/Artboard14.png'; // Update the path as needed
@@ -9,6 +10,7 @@ import TopView from '../../../assets/images/coverImg/Artboard-21.png'; // Update
 import { Colors } from '@/constants/Colors';
 import Next from "../../../assets/images/coverImg/Artboard64.png";
 import Previous from "../../../assets/images/coverImg/Artboard63.png";
+import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
 
 const DepthPerceptionTest = () => {
     const navigation = useNavigation(); // Initialize navigation
@@ -16,6 +18,9 @@ const DepthPerceptionTest = () => {
     const [submitted, setSubmitted] = useState(false); // For managing the submission state
     const [stepsImgCountdown, setStepsImgCountdown] = useState(false);
     const [stepsImg, setStepsImg] = useState(0);
+    const [isFinished, setIsFinished] = useState(false);
+    const [distance, setDistance] = useState(30);
+    const [isCorrect, setIsCorrect] = useState(30);
 
 
 
@@ -30,8 +35,17 @@ const DepthPerceptionTest = () => {
     };
 
     const handleSubmit = () => {
+
+        // Define the correct position (example value)
+        const correctPosition = 0; // Adjust this value based on the correct position
+        setIsCorrect(Math.abs(polePosition - correctPosition) < 5); // Example threshold
+        setDistance(correctPosition - polePosition);
         // Logic for handling the submission
         setSubmitted(true);
+
+        setTimeout(() => {
+            setIsFinished(true)
+        }, 2000);
     };
 
     const handleNext = () => {
@@ -45,58 +59,94 @@ const DepthPerceptionTest = () => {
             setStepsImg(stepsImg - 1);
         }
     };
+    const resetGame = () => {
+        setSubmitted(false);
+        setPolePosition(30);
+        setIsFinished(false);
+    };
 
 
     // Calculate scale based on the pole position
     const scale = 1 + (polePosition / 300);
 
-    // Define the correct position (example value)
-    const correctPosition = 0; // Adjust this value based on the correct position
-    const isCorrect = Math.abs(polePosition - correctPosition) < 5; // Example threshold
-    const distance = correctPosition - polePosition;
+
+
+    const scoreSteps = () => {
+        return (
+            <ScreenContainer>
+                <View style={styles.boxCenter2}>
+                    <Image
+                        source={Artboard90}
+                        style={styles.artboard90}
+                        resizeMode="stretch"
+                    />
+                    <Text style={styles.testResults}>
+                        ผลการทดสอบ
+                    </Text>
+                    <Text style={styles.sourceUser}> {distance}  นิ้ว</Text>
+                    {isCorrect ? <Text style={styles.sourceUser}>ผ่านการทดสอบ</Text> : <Text style={styles.sourceUser}>ไม่ผ่านการทดสอบ</Text>}
+
+                    <View style={styles.attemptsContainer2}>
+                        <View style={styles.boxBack}>
+                            <Pressable onPress={() => navigation.goBack()}>
+                                <Text style={styles.textBack}>กลับสู่เมนู</Text>
+                            </Pressable>
+                        </View>
+                        <View style={styles.boxBack}>
+                            <Pressable onPress={resetGame}>
+                                <Text style={styles.textBack}>ทดสอบใหม่</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </View>
+            </ScreenContainer>
+        )
+    }
+
 
 
 
     const depthKook = () => {
         return (
-            <View style={styles.container}>
-                {!submitted && (
-                    <>
-                        <Image source={Artboard32} style={styles.imageBackground} resizeMode="stretch" />
-                        <View style={styles.testingBox}>
-                            <View style={[styles.pole, { transform: [{ translateY: polePosition }, { scale }] }]} >
-                                <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+            <ScreenContainer>
+                <View style={styles.container}>
+                    {!submitted && (
+                        <>
+                            <Image source={Artboard32} style={styles.imageBackground} resizeMode="stretch" />
+                            <View style={styles.testingBox}>
+                                <View style={[styles.pole, { transform: [{ translateY: polePosition }, { scale }] }]} >
+                                    <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                                </View>
+                                <View style={styles.fixedPole} >
+                                    <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                                </View>
                             </View>
-                            <View style={styles.fixedPole} >
-                                <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                            <View style={styles.buttonContainer}>
+                                <TouchableOpacity onPress={handleMoveForward} style={styles.button}>
+                                    <Text style={styles.buttonText}>▲</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={handleMoveBackward} style={styles.button2}>
+                                    <Text style={styles.buttonText}>▼</Text>
+                                </TouchableOpacity>
                             </View>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity onPress={handleMoveForward} style={styles.button}>
-                                <Text style={styles.buttonText}>▲</Text>
+                            <TouchableOpacity onPress={handleSubmit} style={styles.submitButton}>
+                                <Text style={styles.submitButtonText}>ยืนยันคำตอบ</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={handleMoveBackward} style={styles.button2}>
-                                <Text style={styles.buttonText}>▼</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <TouchableOpacity onPress={handleSubmit} style={styles.submitButton}>
-                            <Text style={styles.submitButtonText}>ยืนยันคำตอบ</Text>
-                        </TouchableOpacity>
-                    </>
-                )}
+                        </>
+                    )}
 
-                {submitted && (
-                    <View style={styles.submittedContainer}>
-                        <Image source={TopView} style={styles.topViewImage} resizeMode="stretch" />
-                        <View style={styles.sideViewContainer}>
-                            <View style={[styles.poleSideView, { transform: [{ translateY: polePosition * 2.5 }, { scale }] }]} >
-                                <Image source={Artboard14} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                    {submitted && (
+                        <View style={styles.submittedContainer}>
+                            <Image source={TopView} style={styles.topViewImage} resizeMode="stretch" />
+                            <View style={styles.sideViewContainer}>
+                                <View style={[styles.poleSideView, { transform: [{ translateY: polePosition * 2.5 }, { scale }] }]} >
+                                    <Image source={Artboard14} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                                </View>
+                                <View style={styles.fixedPoleSideView} >
+                                    <Image source={Artboard16} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                                </View>
                             </View>
-                            <View style={styles.fixedPoleSideView} >
-                                <Image source={Artboard16} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
-                            </View>
-                        </View>
-                        <Text style={styles.submittedText}>
+                            {/*  <Text style={styles.submittedText}>
                             {isCorrect ? 'ตำแหน่งถูกต้อง' : 'ตำแหน่งไม่ถูกต้อง'}
                         </Text>
                         <Text style={styles.submittedText}>
@@ -104,10 +154,12 @@ const DepthPerceptionTest = () => {
                         </Text>
                         <TouchableOpacity onPress={() => setSubmitted(false)} style={styles.submitButton}>
                             <Text style={styles.submitButtonText}>กลับไปแก้ไข</Text>
-                        </TouchableOpacity>
-                    </View>
-                )}
-            </View>
+                        </TouchableOpacity> */}
+                        </View>
+                    )}
+                </View>
+            </ScreenContainer>
+
         )
     }
 
@@ -171,7 +223,7 @@ const DepthPerceptionTest = () => {
     return (
         <>
             {
-                !stepsImgCountdown ? imageSteps() : depthKook()
+                !stepsImgCountdown ? imageSteps() : isFinished ? scoreSteps() : depthKook()
             }
         </>
     );
@@ -193,7 +245,7 @@ const styles = StyleSheet.create({
     },
     submittedContainer: {
         position: 'absolute',
-        top: 50,
+        top: 100,
         alignItems: 'center',
     },
     submittedText: {
@@ -359,6 +411,53 @@ const styles = StyleSheet.create({
         marginTop: 32,
         alignItems: 'center',
     },
+    boxCenter2: {
+        flex: 1,
+        marginTop: 16,
+        alignItems: 'center',
+    },
+    artboard90: {
+        width: "100%",
+        height: "100%",
+        zIndex: 1,
+        maxWidth: 150,
+        maxHeight: 150,
+    },
+    testResults: {
+        marginTop: 16,
+        color: Colors.black,
+        textAlign: "center",
+        fontSize: 48,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+    },
+    sourceUser: {
+        marginTop: 32,
+        color: Colors.black,
+        fontSize: 48,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+    },
+    attemptsContainer2: {
+        flexDirection: 'row',
+        justifyContent: "space-evenly",
+        marginTop: 32,
+        width: "100%",
+        marginBottom: 32
+    },
+    boxBack: {
+        width: 180,
+        height: 100,
+        marginTop: 6,
+        backgroundColor: Colors.primary2,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: Colors.white,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    textBack: {
+        color: Colors.white,
+        fontSize: 30,
+    }
 });
 
 export default DepthPerceptionTest;
