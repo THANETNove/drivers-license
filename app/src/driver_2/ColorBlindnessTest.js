@@ -12,41 +12,13 @@ import Next from "../../../assets/images/coverImg/Artboard64.png";
 import Previous from "../../../assets/images/coverImg/Artboard63.png";
 import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
 
-const DepthPerceptionTest = () => {
+const ColorBlindnessTest = () => {
     const navigation = useNavigation(); // Initialize navigation
-    const [polePosition, setPolePosition] = useState(30); // For managing the position of the pole
     const [submitted, setSubmitted] = useState(false); // For managing the submission state
     const [stepsImgCountdown, setStepsImgCountdown] = useState(false);
     const [stepsImg, setStepsImg] = useState(0);
     const [isFinished, setIsFinished] = useState(false);
-    const [distance, setDistance] = useState(30);
-    const [isCorrect, setIsCorrect] = useState(30);
 
-
-
-    const handleMoveForward = () => {
-        // Logic for moving the pole forward
-        setPolePosition(prev => Math.max(prev - 5, -40)); // Example logic
-    };
-
-    const handleMoveBackward = () => {
-        // Logic for moving the pole backward
-        setPolePosition(prev => Math.min(prev + 5, 35)); // Example logic
-    };
-
-    const handleSubmit = () => {
-
-        // Define the correct position (example value)
-        const correctPosition = 0; // Adjust this value based on the correct position
-        setIsCorrect(Math.abs(polePosition - correctPosition) < 5); // Example threshold
-        setDistance(correctPosition - polePosition);
-        // Logic for handling the submission
-        setSubmitted(true);
-
-        setTimeout(() => {
-            setIsFinished(true)
-        }, 2000);
-    };
 
     const handleNext = () => {
         if (stepsImg < images.length - 1) {
@@ -83,7 +55,7 @@ const DepthPerceptionTest = () => {
                     <Text style={styles.testResults}>
                         ผลการทดสอบ
                     </Text>
-                    <Text style={styles.sourceUser}> {distance}  นิ้ว</Text>
+                    {/* <Text style={styles.sourceUser}> {distance}  นิ้ว</Text>
                     {isCorrect ? <Text style={styles.sourceUser}>ผ่านการทดสอบ</Text> : <Text style={styles.sourceUser}>ไม่ผ่านการทดสอบ</Text>}
 
                     <View style={styles.attemptsContainer2}>
@@ -97,7 +69,7 @@ const DepthPerceptionTest = () => {
                                 <Text style={styles.textBack}>ทดสอบใหม่</Text>
                             </Pressable>
                         </View>
-                    </View>
+                    </View> */}
                 </View>
             </ScreenContainer>
         )
@@ -110,44 +82,8 @@ const DepthPerceptionTest = () => {
         return (
             <ScreenContainer>
                 <View style={styles.container}>
-                    {!submitted && (
-                        <>
-                            <Image source={Artboard32} style={styles.imageBackground} resizeMode="stretch" />
-                            <View style={styles.testingBox}>
-                                <View style={[styles.pole, { transform: [{ translateY: polePosition }, { scale }] }]} >
-                                    <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
-                                </View>
-                                <View style={styles.fixedPole} >
-                                    <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
-                                </View>
-                            </View>
-                            <View style={styles.buttonContainer}>
-                                <TouchableOpacity onPress={handleMoveForward} style={styles.button}>
-                                    <Text style={styles.buttonText}>▲</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={handleMoveBackward} style={styles.button2}>
-                                    <Text style={styles.buttonText}>▼</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <TouchableOpacity onPress={handleSubmit} style={styles.submitButton}>
-                                <Text style={styles.submitButtonText}>ยืนยันคำตอบ</Text>
-                            </TouchableOpacity>
-                        </>
-                    )}
 
-                    {submitted && (
-                        <View style={styles.submittedContainer}>
-                            <Image source={TopView} style={styles.topViewImage} resizeMode="stretch" />
-                            <View style={styles.sideViewContainer}>
-                                <View style={[styles.poleSideView, { transform: [{ translateY: polePosition * 2.5 }, { scale }] }]} >
-                                    <Image source={Artboard14} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
-                                </View>
-                                <View style={styles.fixedPoleSideView} >
-                                    <Image source={Artboard16} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
-                                </View>
-                            </View>
-                        </View>
-                    )}
+
                 </View>
             </ScreenContainer>
 
@@ -451,4 +387,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DepthPerceptionTest;
+export default ColorBlindnessTest;
