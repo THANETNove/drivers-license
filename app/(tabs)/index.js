@@ -257,7 +257,7 @@ export default function App() {
           name="InDepthLook"
           component={InDepthLook}
           options={({ navigation }) => ({
-            title: "ทดสอบการมองโนเชิงลึก",
+            title: "ทดสอบการมองในเชิงลึก",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {
