@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions, ScrollView, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Artboard32 from '../../../assets/images/coverImg/Artboard-17.png'; // Update the path as needed
 import Artboard18 from '../../../assets/images/coverImg/Artboard-18.png'; // Update the path as needed
 import Artboard14 from '../../../assets/images/coverImg/Artboard14.png'; // Update the path as needed
 import Artboard16 from '../../../assets/images/coverImg/Artboard16.png'; // Update the path as needed
 import TopView from '../../../assets/images/coverImg/Artboard-21.png'; // Update the path as needed
+import { Colors } from '@/constants/Colors';
+import Next from "../../../assets/images/coverImg/Artboard64.png";
+import Previous from "../../../assets/images/coverImg/Artboard63.png";
 
 const DepthPerceptionTest = () => {
     const navigation = useNavigation(); // Initialize navigation
-    const [polePosition, setPolePosition] = useState(0); // For managing the position of the pole
+    const [polePosition, setPolePosition] = useState(30); // For managing the position of the pole
     const [submitted, setSubmitted] = useState(false); // For managing the submission state
+    const [stepsImgCountdown, setStepsImgCountdown] = useState(false);
+    const [stepsImg, setStepsImg] = useState(0);
+
+
 
     const handleMoveForward = () => {
         // Logic for moving the pole forward
@@ -27,6 +34,19 @@ const DepthPerceptionTest = () => {
         setSubmitted(true);
     };
 
+    const handleNext = () => {
+        if (stepsImg < images.length - 1) {
+            setStepsImg(stepsImg + 1);
+        }
+    };
+
+    const handlePrevious = () => {
+        if (stepsImg > 0) {
+            setStepsImg(stepsImg - 1);
+        }
+    };
+
+
     // Calculate scale based on the pole position
     const scale = 1 + (polePosition / 300);
 
@@ -35,56 +55,125 @@ const DepthPerceptionTest = () => {
     const isCorrect = Math.abs(polePosition - correctPosition) < 5; // Example threshold
     const distance = correctPosition - polePosition;
 
-    return (
-        <View style={styles.container}>
-            {!submitted && (
-                <>
-                    <Image source={Artboard32} style={styles.imageBackground} resizeMode="stretch" />
-                    <View style={styles.testingBox}>
-                        <View style={[styles.pole, { transform: [{ translateY: polePosition }, { scale }] }]} >
-                            <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
-                        </View>
-                        <View style={styles.fixedPole} >
-                            <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
-                        </View>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity onPress={handleMoveForward} style={styles.button}>
-                            <Text style={styles.buttonText}>▲</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={handleMoveBackward} style={styles.button2}>
-                            <Text style={styles.buttonText}>▼</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity onPress={handleSubmit} style={styles.submitButton}>
-                        <Text style={styles.submitButtonText}>ยืนยันคำตอบ</Text>
-                    </TouchableOpacity>
-                </>
-            )}
 
-            {submitted && (
-                <View style={styles.submittedContainer}>
-                    <Image source={TopView} style={styles.topViewImage} resizeMode="stretch" />
-                    <View style={styles.sideViewContainer}>
-                        <View style={[styles.poleSideView, { transform: [{ translateY: polePosition * 2.5 }, { scale }] }]} >
-                            <Image source={Artboard14} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+
+    const depthKook = () => {
+        return (
+            <View style={styles.container}>
+                {!submitted && (
+                    <>
+                        <Image source={Artboard32} style={styles.imageBackground} resizeMode="stretch" />
+                        <View style={styles.testingBox}>
+                            <View style={[styles.pole, { transform: [{ translateY: polePosition }, { scale }] }]} >
+                                <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                            </View>
+                            <View style={styles.fixedPole} >
+                                <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                            </View>
                         </View>
-                        <View style={styles.fixedPoleSideView} >
-                            <Image source={Artboard16} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity onPress={handleMoveForward} style={styles.button}>
+                                <Text style={styles.buttonText}>▲</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={handleMoveBackward} style={styles.button2}>
+                                <Text style={styles.buttonText}>▼</Text>
+                            </TouchableOpacity>
                         </View>
+                        <TouchableOpacity onPress={handleSubmit} style={styles.submitButton}>
+                            <Text style={styles.submitButtonText}>ยืนยันคำตอบ</Text>
+                        </TouchableOpacity>
+                    </>
+                )}
+
+                {submitted && (
+                    <View style={styles.submittedContainer}>
+                        <Image source={TopView} style={styles.topViewImage} resizeMode="stretch" />
+                        <View style={styles.sideViewContainer}>
+                            <View style={[styles.poleSideView, { transform: [{ translateY: polePosition * 2.5 }, { scale }] }]} >
+                                <Image source={Artboard14} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                            </View>
+                            <View style={styles.fixedPoleSideView} >
+                                <Image source={Artboard16} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
+                            </View>
+                        </View>
+                        <Text style={styles.submittedText}>
+                            {isCorrect ? 'ตำแหน่งถูกต้อง' : 'ตำแหน่งไม่ถูกต้อง'}
+                        </Text>
+                        <Text style={styles.submittedText}>
+                            ความห่าง: {distance}  หน่วย
+                        </Text>
+                        <TouchableOpacity onPress={() => setSubmitted(false)} style={styles.submitButton}>
+                            <Text style={styles.submitButtonText}>กลับไปแก้ไข</Text>
+                        </TouchableOpacity>
                     </View>
-                    <Text style={styles.submittedText}>
-                        {isCorrect ? 'ตำแหน่งถูกต้อง' : 'ตำแหน่งไม่ถูกต้อง'}
-                    </Text>
-                    <Text style={styles.submittedText}>
-                        ความห่าง: {distance}  หน่วย
-                    </Text>
-                    <TouchableOpacity onPress={() => setSubmitted(false)} style={styles.submitButton}>
-                        <Text style={styles.submitButtonText}>กลับไปแก้ไข</Text>
+                )}
+            </View>
+        )
+    }
+
+    const images = [
+        require('../../../assets/images/coverImg/Artboard3_1.png'),
+        require('../../../assets/images/coverImg/Artboard3_2.png'),
+        require('../../../assets/images/coverImg/Artboard3_3.png'), // Ensure this path is correct
+    ];
+    const imgCount = () => {
+        setStepsImgCountdown(true);
+    }
+
+    const imageSteps = () => {
+        return (
+            <>
+                <ScrollView contentContainerStyle={styles.scrollViewContent}>
+                    {images.map((img, index) => (
+                        <View key={index} style={stepsImg === index ? styles.imageContainer : styles.hidden}>
+                            {stepsImg === index && (
+                                <Pressable onPress={() => stepsImg == 2 && imgCount()}>
+                                    <Image
+                                        source={img}
+                                        style={styles.image}
+                                        resizeMode="stretch"
+                                    />
+                                </Pressable>
+                            )}
+                        </View>
+                    ))}
+                </ScrollView>
+                <View style={styles.buttonContainerImg}>
+                    <TouchableOpacity onPress={handlePrevious} disabled={stepsImg === 0}>
+                        {stepsImg !== 0 &&
+                            <Image
+                                source={Previous}
+                                style={[
+                                    styles.buttonImage,
+                                    stepsImg === 0 && styles.disabledButton
+                                ]}
+                            />
+                        }
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleNext} disabled={stepsImg === images.length - 1}>
+                        {stepsImg !== images.length - 1 &&
+                            <Image
+                                source={Next}
+                                style={[
+                                    styles.buttonImage,
+                                    stepsImg === images.length - 1 && styles.disabledButton
+                                ]}
+                            />
+                        }
                     </TouchableOpacity>
                 </View>
-            )}
-        </View>
+            </>
+        );
+    }
+
+
+
+    return (
+        <>
+            {
+                !stepsImgCountdown ? imageSteps() : depthKook()
+            }
+        </>
     );
 };
 
@@ -228,6 +317,47 @@ const styles = StyleSheet.create({
         borderRadius: 50,
 
         left: 127,
+    },
+    scrollViewContent: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    imageContainer: {
+        width: '100%',
+        height: "100%",
+    },
+    hidden: {
+        display: 'none',
+    },
+    buttonContainerImg: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: width,
+        position: "absolute",
+        bottom: 0,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+    },
+    buttonContainerImg: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: width,
+        position: "absolute",
+        bottom: 0,
+    },
+    buttonImage: {
+        marginHorizontal: 16,
+        marginVertical: 8,
+        width: 50,
+        height: 50,
+    },
+    boxCenter: {
+        flex: 1,
+        marginTop: 32,
+        alignItems: 'center',
     },
 });
 
