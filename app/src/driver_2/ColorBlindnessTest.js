@@ -38,8 +38,7 @@ const ColorBlindnessTest = () => {
     };
 
 
-    // Calculate scale based on the pole position
-    const scale = 1 + (polePosition / 300);
+
 
 
 
@@ -83,7 +82,7 @@ const ColorBlindnessTest = () => {
             <ScreenContainer>
                 <View style={styles.container}>
 
-
+                    <Text>55555</Text>
                 </View>
             </ScreenContainer>
 
@@ -91,9 +90,9 @@ const ColorBlindnessTest = () => {
     }
 
     const images = [
-        require('../../../assets/images/coverImg/Artboard3_1.png'),
-        require('../../../assets/images/coverImg/Artboard3_2.png'),
-        require('../../../assets/images/coverImg/Artboard3_3.png'), // Ensure this path is correct
+        require('../../../assets/images/coverImg/Artboard4_1.png'),
+        require('../../../assets/images/coverImg/Artboard4_2.png'),
+        require('../../../assets/images/coverImg/Artboard4_3.png'), // Ensure this path is correct
     ];
     const imgCount = () => {
         setStepsImgCountdown(true);

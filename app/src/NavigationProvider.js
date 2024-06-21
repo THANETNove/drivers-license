@@ -5,7 +5,7 @@ import { Colors } from "@/constants/Colors";
 
 const ScreenContainer = ({ children }) => {
     return (
-        <LinearGradient colors={[Colors.primary, Colors.primary2, Colors.primary3]} style={{ flex: 1, zIndex: 0 }}>
+        <LinearGradient colors={["#DFE9F6", "#DBDEF1", "#DCD2EA"]} style={{ flex: 1, zIndex: 0 }}>
             {children}
         </LinearGradient>
     );

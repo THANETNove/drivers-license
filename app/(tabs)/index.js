@@ -25,6 +25,7 @@ import IdexFitnessTest from "../src/driver_2/IdexFitnessTest";
 import StepsTest from "../src/driver_2/StepsTest";
 import ReactionTest from "../src/driver_2/ReactionTest";
 import InDepthLook from "../src/driver_2/InDepthLook";
+import ColorBlindnessTest from "../src/driver_2/ColorBlindnessTest";
 
 
 
@@ -258,6 +259,24 @@ export default function App() {
           component={InDepthLook}
           options={({ navigation }) => ({
             title: "ทดสอบการมองในเชิงลึก",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="ColorBlindnessTest"
+          component={ColorBlindnessTest}
+          options={({ navigation }) => ({
+            title: "ทดสอบตาบอดสี",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {
