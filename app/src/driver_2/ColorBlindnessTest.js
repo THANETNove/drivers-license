@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Pressable, Dimensions } from 'react-native';
 import { RadioButton } from 'react-native-paper'; // You can use any library for radio buttons
 import ScreenContainer from "../NavigationProvider"; // Adjust the path accordingly
 import { useNavigation } from '@react-navigation/native';
+import { Colors } from '@/constants/Colors';
+import Previous from "../../../assets/images/coverImg/Artboard63.png";
+import Next from "../../../assets/images/coverImg/Artboard64.png";
 
 
 const ColorBlindnessTest = () => {
@@ -11,10 +14,18 @@ const ColorBlindnessTest = () => {
     const [answers, setAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [summaryStep, setSummaryStep] = useState(0);
+    const [stepsImg, setStepsImg] = useState(0);
+    const [stepsImgCountdown, setStepsImgCountdown] = useState(false);
 
-    const handleSelect = (step, value) => {
-        setAnswers({ ...answers, [step]: value });
-    };
+
+
+
+    const images = [
+        require('../../../assets/images/coverImg/Artboard01.png'),
+        require('../../../assets/images/coverImg/Artboard02.jpg'),
+        require('../../../assets/images/coverImg/Artboard03.png'), // Ensure this path is correct
+    ];
+
 
     const steps = [
         {
@@ -100,6 +111,10 @@ const ColorBlindnessTest = () => {
         // Add more steps as needed
     ];
 
+    const handleSelect = (step, value) => {
+        setAnswers({ ...answers, [step]: value });
+    };
+
     const handleNext = () => {
         if (currentStep < steps.length - 1) {
             setCurrentStep(currentStep + 1);
@@ -121,8 +136,74 @@ const ColorBlindnessTest = () => {
         }
     };
 
-    return (
-        <ScreenContainer>
+
+    const handleNextText = () => {
+        if (stepsImg < images.length - 1) {
+            setStepsImg(stepsImg + 1);
+        }
+    };
+
+    const handlePreviousText = () => {
+        if (stepsImg > 0) {
+            setStepsImg(stepsImg - 1);
+        }
+    };
+
+    const imgCount = () => {
+        setStepsImgCountdown(true);
+    }
+
+
+    const imageSteps = () => {
+        return (
+            <>
+                <View style={{ flex: 1 }}>
+                    {images.map((img, index) => (
+                        <View key={index} style={stepsImg === index ? styles.imageContainer : styles.hidden}>
+                            {stepsImg === index && (
+                                <Pressable onPress={() => stepsImg == 2 && imgCount()}>
+                                    <Image
+                                        source={img}
+                                        style={styles.imageSteps2}
+                                        resizeMode="stretch"
+                                    />
+                                </Pressable>
+                            )}
+                        </View>
+                    ))}
+                </View>
+                <View style={styles.buttonContainerImg}>
+                    <TouchableOpacity onPress={handlePreviousText} disabled={stepsImg === 0}>
+                        {stepsImg !== 0 &&
+                            <Image
+                                source={Previous}
+                                style={[
+                                    styles.buttonImage,
+                                    stepsImg === 0 && styles.disabledButton
+                                ]}
+                            />
+                        }
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleNextText} disabled={stepsImg === images.length - 1}>
+                        {stepsImg !== images.length - 1 &&
+                            <Image
+                                source={Next}
+                                style={[
+                                    styles.buttonImage,
+                                    stepsImg === images.length - 1 && styles.disabledButton
+                                ]}
+                            />
+                        }
+                    </TouchableOpacity>
+                </View>
+            </>
+        );
+    }
+
+
+
+    const blindTest = () => {
+        return (
             <ScrollView contentContainerStyle={styles.container}>
                 {!submitted ? (
                     <View style={styles.stepContainer}>
@@ -170,11 +251,18 @@ const ColorBlindnessTest = () => {
                     </View>
                 )}
             </ScrollView>
+        )
+    }
+
+    return (
+        <ScreenContainer>
+            {stepsImgCountdown ? blindTest() : imageSteps()}
         </ScreenContainer>
     );
 };
-
+const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
+
     container: {
         flexGrow: 1,
         padding: 20,
@@ -182,7 +270,7 @@ const styles = StyleSheet.create({
     },
     boxCenter: {
 
-        marginLeft: "28%"
+        marginLeft: "26%"
 
     },
     stepContainer: {
@@ -256,6 +344,38 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'SukhumvitSet-Bold', // Use the loaded font
     },
+    scrollViewContent: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    imageContainer: {
+        width: '100%',
+        height: "100%",
+    },
+    hidden: {
+        display: 'none',
+    },
+    buttonContainerImg: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: width,
+        position: "absolute",
+        bottom: 0,
+    },
+    buttonImage: {
+        marginHorizontal: 16,
+        marginVertical: 8,
+        width: 50,
+        height: 50,
+    },
+    disabledButton: {
+        opacity: 0.5,
+    },
+    imageSteps2: {
+        width: "100%",
+        height: "100%"
+    }
 });
 
 export default ColorBlindnessTest;
