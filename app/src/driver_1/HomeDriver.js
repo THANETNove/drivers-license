@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
     marginRight: "17%",
     top: 0,
     right: 0,
-    marginTop: "40%",
+    marginTop: "41%",
 
   },
   boxNumber_3: {
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     marginRight: "0%",
     top: 0,
     right: 0,
-    marginTop: "64%"
+    marginTop: "67%"
   },
   boxNumber_4: {
     width: 50,
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     marginRight: "35%",
     top: 0,
     right: 0,
-    marginTop: "84%"
+    marginTop: 350
   },
   boxNumber_5: {
     width: 50,
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     marginRight: "43%",
     top: 0,
     right: 0,
-    marginTop: "110%"
+    marginTop: 450
   },
   boxNumber_6: {
     width: 50,
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     marginRight: "60%",
     top: 0,
     right: 0,
-    marginTop: "138%"
+    marginTop: 590
   },
   boxModel: {
     zIndex: 1,
