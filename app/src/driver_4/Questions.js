@@ -20,7 +20,7 @@ import Category_5 from '../questionsCategory/category_5.json'; // ปรับ�
 const Questions = ({ route, navigation }) => {
     const { category, categoryIndex, selectedSet, indexSet } = route.params;
 
-    console.log("category, categoryIndex, selectedSet, indexSet");
+    console.log("category, categoryIndex, selectedSet, indexSet", indexSet - 1);
 
     const [questions, setQuestions] = useState([]);
     const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -29,22 +29,24 @@ const Questions = ({ route, navigation }) => {
 
     useEffect(() => {
         // Load questions from JSON file
-        setQuestions(Category_1);
+
 
         if (categoryIndex == 1) {
-            setQuestions(Category_1);
+            console.log("11",);
+
+            setQuestions(Category_1[indexSet - 1]);
         }
         if (categoryIndex == 2) {
-            setQuestions(Category_2);
+            setQuestions(Category_2[indexSet - 1]);
         }
         if (categoryIndex == 3) {
-            setQuestions(Category_3);
+            setQuestions(Category_3[indexSet - 1]);
         }
         if (categoryIndex == 4) {
-            setQuestions(Category_4);
+            setQuestions(Category_4[indexSet - 1]);
         }
         if (categoryIndex == 5) {
-            setQuestions(Category_4);
+            setQuestions(Category_5[indexSet - 1]);
         }
 
     }, []);
