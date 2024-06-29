@@ -122,7 +122,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -140,7 +140,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
 
@@ -159,7 +159,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -177,7 +177,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -195,7 +195,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -215,7 +215,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -233,7 +233,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -251,7 +251,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -269,7 +269,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -287,7 +287,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -305,7 +305,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -323,7 +323,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -341,7 +341,7 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
@@ -359,15 +359,15 @@ export default function App() {
             showLabel: false,
             headerTitleStyle: {
               fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontSize: 18, // ขนาดฟอนต์
             },
           })}
         />
         <Stack.Screen
           name="Questions"
           component={Questions}
-          options={({ navigation }) => ({
-            title: "ตอบคำถาม",
+          options={({ route, navigation }) => ({
+            title: route.params.category + " " + route.params.selectedSet,
             headerBackTitleVisible: false,
             headerShadowVisible: false,
             headerStyle: {
@@ -376,8 +376,8 @@ export default function App() {
             headerTintColor: Colors.white,
             showLabel: false,
             headerTitleStyle: {
-              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 20, // ขนาดฟอนต์
+              fontFamily: "SukhumvitSet-Bold",
+              fontSize: 20,
             },
           })}
         />
@@ -394,11 +394,11 @@ const styles = StyleSheet.create({
 
   },
   boxImage: {
-    width: 75,
-    height: 70,
+    width: 65,
+    height: 60,
     zIndex: 10,
-    right: 16,
-    top: 35,
+    right: 8,
+    top: 40,
     position: "absolute"
 
   }

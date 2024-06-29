@@ -51,44 +51,9 @@ const Questions = ({ route, navigation }) => {
 
 
 
-    const handleSelect = (questionIndex, choiceLetter) => {
-        setSelectedAnswers(prevAnswers => ({
-            ...prevAnswers,
-            [questionIndex]: {
-                index: questions[questionIndex].index,
-                enterAnswer: choiceLetter,
-            }
-        }));
-    };
-
-    const calculateScore = () => {
-        let newScore = 0;
-        const newResults = {};
-        questions.forEach((question, questionIndex) => {
-            const userAnswer = selectedAnswers[questionIndex];
-            if (userAnswer) {
-                if (userAnswer.enterAnswer === question.answer) {
-                    newScore += 1;
-                    newResults[questionIndex] = 'correct';
-                } else {
-                    newResults[questionIndex] = 'incorrect';
-                }
-            } else {
-                newResults[questionIndex] = 'unanswered';
-            }
-        });
-        setScore(newScore);
-        setResults(newResults);
-    };
-
-
-
-
     return (
         <ScreenContainer>
             <View style={styles.container}>
-                <Text style={styles.categoryIndex}>ข้อสอบใบขับขี่หมวดที่ {categoryIndex}</Text>
-                <Text style={styles.category1}>{category}</Text>
 
                 <ScrollView
                     showsVerticalScrollIndicator={false}
@@ -102,7 +67,7 @@ const Questions = ({ route, navigation }) => {
 
 
                             <RadioButton.Group
-                                onValueChange={(newValue) => handleSelect(questionIndex, newValue)}
+
                                 value={selectedAnswers[questionIndex]?.enterAnswer}
                             >
                                 {question.choices.map((choice, choiceIndex) => {
@@ -133,10 +98,7 @@ const Questions = ({ route, navigation }) => {
                             </RadioButton.Group>
                         </View>
                     ))}
-                    <Pressable style={styles.button} onPress={calculateScore}>
-                        <Text style={styles.buttonText}>ตรวจสอบคะแนน</Text>
-                    </Pressable>
-                    <Text style={styles.scoreText}>คะแนน: {score}</Text>
+
                 </ScrollView>
 
             </View >
