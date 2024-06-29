@@ -63,7 +63,16 @@ const Questions = ({ route, navigation }) => {
                         <View View key={questionIndex} style={styles.questionContainer} >
                             <View style={styles.boxQuestion}>
                                 <Text style={styles.questionText}>{question.index}. {question.question}</Text>
+
+
+                                {question.img && <Image
+                                    source={{ uri: question.img }} // ใช้ source แทน src
+                                    style={styles.imageQue}
+                                    resizeMode="stretch"
+                                />}
+
                             </View>
+
 
 
                             <RadioButton.Group
@@ -182,7 +191,7 @@ const styles = StyleSheet.create({
     imageQue: {
         width: 100,
         height: 100,
-        marginLeft: "10%"
+        marginVertical: 16
     },
     boxQuestion: {
         paddingHorizontal: 8,

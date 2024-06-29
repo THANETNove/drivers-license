@@ -152,7 +152,7 @@
       "ค.ด้านหลัง",
       "ง.ด้านหน้า"
     ],
-    "img": "../../../assets/images/categoryImage/category1/12.jpg",
+    "img": "http://localhost/project/DriversLicenseImage/categoryImage/category1/12.jpg",
     "enterAnswer": null,
     "answer": "ข"
   },
@@ -165,7 +165,7 @@
       "ค.ด้านหน้า",
       "ง.ด้านข้างและด้านหลัง"
     ],
-    "img": "../../../assets/images/categoryImage/category1/13.jpg",
+    "img": "http://localhost/project/DriversLicenseImage/categoryImage/category1/13.jpg",
     "enterAnswer": null,
     "answer": "ข"
   },
@@ -212,7 +212,7 @@
     "index": "17",
     "question": "การให้สัญญาณด้วยแขน โดยผู้ขับขี่ยื่นแขนขวาตรงออกไปนอกตัวรถเสมอระดับไหล่และโบกมือขึ้นลงหลายครั้ง หมายถึงผู้ขับขี่นั้นต้องการอะไร",
     "choices": ["ก.หยุดรถ", "ข.เลี้ยวขวา", "ค.จะลดความเร็วของรถ", "ง.จอดรถ"],
-    "img": "../../../assets/images/categoryImage/category1/17.jpg",
+    "img": "http://localhost/project/DriversLicenseImage/categoryImage/category1/17.jpg",
     "enterAnswer": null,
     "answer": "ค"
   },
