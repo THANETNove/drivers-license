@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
 
     },
     scoreBox: {
-        marginTop: "35%",
+        marginTop: "30%",
         justifyContent: "center",
         alignItems: "center"
     },
