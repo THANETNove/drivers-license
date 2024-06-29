@@ -21,16 +21,20 @@ const HomeDriver = ({ navigation }) => {
   const width = Dimensions.get('window').width;
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0); // Initialize state for currentIndex
+
 
 
   const images = [
-    require('../../../assets/images/home/home_1.png'),
-    require('../../../assets/images/home/home_2.png'),
-    require('../../../assets/images/home/home_3.png'),
-    require('../../../assets/images/home/home_4.png'),
-    require('../../../assets/images/home/home_5.png'),
-    require('../../../assets/images/home/home_6.png'),
+    require('../../../assets/images/coverImg/2_0.jpg'),
+    require('../../../assets/images/coverImg/2_0.jpg'),
+    require('../../../assets/images/coverImg/2_0.jpg'),
+    require('../../../assets/images/coverImg/2_0.jpg'),
+    require('../../../assets/images/coverImg/2_0.jpg'),
+    require('../../../assets/images/coverImg/2_0.jpg'),
   ];
+
+
 
   // Create animated values for scaling
   const imageScale = useRef(new Animated.Value(1)).current;
@@ -77,9 +81,10 @@ const HomeDriver = ({ navigation }) => {
 
       // Move to next index
       index = (index + 1) % 6; // Loop back to 0 after reaching 5
-    }, 1000);
 
+    }, 1000);
     return () => clearInterval(interval); // Clear interval on component unmount
+
   }, []); // Run effect only once on component mount
 
   const handleNext = (index) => {
@@ -108,10 +113,10 @@ const HomeDriver = ({ navigation }) => {
         loop
         width={width}
         height={"100%"}
-        autoPlay={false}
+        autoPlay={true}
         data={images}
         scrollAnimationDuration={1000}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <View style={{ flex: 1, justifyContent: 'center', zIndex: 0 }}>
             <Animated.Image
               source={item}
@@ -121,6 +126,7 @@ const HomeDriver = ({ navigation }) => {
               ]}
               resizeMode="stretch"
             />
+
             {buttons.map((button, index) => (
               <Pressable
                 key={index}
@@ -137,16 +143,33 @@ const HomeDriver = ({ navigation }) => {
                 />
               </Pressable>
             ))}
+
+
+            <View style={styles.boxCircle}>
+              {images.map((_, i) => (
+                <View
+                  key={i}
+                  style={[
+                    styles.circle,
+                    index === i ? { backgroundColor: Colors.primary } : null
+                  ]}
+                />
+              ))}
+            </View>
+            <Pressable style={styles.boxModel3}
+              onPress={() => handleNext(1)} >
+              <Text style={styles.textBoxModel3}>เเนวข้อสอบพร้อมเฉลย</Text>
+            </Pressable>
           </View>
         )}
       />
+
       <Pressable style={styles.boxModel}
         onPress={() => setModalVisible(true)} />
       <Pressable style={styles.boxModel2}
         onPress={() => setModalVisible2(true)} />
 
-      <Pressable style={styles.boxModel3}
-        onPress={() => handleNext(1)} />
+
 
       <Modal
         animationType="slide"
@@ -230,7 +253,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginLeft: "27%",
     top: 0,
-    marginTop: "37%"
+    marginTop: "37%",
+
   },
   boxNumber_2: {
     width: 50,
@@ -294,12 +318,21 @@ const styles = StyleSheet.create({
     right: 0,
   },
   boxModel3: {
+    backgroundColor: Colors.primary2,
     zIndex: 1,
     width: width - 32,
     height: 45,
     marginLeft: 16,
     position: "absolute",
     bottom: 24,
+    borderRadius: 4,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  textBoxModel3: {
+    color: Colors.white,
+    fontSize: 20,
+    fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
   },
   centeredView: {
     flex: 1,
@@ -397,6 +430,24 @@ const styles = StyleSheet.create({
     height: 50,
     zIndex: 1,
   },
+  boxCircle: {
+    position: "absolute",
+    width: "100%",
+    height: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    bottom: 74,
+    flexDirection: "row",
+    zIndex: 0
+  },
+  circle: {
+    marginRight: 6,
+    width: 10,
+    height: 10,
+    borderRadius: 50,
+    zIndex: 1,
+    backgroundColor: Colors.white
+  }
 });
 
 export default HomeDriver;

@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "drivers-license-test",
-    "slug": "drivers-license-test",
+    "name": "driversLicense",
+    "slug": "driversLicense",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/coverImg/Artboard90.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/coverImg/artboard1_0.png",
+      "image": "./assets/images/coverImg/3_0.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/3_0.jpg",
         "backgroundColor": "#ffffff"
       }
     },
@@ -26,10 +26,7 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
+    "plugins": ["expo-router", "expo-font"],
     "experiments": {
       "typedRoutes": true
     }
