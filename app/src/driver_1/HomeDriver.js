@@ -98,6 +98,12 @@ const HomeDriver = ({ navigation }) => {
       case 2:
         navigation.navigate('IdexFitnessTest');
         break;
+      case 3:
+        navigation.navigate('IndexExamination');
+        break;
+      case 4:
+        navigation.navigate('ExaminationQ');
+        break;
       // Add more cases for other navigation indexes as needed
       default:
         break;
@@ -157,8 +163,15 @@ const HomeDriver = ({ navigation }) => {
               ))}
             </View>
             <Pressable style={styles.boxModel3}
-              onPress={() => handleNext(1)} >
-              <Text style={styles.textBoxModel3}>เเนวข้อสอบพร้อมเฉลย</Text>
+              onPress={() => handleNext(index)} >
+              <Text style={styles.textBoxModel3}>
+                {
+                  index == 1 ? "รอบรู้เรื่องการสอบใบขับขี่" : index == 2 ? "ทดสอบสมรรณภาพ" : index == 3 ?
+                    "ทดสอบพร้อมเฉลย" : index == 4 ? "เเนวข้อสอบพร้อมเฉลย" : index == 5 ? "คลิปสอนสอบฏิบัติ" : index == 6 && "การต่อใบขับขี่"
+                }
+
+
+              </Text>
             </Pressable>
           </View>
         )}

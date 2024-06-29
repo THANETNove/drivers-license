@@ -13,9 +13,10 @@ import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสด�
 import Artboard90 from "../../assets/images/coverImg/Artboard90.png";
 import NewScreen from "../src/driver_1/NewScreen";
 import indexCapacity from "../src/driver_1/IndexCapacity";
-import ExaminationQ from "../src/driver_1/Examination";
-import Category from "../src/driver_1/Category";
-import Questions from "../src/driver_1/Questions";
+import IndexExamination from "../src/driver_3/IndexExamination";
+import ExaminationQ from "../src/driver_4/Examination";
+import Category from "../src/driver_4/Category";
+import Questions from "../src/driver_4/Questions";
 import HomeDriver from "../src/driver_1/HomeDriver";
 import InterestingDriverLicense from "../src/driver_1/InterestingDriverLicense";
 import StepsDriversLicense from "../src/driver_1/StepsDriversLicense";
@@ -102,7 +103,7 @@ export default function App() {
           name="indexCapacity"
           component={indexCapacity}
           options={({ navigation }) => ({
-            title: "รอบรู้เรื่อง การสอบใบขับขี่",
+            title: "รอบรู้เรื่องการสอบใบขับขี่",
             headerTitle: () => (
               <View style={styles.boxImage90}>
                 <Image
@@ -295,6 +296,24 @@ export default function App() {
           component={NewScreen}
           options={({ navigation }) => ({
             title: "ทดสอบสมรรณภาพ",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 20, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="IndexExamination"
+          component={IndexExamination}
+          options={({ navigation }) => ({
+            title: "ทดสอบพร้อมเฉลย",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {
