@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         borderRadius: 6,
-        paddingHorizontal: 8,
+        paddingHorizontal: 4,
     },
     questionContainer: {
         marginBottom: 8,
