@@ -40,7 +40,7 @@ const Examination_3 = () => {
                                 <View style={styles.boxSet}>
                                     <Pressable
                                         key={setIndex}
-                                        onPress={() => navigation.navigate('Questions', {
+                                        onPress={() => navigation.navigate('Questions_3', {
                                             category: categoric.category,
                                             categoryIndex: categoric.categoryIndex,
                                             selectedSet: set,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         marginBottom: 4,
     },
     button: {
-        width: width - 32,
+        width: width - 16,
         height: 70,
         borderRadius: 4,
         justifyContent: 'center',

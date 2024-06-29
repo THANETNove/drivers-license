@@ -20,6 +20,7 @@ const Examination = () => {
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
             >
+
                 {categories && categories.map((categoric, index) => (
                     <View key={index} style={styles.buttonWrapper}>
                         {/* ปุ่มหลักสำหรับแต่ละหมวดหมู่ */}
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
         marginBottom: 4,
     },
     button: {
-        width: width - 32,
+        width: width - 16,
         height: 70,
         borderRadius: 4,
         justifyContent: 'center',
@@ -151,7 +152,8 @@ const styles = StyleSheet.create({
         marginVertical: 0,
 
 
-    }
+    },
+
 });
 
 export default Examination;

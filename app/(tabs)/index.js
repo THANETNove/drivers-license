@@ -15,6 +15,7 @@ import NewScreen from "../src/driver_1/NewScreen";
 import indexCapacity from "../src/driver_1/IndexCapacity";
 import IndexExamination from "../src/driver_3/IndexExamination";
 import Examination_3 from "../src/driver_3/Examination_3";
+import Questions_3 from "../src/driver_3/Questions_3";
 import ExaminationQ from "../src/driver_4/Examination";
 import Category from "../src/driver_4/Category";
 import Questions from "../src/driver_4/Questions";
@@ -333,6 +334,24 @@ export default function App() {
           component={Examination_3}
           options={({ navigation }) => ({
             title: "ทดสอบพร้อมเฉลย",
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 18, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="Questions_3"
+          component={Questions_3}
+          options={({ route, navigation }) => ({
+            title: route.params.category + " " + route.params.selectedSet,
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {

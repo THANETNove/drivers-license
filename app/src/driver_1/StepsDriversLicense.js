@@ -109,6 +109,9 @@ const styles = StyleSheet.create({
         width: 50, // กำหนดขนาดภาพปุ่ม
         height: 50,
     },
+    disabledButton: {
+        opacity: 0.5,
+    },
 });
 
 export default StepsDriversLicense;
