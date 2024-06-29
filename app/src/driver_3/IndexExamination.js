@@ -3,8 +3,10 @@ import { Image, ScrollView, View, Text, Button, StyleSheet, Pressable, Dimension
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
 import Artboard60 from "../../../assets/images/coverImg/Artboard60.png";
 import { Colors } from '@/constants/Colors';
+import { useNavigation } from '@react-navigation/native'; // ใช้ useNavigation จาก react-navigation
 
 const IndexExamination = () => {
+    const navigation = useNavigation();
     return (
         <ScreenContainer >
             <View style={styles.container}>
@@ -13,9 +15,10 @@ const IndexExamination = () => {
                     style={styles.artboardx}
                     resizeMode="stretch"
                 />
-                <View style={styles.boxText}>
+
+                <Pressable onPress={() => navigation.navigate('Examination_3')} style={styles.boxText}>
                     <Text style={styles.text}>เลือกหมวดหมู่</Text>
-                </View>
+                </Pressable>
                 <View style={styles.boxText}>
                     <Text style={styles.text}>สุ่มเลือก 50 ข้อ</Text>
                 </View>
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
     },
     artboardx: {
         width: "100%",
-        height: "80%"
+        height: "75%"
 
     },
     boxText: {

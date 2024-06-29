@@ -6,11 +6,8 @@ import { Colors } from "@/constants/Colors"; // ปรับเส้นทา�
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
 import categories from "../categoriesArray"; // ปรับเส้นทางตามที่ถูกต้อง
 
-const Examination = () => {
+const Examination_3 = () => {
     const navigation = useNavigation();
-
-    // ปรับโครงสร้างของปุ่มให้ sets เป็น array
-
 
     return (
         <ScreenContainer>
@@ -154,4 +151,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Examination;
+export default Examination_3;

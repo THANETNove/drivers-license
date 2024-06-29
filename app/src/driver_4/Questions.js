@@ -19,9 +19,6 @@ import Category_5 from '../questionsCategory/category_5.json'; // ปรับ�
 
 const Questions = ({ route, navigation }) => {
     const { category, categoryIndex, selectedSet, indexSet } = route.params;
-
-    console.log("category, categoryIndex, selectedSet, indexSet", indexSet - 1);
-
     const [questions, setQuestions] = useState([]);
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [score, setScore] = useState(0);
