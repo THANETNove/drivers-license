@@ -29,6 +29,7 @@ import StepsTest from "../src/driver_2/StepsTest";
 import ReactionTest from "../src/driver_2/ReactionTest";
 import InDepthLook from "../src/driver_2/InDepthLook";
 import ColorBlindnessTest from "../src/driver_2/ColorBlindnessTest";
+import RandomQuestions from "../src/driver_3/RandomQuestions";
 
 
 
@@ -352,6 +353,24 @@ export default function App() {
           component={Questions_3}
           options={({ route, navigation }) => ({
             title: route.params.category + " " + route.params.selectedSet,
+            headerShadowVisible: false,
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
+              fontSize: 18, // ขนาดฟอนต์
+            },
+          })}
+        />
+        <Stack.Screen
+          name="RandomQuestions"
+          component={RandomQuestions}
+          options={({ route, navigation }) => ({
+            title: "ทดสอบพร้อมเฉลย",
             headerShadowVisible: false,
             headerBackTitleVisible: false,
             headerStyle: {

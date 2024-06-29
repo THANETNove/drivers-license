@@ -18,10 +18,10 @@ const IndexExamination = () => {
 
                 <Pressable onPress={() => navigation.navigate('Examination_3')} style={styles.boxText}>
                     <Text style={styles.text}>เลือกหมวดหมู่</Text>
-                </Pressable>
-                <View style={styles.boxText}>
+                </Pressable  >
+                <Pressable onPress={() => navigation.navigate('RandomQuestions')} style={styles.boxText}>
                     <Text style={styles.text}>สุ่มเลือก 50 ข้อ</Text>
-                </View>
+                </Pressable>
             </View>
         </ScreenContainer>
 
