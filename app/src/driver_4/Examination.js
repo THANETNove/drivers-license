@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         marginBottom: 4,
     },
     button: {
-        width: width - 64,
+        width: width - 32,
         height: 70,
         borderRadius: 4,
         justifyContent: 'center',
