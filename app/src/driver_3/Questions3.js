@@ -30,23 +30,20 @@ const Questions = ({ route, navigation }) => {
     useEffect(() => {
         // Load questions from JSON file
         setQuestions(Category_1);
-
-        if (categoryIndex == 1) {
-            setQuestions(Category_1);
-        }
-        if (categoryIndex == 2) {
-            setQuestions(Category_2);
-        }
-        if (categoryIndex == 3) {
-            setQuestions(Category_3);
-        }
-        if (categoryIndex == 4) {
-            setQuestions(Category_4);
-        }
-        if (categoryIndex == 5) {
-            setQuestions(Category_4);
-        }
-
+        /* 
+                if (categoryIndex == 1) {
+                    setQuestions(Category_1);
+                }
+                if (categoryIndex == 2) {
+                    setQuestions(Category_2);
+                }
+                if (categoryIndex == 3) {
+                    setQuestions(Category_3);
+                }
+                if (categoryIndex == 4) {
+                    setQuestions(Category_4);
+                }
+         */
     }, []);
 
 
@@ -101,35 +98,41 @@ const Questions = ({ route, navigation }) => {
                             </View>
 
 
+
+
                             <RadioButton.Group
                                 onValueChange={(newValue) => handleSelect(questionIndex, newValue)}
                                 value={selectedAnswers[questionIndex]?.enterAnswer}
                             >
                                 {question.choices.map((choice, choiceIndex) => {
-                                    const choiceLetter = ["ก", "ข", "ค", "ง"];
-                                    const isCorrectAnswer = question.answer === choiceLetter[choiceIndex];
-
+                                    const choiceLetter = choice.charAt(0);
+                                    const isCorrectAnswer = question.answer === choiceLetter;
+                                    const isSelectedAnswer = selectedAnswers[questionIndex]?.enterAnswer === choiceLetter;
+                                    const isIncorrectSelection = results[questionIndex] === 'incorrect' && isSelectedAnswer;
                                     return (
-                                        <View
+                                        <Pressable
                                             key={choiceIndex}
                                             style={[
                                                 styles.choiceContainer,
+                                                isSelectedAnswer && results[questionIndex] === 'correct' ? styles.correctChoice : null,
+                                                isIncorrectSelection ? styles.incorrectChoice : null,
+                                                results[questionIndex] === 'incorrect' && isCorrectAnswer ? styles.correctAnswer : null,
                                                 { backgroundColor: choiceIndex % 2 === 0 ? '#B16DC0' : '#B77DC7' }
                                             ]}
 
                                         >
                                             <View style={styles.radioButtonWrapper}>
                                                 <RadioButton
-                                                    status={isCorrectAnswer ? 'checked' : 'unchecked'}
+                                                    value={choiceLetter}
+                                                    status={isSelectedAnswer ? 'checked' : 'unchecked'}
                                                     color={Colors.green}
                                                     fontSize={64}
                                                 />
                                             </View>
-                                            <Text style={[styles.choiceText, isCorrectAnswer && { color: Colors.red }]}>{choice}</Text>
-                                        </View>
+                                            <Text style={styles.choiceText}>{choice}</Text>
+                                        </Pressable>
                                     );
                                 })}
-
                             </RadioButton.Group>
                         </View>
                     ))}
