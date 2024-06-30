@@ -269,9 +269,10 @@ const styles = StyleSheet.create({
     choiceContainer: {
         flexDirection: 'row',
         paddingRight: 32,
-        paddingTop: 8
+        paddingVertical: 4
     },
     radioButtonWrapper: {
+        marginTop: 8,
         backgroundColor: Colors.white,
         borderRadius: 2,
         marginRight: 16,
@@ -288,7 +289,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         backgroundColor: Colors.primary,
         borderRadius: 10,
-        padding: 10,
+        padding: 12,
         alignItems: 'center',
     },
     buttonText: {
