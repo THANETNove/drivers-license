@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     choiceText: {
         fontSize: 16,
         width: '90%', // จำกัดความกว้างสูงสุดของ container
-        paddingBottom: 8
+        paddingTop: 6
     },
     button: {
         marginTop: 20,
