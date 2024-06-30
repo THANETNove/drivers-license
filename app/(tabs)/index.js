@@ -11,25 +11,27 @@ import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสด�
 
 
 import Artboard90 from "../../assets/images/coverImg/Artboard90.png";
-import NewScreen from "../src/driver_1/NewScreen";
+import HomeDriver from "../src/driver_1/HomeDriver";
 import indexCapacity from "../src/driver_1/IndexCapacity";
+import StepsDriversLicense from "../src/driver_1/StepsDriversLicense";
+import PrepareBeforeExam from "../src/driver_1/PrepareBeforeExam";
+import QualificationsTaker from "../src/driver_1/QualificationsTaker";
 import IndexExamination from "../src/driver_3/IndexExamination";
 import Examination_3 from "../src/driver_3/Examination_3";
 import Questions_3 from "../src/driver_3/Questions_3";
 import ExaminationQ from "../src/driver_4/Examination";
 import Category from "../src/driver_4/Category";
 import Questions from "../src/driver_4/Questions";
-import HomeDriver from "../src/driver_1/HomeDriver";
+
 import InterestingDriverLicense from "../src/driver_1/InterestingDriverLicense";
-import StepsDriversLicense from "../src/driver_1/StepsDriversLicense";
-import PrepareBeforeExam from "../src/driver_1/PrepareBeforeExam";
-import QualificationsTaker from "../src/driver_1/QualificationsTaker";
+
 import IdexFitnessTest from "../src/driver_2/IdexFitnessTest";
 import StepsTest from "../src/driver_2/StepsTest";
 import ReactionTest from "../src/driver_2/ReactionTest";
 import InDepthLook from "../src/driver_2/InDepthLook";
 import ColorBlindnessTest from "../src/driver_2/ColorBlindnessTest";
 import RandomQuestions from "../src/driver_3/RandomQuestions";
+import ClipTeachingPracticePoses from "../src/driver_4/ClipTeachingPracticePoses";
 
 
 
