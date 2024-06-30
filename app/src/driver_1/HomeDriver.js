@@ -104,6 +104,9 @@ const HomeDriver = ({ navigation }) => {
       case 4:
         navigation.navigate('ExaminationQ');
         break;
+      case 5:
+        navigation.navigate('ClipTeachingPracticePoses');
+        break;
       // Add more cases for other navigation indexes as needed
       default:
         break;

@@ -13,25 +13,23 @@ import Box from "../src/Box"; // ใช้ AppLoading เพื่อแสด�
 import Artboard90 from "../../assets/images/coverImg/Artboard90.png";
 import HomeDriver from "../src/driver_1/HomeDriver";
 import indexCapacity from "../src/driver_1/IndexCapacity";
+import InterestingDriverLicense from "../src/driver_1/InterestingDriverLicense";
 import StepsDriversLicense from "../src/driver_1/StepsDriversLicense";
 import PrepareBeforeExam from "../src/driver_1/PrepareBeforeExam";
 import QualificationsTaker from "../src/driver_1/QualificationsTaker";
-import IndexExamination from "../src/driver_3/IndexExamination";
-import Examination_3 from "../src/driver_3/Examination_3";
-import Questions_3 from "../src/driver_3/Questions_3";
-import ExaminationQ from "../src/driver_4/Examination";
-import Category from "../src/driver_4/Category";
-import Questions from "../src/driver_4/Questions";
-
-import InterestingDriverLicense from "../src/driver_1/InterestingDriverLicense";
-
 import IdexFitnessTest from "../src/driver_2/IdexFitnessTest";
 import StepsTest from "../src/driver_2/StepsTest";
 import ReactionTest from "../src/driver_2/ReactionTest";
 import InDepthLook from "../src/driver_2/InDepthLook";
 import ColorBlindnessTest from "../src/driver_2/ColorBlindnessTest";
+import IndexExamination from "../src/driver_3/IndexExamination";
+import Examination_3 from "../src/driver_3/Examination_3";
+import Questions_3 from "../src/driver_3/Questions_3";
 import RandomQuestions from "../src/driver_3/RandomQuestions";
-import ClipTeachingPracticePoses from "../src/driver_4/ClipTeachingPracticePoses";
+import ExaminationQ from "../src/driver_4/Examination";
+import Category from "../src/driver_4/Category";
+import Questions from "../src/driver_4/Questions";
+import ClipTeachingPracticePoses from "../src/driver_5/ClipTeachingPracticePoses";
 
 
 
@@ -297,24 +295,6 @@ export default function App() {
           })}
         />
         <Stack.Screen
-          name="NewScreen"
-          component={NewScreen}
-          options={({ navigation }) => ({
-            title: "ทดสอบสมรรณภาพ",
-            headerShadowVisible: false,
-            headerBackTitleVisible: false,
-            headerStyle: {
-              backgroundColor: Colors.primary,
-            },
-            headerTintColor: Colors.white,
-            showLabel: false,
-            headerTitleStyle: {
-              fontFamily: "SukhumvitSet-Bold", // ใช้ฟอนต์ที่โหลดเสร็จแล้ว
-              fontSize: 18, // ขนาดฟอนต์
-            },
-          })}
-        />
-        <Stack.Screen
           name="IndexExamination"
           component={IndexExamination}
           options={({ navigation }) => ({
@@ -427,6 +407,24 @@ export default function App() {
           component={Questions}
           options={({ route, navigation }) => ({
             title: route.params.category + " " + route.params.selectedSet,
+            headerBackTitleVisible: false,
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold",
+              fontSize: 20,
+            },
+          })}
+        />
+        <Stack.Screen
+          name="ClipTeachingPracticePoses"
+          component={ClipTeachingPracticePoses}
+          options={({ route, navigation }) => ({
+            title: "คลิปสอนท่าสอบปฏิบัติ",
             headerBackTitleVisible: false,
             headerShadowVisible: false,
             headerStyle: {
