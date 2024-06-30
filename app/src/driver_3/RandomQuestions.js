@@ -127,8 +127,11 @@ const RandomQuestions = ({ route, navigation }) => {
     const goToNextQuestion = () => {
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
+            setModalVisible(false);
+            setIsButtonDisabled(false)
         }
     };
+
 
     const goToPreviousQuestion = () => {
         if (currentQuestionIndex > 0) {
@@ -156,7 +159,7 @@ const RandomQuestions = ({ route, navigation }) => {
                 <View style={styles.boxHead}>
                     <Image
                         source={Artboard90} // ใช้ source แทน src
-                        style={{ width: 120, height: 120, marginTop: -16 }}
+                        style={{ width: 100, height: 100, marginTop: -8 }}
                         resizeMode="stretch"
                     />
                     <View style={styles.boxHeadText}>
@@ -174,7 +177,7 @@ const RandomQuestions = ({ route, navigation }) => {
                     {currentQuestion && (
                         <View style={styles.questionContainer}>
                             <View style={styles.boxQuestion}>
-                                <Text style={styles.questionText}>{currentQuestion.index}. {currentQuestion.question}</Text>
+                                <Text style={styles.questionText}>{currentQuestionIndex + 1}. {currentQuestion.question}</Text>
                                 {currentQuestion.img && (
                                     <Image
                                         source={{ uri: currentQuestion.img }}
@@ -195,15 +198,15 @@ const RandomQuestions = ({ route, navigation }) => {
 
                                     // คำนวณสไตล์ของตัวเลือก
                                     let choiceStyle = [styles.choiceContainer, { backgroundColor: choiceIndex % 2 === 0 ? '#B16DC0' : '#B77DC7' }];
-                                    if (results[currentQuestionIndex] !== undefined) {
-                                        if (isSelectedAnswer && results[currentQuestionIndex] === 'correct') {
-                                            choiceStyle.push(styles.correctChoice);
-                                        } else if (isIncorrectSelection) {
-                                            choiceStyle.push(styles.incorrectChoice);
-                                        } else if (results[currentQuestionIndex] === 'incorrect' && isCorrectAnswer) {
-                                            choiceStyle.push(styles.correctAnswer);
-                                        }
-                                    }
+                                    /*  if (results[currentQuestionIndex] !== undefined) {
+                                         if (isSelectedAnswer && results[currentQuestionIndex] === 'correct') {
+                                             choiceStyle.push(styles.correctChoice);
+                                         } else if (isIncorrectSelection) {
+                                             choiceStyle.push(styles.incorrectChoice);
+                                         } else if (results[currentQuestionIndex] === 'incorrect' && isCorrectAnswer) {
+                                             choiceStyle.push(styles.correctAnswer);
+                                         }
+                                     } */
 
                                     return (
                                         <Pressable
@@ -242,7 +245,7 @@ const RandomQuestions = ({ route, navigation }) => {
 
                 </ScrollView>
 
-                <View style={styles.navigationButtons}>
+                {/*  <View style={styles.navigationButtons}>
                     <Pressable
                         style={[styles.navButton, currentQuestionIndex === 0 ? styles.disabledButton : null]}
                         onPress={goToPreviousQuestion}
@@ -273,7 +276,7 @@ const RandomQuestions = ({ route, navigation }) => {
                     </Pressable>
 
 
-                </View>
+                </View> */}
 
                 <Modal
                     animationType="slide"
@@ -298,24 +301,23 @@ const RandomQuestions = ({ route, navigation }) => {
                                     resizeMode="stretch"
                                 />
                             )}
-                            <Text style={[styles.questionText2, { marginTop: 16 }]}>{currentQuestion && currentQuestion.index}. {currentQuestion && currentQuestion.question}</Text>
+                            <Text style={[styles.questionText2, { marginTop: 16 }]}>{currentQuestionIndex + 1}. {currentQuestion && currentQuestion.question}</Text>
 
                             <View style={styles.questionAnswer}>
                                 <Text style={styles.questionAnswerText}>
                                     เฉลย: {answerDetails && answerDetails.correctAnswer}
                                 </Text>
                             </View>
+
                             <Pressable
-                                style={styles.buttonClose}
-                                onPress={() => setModalVisible(!modalVisible)}>
-                                <Image
-                                    source={Artboard99} // ใช้ source แทน src
-                                    style={styles.artboard99}
-                                    resizeMode="stretch"
-                                />
+                                style={[styles.navButton2, currentQuestionIndex === questions.length - 1 ? styles.disabledButton : null]}
+                                onPress={goToNextQuestion}
+                                disabled={currentQuestionIndex === questions.length - 1}
+                            >
+                                <Text style={styles.textBack2}>ข้อถัดไป</Text>
                             </Pressable>
 
-                            <Text>asdasdads</Text>
+
                         </View>
                     </View>
                 </Modal>
@@ -371,7 +373,7 @@ const styles = StyleSheet.create({
 
     },
     button: {
-        marginTop: 20,
+        marginTop: 16,
         backgroundColor: Colors.primary,
         borderRadius: 10,
         padding: 12,
@@ -422,6 +424,13 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
     },
+    navButton2: {
+        backgroundColor: Colors.primary,
+        borderRadius: 10,
+        paddingVertical: 8,
+        paddingHorizontal: 32,
+        alignItems: 'center',
+    },
     navButtonText: {
         color: Colors.white,
         fontSize: 18,
@@ -443,11 +452,11 @@ const styles = StyleSheet.create({
     },
     boxHead: {
         flexDirection: "row",
-        paddingTop: 16,
+        paddingTop: 8,
         paddingLeft: 16,
         backgroundColor: Colors.primary,
         width: "100%",
-        height: 120,
+        height: 100,
         marginBottom: 8,
         marginTop: 8,
     },
@@ -459,6 +468,7 @@ const styles = StyleSheet.create({
         color: Colors.white,
         fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
     },
+
     headText2: {
         color: Colors.white,
         fontSize: 28,
@@ -513,6 +523,11 @@ const styles = StyleSheet.create({
     textBack: {
         color: Colors.white,
         fontSize: 30,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+    },
+    textBack2: {
+        color: Colors.white,
+        fontSize: 20,
         fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
     },
     correctChoice: {
@@ -622,9 +637,10 @@ const styles = StyleSheet.create({
         padding: 16,
         marginTop: 32,
         width: "100%",
-        height: 150,
+        height: "auto",
+        minHeight: 150,
         backgroundColor: Colors.primary2,
-        marginBottom: 64,
+        marginBottom: 48,
         borderRadius: 8
     },
     questionAnswerText: {
