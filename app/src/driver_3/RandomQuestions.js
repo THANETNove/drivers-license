@@ -12,7 +12,7 @@ import Category_5 from '../questionsCategory/category_5.json'; // ปรับ�
 import Previous from "../../../assets/images/coverImg/Artboard63.png";
 import Next from "../../../assets/images/coverImg/Artboard64.png";
 import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
-
+import Artboard99 from "../../../assets/images/coverImg/Artboard99.png";
 
 
 const RandomQuestions = ({ route, navigation }) => {
@@ -24,7 +24,8 @@ const RandomQuestions = ({ route, navigation }) => {
     const [score, setScore] = useState(0);
     const [results, setResults] = useState({});
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
+    const [answerDetails, setAnswerDetails] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         // Function to flatten nested arrays
@@ -77,21 +78,47 @@ const RandomQuestions = ({ route, navigation }) => {
     const calculateScore = () => {
         let newScore = 0;
         const newResults = {};
+
         questions.forEach((question, questionIndex) => {
             const userAnswer = selectedAnswers[questionIndex];
             if (userAnswer) {
                 if (userAnswer.enterAnswer === question.answer) {
-                    newScore += 1;
-                    newResults[questionIndex] = 'correct';
+                    newScore += 1
+                    newResults[0] = 'correct';
                 } else {
                     newResults[questionIndex] = 'incorrect';
                 }
+
+                let numberIndex;
+                switch (question.answer) {
+                    case "ก":
+                        numberIndex = 0;
+                        break;
+                    case "ข":
+                        numberIndex = 1;
+                        break;
+                    case "ค":
+                        numberIndex = 2;
+                        break;
+                    case "ง":
+                        numberIndex = 3;
+                        break;
+                    default:
+                        numberIndex = -1; // Handle unexpected values
+                }
+
+                setAnswerDetails({
+                    userAnswer: userAnswer.enterAnswer,
+                    correctAnswer: question.choices[numberIndex],
+                })
+
             } else {
                 newResults[questionIndex] = 'unanswered';
             }
         });
         setScore(newScore);
         setResults(newResults);
+        setModalVisible(true);
     };
 
 
@@ -120,7 +147,7 @@ const RandomQuestions = ({ route, navigation }) => {
 
 
 
-
+    console.log('answerDetails', answerDetails);
 
     const takeTheExam = () => {
         return (
@@ -248,6 +275,51 @@ const RandomQuestions = ({ route, navigation }) => {
 
                 </View>
 
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
+                    }}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+
+                            <Text style={styles.userAnswer}>
+
+                                คำตอบ:<Text style={[currentQuestion && currentQuestion.answer === answerDetails.userAnswer ? styles.answerGreen : styles.answerRed]}>
+                                    {currentQuestion && currentQuestion.answer === answerDetails.userAnswer ? " ถูก" : " ผิด"}</Text>
+                            </Text>
+                            {currentQuestion && currentQuestion.img && (
+                                <Image
+                                    source={{ uri: currentQuestion.img }}
+                                    style={styles.imageQue}
+                                    resizeMode="stretch"
+                                />
+                            )}
+                            <Text style={[styles.questionText2, { marginTop: 16 }]}>{currentQuestion && currentQuestion.index}. {currentQuestion && currentQuestion.question}</Text>
+
+                            <View style={styles.questionAnswer}>
+                                <Text style={styles.questionAnswerText}>
+                                    เฉลย: {answerDetails && answerDetails.correctAnswer}
+                                </Text>
+                            </View>
+                            <Pressable
+                                style={styles.buttonClose}
+                                onPress={() => setModalVisible(!modalVisible)}>
+                                <Image
+                                    source={Artboard99} // ใช้ source แทน src
+                                    style={styles.artboard99}
+                                    resizeMode="stretch"
+                                />
+                            </Pressable>
+
+                            <Text>asdasdads</Text>
+                        </View>
+                    </View>
+                </Modal>
+
             </View>
         )
     }
@@ -272,6 +344,10 @@ const styles = StyleSheet.create({
     },
     questionText: {
         fontSize: 18,
+        fontWeight: 'bold',
+    },
+    questionText2: {
+        fontSize: 20,
         fontWeight: 'bold',
     },
     choiceContainer: {
@@ -500,7 +576,62 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 16,
     },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'flex-end', // เปลี่ยนจาก 'center' เป็น 'flex-end'
+    },
+    modalView: {
+        paddingTop: 150,
+        flex: 1,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        zIndex: 1,
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        backgroundColor: 'rgba(255, 255, 255, 0.9)', // ใช้ rgba เพื่อทำให้ backgroundColor โปร่งใส
+        zIndex: 0,
+        paddingHorizontal: 16
+    },
+    artboard99: {
+        width: 70,
+        height: 70,
+        zIndex: 1,
+    },
+    userAnswer: {
+        fontSize: 48,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+        color: Colors.black,
 
+    },
+    answerGreen: {
+        fontSize: 48,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+        color: Colors.green
+    },
+    answerRed: {
+        fontSize: 48,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+        color: Colors.red
+    },
+    questionAnswer: {
+        padding: 16,
+        marginTop: 32,
+        width: "100%",
+        height: 150,
+        backgroundColor: Colors.primary2,
+        marginBottom: 64,
+        borderRadius: 8
+    },
+    questionAnswerText: {
+        fontSize: 20,
+        fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+        color: Colors.white
+    }
 
 
 });
