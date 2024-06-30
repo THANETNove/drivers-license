@@ -12,7 +12,8 @@ import Category_5 from '../questionsCategory/category_5.json'; // ปรับ�
 import Previous from "../../../assets/images/coverImg/Artboard63.png";
 import Next from "../../../assets/images/coverImg/Artboard64.png";
 import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
-import Artboard99 from "../../../assets/images/coverImg/Artboard99.png";
+import Artboard75 from "../../../assets/images/coverImg/Artboard75.png";
+import red_cross from "../../../assets/images/coverImg/red_cross.webp";
 
 
 const RandomQuestions = ({ route, navigation }) => {
@@ -288,6 +289,20 @@ const RandomQuestions = ({ route, navigation }) => {
                     }}>
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
+
+                            {currentQuestion && currentQuestion.answer === answerDetails.userAnswer ?
+                                <Image
+                                    source={Artboard75} // ใช้ source แทน src
+                                    style={{ width: 100, height: 100, marginTop: -8 }}
+                                    resizeMode="stretch"
+                                /> : <Image
+                                    source={red_cross} // ใช้ source แทน src
+                                    style={{ width: 100, height: 100, marginTop: -8 }}
+                                    resizeMode="stretch"
+                                />}
+
+
+
 
                             <Text style={styles.userAnswer}>
 
@@ -647,6 +662,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
         color: Colors.white
+    },
+    wrongText: {
+        fontSize: 64,
+        fontWeight: "bold"
     }
 
 
