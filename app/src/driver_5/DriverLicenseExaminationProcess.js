@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
     },
     boxVideo: {
         width: width - 64,
-        height: 200,
+        height: 180,
         borderColor: Colors.primary2,
         borderWidth: 1,
         zIndex: 1,
         position: "absolute",
-        bottom: 120
+        bottom: "18%"
     }
 });
 export default DriverLicenseExaminationProcess;
