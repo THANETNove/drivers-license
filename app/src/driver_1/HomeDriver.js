@@ -91,6 +91,8 @@ const HomeDriver = ({ navigation }) => {
 
     // Navigate based on button index
     let navigationIndex = index + 1;
+
+    console.log("navigationIndex", navigationIndex);
     switch (navigationIndex) {
       case 1:
         navigation.navigate('indexCapacity');
@@ -106,6 +108,9 @@ const HomeDriver = ({ navigation }) => {
         break;
       case 5:
         navigation.navigate('ClipTeachingPracticePoses');
+        break;
+      case 6:
+        navigation.navigate('RenewDriverLicense');
         break;
       // Add more cases for other navigation indexes as needed
       default:

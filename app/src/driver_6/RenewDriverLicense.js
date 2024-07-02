@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native'; // ใช้ useNaviga
 
 
 
-const ClipTeachingPracticePoses = () => {
+const RenewDriverLicense = () => {
     const navigation = useNavigation();
 
     return (
@@ -42,31 +42,22 @@ const ClipTeachingPracticePoses = () => {
     )
 }
 
-const width = Dimensions.get('window').width;
-
 const styles = StyleSheet.create({
     box_1: {
         marginTop: 16,
         justifyContent: "center",
         alignItems: "center",
-        width: width - 32,
-        height: "45%",
-        borderColor: Colors.primary2,
-        borderWidth: 1,
-        marginLeft: 16,
-        marginBottom: 42
+        paddingLeft: 16,
+        width: "100%",
+        height: "50%",
     },
     box_2: {
         marginTop: -32,
         justifyContent: "center",
         alignItems: "center",
-
-        width: width - 32,
-        height: "45%",
-        borderColor: Colors.primary2,
-        borderWidth: 1,
-        marginLeft: 16,
-
+        paddingLeft: 16,
+        width: "100%",
+        height: "50%",
 
     },
     imageArt5: {
@@ -98,4 +89,4 @@ const styles = StyleSheet.create({
 
 
 })
-export default ClipTeachingPracticePoses;
+export default RenewDriverLicense;

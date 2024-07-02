@@ -31,6 +31,7 @@ import Category from "../src/driver_4/Category";
 import Questions from "../src/driver_4/Questions";
 import ClipTeachingPracticePoses from "../src/driver_5/ClipTeachingPracticePoses";
 import DriverLicenseExaminationProcess from "../src/driver_5/DriverLicenseExaminationProcess";
+import RenewDriverLicense from "../src/driver_6/RenewDriverLicense";
 
 
 
@@ -444,6 +445,24 @@ export default function App() {
           component={DriverLicenseExaminationProcess}
           options={({ route, navigation }) => ({
             title: "ขั้นตอนการสอบใบขับขี่",
+            headerBackTitleVisible: false,
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerTintColor: Colors.white,
+            showLabel: false,
+            headerTitleStyle: {
+              fontFamily: "SukhumvitSet-Bold",
+              fontSize: 20,
+            },
+          })}
+        />
+        <Stack.Screen
+          name="RenewDriverLicense"
+          component={RenewDriverLicense}
+          options={({ route, navigation }) => ({
+            title: "การต่อใบขับขี่",
             headerBackTitleVisible: false,
             headerShadowVisible: false,
             headerStyle: {
