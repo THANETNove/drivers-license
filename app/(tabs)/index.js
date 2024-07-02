@@ -116,15 +116,6 @@ export default function App() {
             component={indexCapacity}
             options={({ navigation }) => ({
               title: "รอบรู้เรื่องการสอบใบขับขี่",
-              headerTitle: () => (
-                <View style={styles.boxImage90}>
-                  <Image
-                    source={Artboard90} // ใช้ source แทน src
-                    style={{ width: '100%', height: '100%' }}
-                    resizeMode="cover"
-                  />
-                </View>
-              ),
               headerShadowVisible: false,
               headerBackTitleVisible: false,
               headerStyle: {
