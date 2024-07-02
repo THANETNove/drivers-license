@@ -20,10 +20,10 @@ const ClipTeachingPracticePoses = () => {
                 source={Artboard7_100} // ใช้ source แทน src
                 style={styles.artboard7_100}
             />
-            <Pressable onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 1 })} style={styles.box_1} />
+            <Pressable onPress={() => navigation.navigate('RenewDriverLicenseProcess', { id: 1 })} style={styles.box_1} />
 
 
-            <Pressable onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 2 })} style={styles.box_2} />
+            <Pressable onPress={() => navigation.navigate('RenewDriverLicenseProcess', { id: 2 })} style={styles.box_2} />
 
 
 
