@@ -41,10 +41,19 @@ const StepsTest = () => {
     ];
 
     const getRandomImage = () => {
-        const filteredImages = imagesRandom.filter(image => randomImage ? image.id !== randomImage.id : true);
+        let filteredImages = imagesRandom.filter(image => randomImage ? image.id !== randomImage.id : true);
+
+        if (filteredImages.length === 0) {
+            // ถ้าไม่มีภาพเหลือใน filteredImages ให้ใช้ imagesRandom ทั้งหมด
+            filteredImages = imagesRandom;
+        }
+
         const randomIndex = Math.floor(Math.random() * filteredImages.length);
-        setRandomImage(filteredImages[randomIndex]);
-        setButtonIndex(filteredImages[randomIndex].id); // เก็บ id ของภาพที่สุ่มได้
+        const selectedImage = filteredImages[randomIndex];
+
+        // ตั้งค่าให้เป็นภาพที่สุ่มได้
+        setRandomImage(selectedImage);
+        setButtonIndex(selectedImage.id); // เก็บ id ของภาพที่สุ่มได้
     };
 
     useEffect(() => {
@@ -70,19 +79,18 @@ const StepsTest = () => {
                 if (prev > 0) {
                     return prev - 1;
                 } else {
-                    // Update attempts when countdown reaches 0
                     setAttempts(attempts => {
                         if (attempts < 5) {
-                            setButtonPressed(false); // Reset button press state for the new attempt
-                            getRandomImage();
+                            setButtonPressed(false); // รีเซ็ตสถานะการกดปุ่มสำหรับการสุ่มครั้งใหม่
+                            getRandomImage(); // สุ่มภาพใหม่
                             return attempts + 1;
                         } else {
                             clearInterval(countdownIntervalRef.current);
-                            setIsFinished(true); // Mark the process as finished
+                            setIsFinished(true); // ทำเครื่องหมายว่ากระบวนการเสร็จสิ้น
                             return attempts;
                         }
                     });
-                    return 5; // Reset countdown to 5
+                    return 5; // รีเซ็ตเวลานับถอยหลัง
                 }
             });
         }, 1000);
