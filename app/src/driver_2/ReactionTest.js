@@ -195,7 +195,7 @@ const ReactionTest = () => {
                         ))}
                     </View>
                     <View style={styles.buttonRow}>
-                        <TouchableOpacity onPress={startAnimation}>
+                        <TouchableOpacity onPress={stopAnimation}>
                             {/*  <Text style={styles.buttonText}>Start</Text> */}
                             <Image
                                 source={Artboard29}
@@ -203,7 +203,7 @@ const ReactionTest = () => {
                                 resizeMode="stretch"
                             />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={stopAnimation} >
+                        <TouchableOpacity onPress={startAnimation} >
                             <Image
                                 source={Artboard30}
                                 style={styles.artboard30}
@@ -480,16 +480,16 @@ const styles = StyleSheet.create({
     dotsContainer: {
         position: "absolute",
         marginTop: 65,
-        marginLeft: 162,
+        marginLeft: "36%",
         flexDirection: "column",
         justifyContent: 'center',
         zIndex: 1
     },
     dot: {
-        width: 10,
-        height: 10,
-        borderRadius: 5,
-        marginVertical: 3.6
+        width: 15,
+        height: 15,
+        borderRadius: 50,
+        marginVertical: 1
     },
     buttonRow: {
         flexDirection: 'row',
