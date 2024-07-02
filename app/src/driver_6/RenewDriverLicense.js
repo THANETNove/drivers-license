@@ -3,61 +3,60 @@ import { Colors } from "@/constants/Colors";
 import { View, Text, ScrollView, StyleSheet, Pressable, Dimensions, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
-import Artboard5_63 from "../../../assets/images/coverImg/Artboard5_63.png";
+import Artboard7_100 from "../../../assets/images/coverImg/Artboard8-100.jpg";
 import Artboard5_64 from "../../../assets/images/coverImg/Artboard5_64.png";
+
 import { useNavigation } from '@react-navigation/native'; // ใช้ useNavigation จาก react-navigation
 
 
 
-const RenewDriverLicense = () => {
+const ClipTeachingPracticePoses = () => {
     const navigation = useNavigation();
 
     return (
         <ScreenContainer>
-            <View style={styles.box_1}>
-                <View style={styles.boxText}>
-                    <Text style={styles.textBox}>รถยนต์</Text>
-                </View>
-                <Pressable onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 1 })}>
-                    <Image
-                        source={Artboard5_63} // ใช้ source แทน src
-                        style={styles.imageArt5}
-                    />
-                </Pressable>
-            </View>
 
-            <View style={styles.box_2}>
-                <Pressable onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 2 })}>
-                    <Image
-                        source={Artboard5_64} // ใช้ source แทน src
-                        style={styles.imageArt5}
-                    />
-                </Pressable>
-                <View style={styles.boxText2}>
-                    <Text style={styles.textBox}>รถยนต์จักรยานยนต์</Text>
-                </View>
-            </View>
+            <Image
+                source={Artboard7_100} // ใช้ source แทน src
+                style={styles.artboard7_100}
+            />
+            <Pressable onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 1 })} style={styles.box_1} />
 
-        </ScreenContainer>
+
+            <Pressable onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 2 })} style={styles.box_2} />
+
+
+
+
+
+
+        </ScreenContainer >
     )
 }
 
+const width = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
     box_1: {
+        position: "absolute",
         marginTop: 16,
         justifyContent: "center",
         alignItems: "center",
-        paddingLeft: 16,
-        width: "100%",
-        height: "50%",
+        width: width - 32,
+        height: "45%",
+        marginLeft: 16,
+        marginBottom: 42,
+        zIndex: 1
     },
     box_2: {
-        marginTop: -32,
+        position: "absolute",
+        bottom: 32,
         justifyContent: "center",
         alignItems: "center",
-        paddingLeft: 16,
-        width: "100%",
-        height: "50%",
+        width: width - 32,
+        height: "45%",
+        marginLeft: 16,
+        zIndex: 1
 
     },
     imageArt5: {
@@ -85,8 +84,15 @@ const styles = StyleSheet.create({
         color: Colors.white,
         fontSize: 20,
         fontFamily: 'SukhumvitSet-Bold',
+    },
+    artboard7_100: {
+        marginTop: 8,
+        width: "100%",
+        height: "100%",
+        resizeMode: "stretch",
+        zIndex: 0
     }
 
 
 })
-export default RenewDriverLicense;
+export default ClipTeachingPracticePoses;
