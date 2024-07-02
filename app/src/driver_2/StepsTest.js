@@ -10,11 +10,17 @@ import { Colors } from '@/constants/Colors';
 import Previous from "../../../assets/images/coverImg/Artboard63.png";
 import Next from "../../../assets/images/coverImg/Artboard64.png";
 import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUser, setIndexImage } from '../../../redux/userSlice';
+
 
 const StepsTest = () => {
     const navigation = useNavigation(); // Initialize navigation
+    const dispatch = useDispatch();
+
     const [randomImage, setRandomImage] = useState(null);
     const [buttonIndex, setButtonIndex] = useState(null);
+
     const [score, setScore] = useState(0); // สำหรับนับคะแนน
     const [attempts, setAttempts] = useState(1); // สำหรับนับจำนวนครั้งที่สุ่ม
     const [countdown, setCountdown] = useState(5); // เวลานับถอยหลัง (5 วินาที)
@@ -25,6 +31,10 @@ const StepsTest = () => {
     const [stepsImgCountdown, setStepsImgCountdown] = useState(false);
     const attemptsIntervalRef = useRef(null);
     const countdownIntervalRef = useRef(null);
+    const { indexImage } = useSelector(selectUser); // ดึงค่า indexImage จาก Redux state
+
+
+
 
     const images = [
         require('../../../assets/images/coverImg/Artboard01.png'),
@@ -40,21 +50,31 @@ const StepsTest = () => {
         { source: Artboard6_3, id: 3 },
     ];
 
-    const getRandomImage = () => {
-        let filteredImages = imagesRandom.filter(image => randomImage ? image.id !== randomImage.id : true);
 
-        if (filteredImages.length === 0) {
-            // ถ้าไม่มีภาพเหลือใน filteredImages ให้ใช้ imagesRandom ทั้งหมด
-            filteredImages = imagesRandom;
-        }
+    const getRandomImage = (idImage) => {
+
+        const filteredImages = imagesRandom.filter(image =>
+            (randomImage ? image.id !== indexImage : true)
+        );
 
         const randomIndex = Math.floor(Math.random() * filteredImages.length);
-        const selectedImage = filteredImages[randomIndex];
 
-        // ตั้งค่าให้เป็นภาพที่สุ่มได้
-        setRandomImage(selectedImage);
-        setButtonIndex(selectedImage.id); // เก็บ id ของภาพที่สุ่มได้
+        if (filteredImages.length > 0) {
+            const selectedImage = filteredImages[randomIndex];
+
+
+            setRandomImage(selectedImage);
+            setButtonIndex(selectedImage.id);
+
+            dispatch(setIndexImage(selectedImage.id)); // ส่ง action ไปยัง Redux
+
+        }
     };
+
+    useEffect(() => {
+
+    }, [indexImage]);
+
 
     useEffect(() => {
         if (stepsImgCountdown) {
@@ -73,24 +93,27 @@ const StepsTest = () => {
     }, [countdown]);
 
     const startCountdown = () => {
-        getRandomImage();
+
+        getRandomImage(indexImage); // เรียกใช้ getRandomImage ด้วยค่า indexImage ปัจจุบัน
+
         countdownIntervalRef.current = setInterval(() => {
             setCountdown(prev => {
                 if (prev > 0) {
                     return prev - 1;
                 } else {
+                    // Update attempts when countdown reaches 0
                     setAttempts(attempts => {
                         if (attempts < 5) {
-                            setButtonPressed(false); // รีเซ็ตสถานะการกดปุ่มสำหรับการสุ่มครั้งใหม่
-                            getRandomImage(); // สุ่มภาพใหม่
+                            setButtonPressed(false); // Reset button press state for the new attempt
+                            getRandomImage(indexImage);
                             return attempts + 1;
                         } else {
                             clearInterval(countdownIntervalRef.current);
-                            setIsFinished(true); // ทำเครื่องหมายว่ากระบวนการเสร็จสิ้น
+                            setIsFinished(true); // Mark the process as finished
                             return attempts;
                         }
                     });
-                    return 5; // รีเซ็ตเวลานับถอยหลัง
+                    return 5; // Reset countdown to 5
                 }
             });
         }, 1000);
@@ -183,6 +206,10 @@ const StepsTest = () => {
     }
 
     const testSteps = () => {
+
+
+
+
         return (
             <ScreenContainer>
                 <View style={styles.boxCenter}>

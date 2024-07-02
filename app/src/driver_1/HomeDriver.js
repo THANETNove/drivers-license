@@ -92,7 +92,6 @@ const HomeDriver = ({ navigation }) => {
     // Navigate based on button index
     let navigationIndex = index + 1;
 
-    console.log("navigationIndex", navigationIndex);
     switch (navigationIndex) {
       case 1:
         navigation.navigate('indexCapacity');
