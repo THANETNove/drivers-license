@@ -4,8 +4,8 @@ import { View, Text, ScrollView, StyleSheet, Pressable, Dimensions, Image, Butto
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation, useRoute } from '@react-navigation/native'; // ใช้ useNavigation จาก react-navigation
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
-import Artboard15 from "../../../assets/images/coverImg/Artboard18_0.jpg";
-import Artboard16 from "../../../assets/images/coverImg/Artboard18_0.jpg";
+import Artboard15 from "../../../assets/images/coverImg/6_0.jpg";
+import Artboard16 from "../../../assets/images/coverImg/6_1.jpg";
 import { Video, ResizeMode } from 'expo-av';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
@@ -38,7 +38,7 @@ const DriverLicenseExaminationProcess = () => {
                         onPlaybackStatusUpdate={status => setStatus(() => status)}
                     /> */}
                     <YoutubePlayer
-                        height={250}
+                        height={200}
                         width={width - 64}
                         videoId={id == 1 ? "mwag25NZ1-U" : "TwPvU8mbY_0"} // Replace with your YouTube video ID
                         play={true} // Autoplay the video
