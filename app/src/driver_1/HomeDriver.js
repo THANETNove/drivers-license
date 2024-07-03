@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Dimensions, View, Image, Pressable, Animated, StyleSheet, StatusBar, Platform, SafeAreaView, Modal, Text } from 'react-native';
+import { Dimensions, View, Image, Pressable, Animated, Linking, StyleSheet, StatusBar, Platform, SafeAreaView, Modal, Text } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { Colors } from '@/constants/Colors';
 // Import button images
@@ -11,9 +11,9 @@ import button_5 from "../../../assets/images/home/button_5.png";
 import button_6 from "../../../assets/images/home/button_6.png";
 import purple from "../../../assets/images/coverImg/purple.png";
 import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
-import Artboard95 from "../../../assets/images/coverImg/Artboard95.png";
-import Artboard96 from "../../../assets/images/coverImg/Artboard96.png";
-import Artboard97 from "../../../assets/images/coverImg/Artboard97.png";
+import Artboard95 from "../../../assets/images/coverImg/11_0.png";
+import Artboard96 from "../../../assets/images/coverImg/12_0.png";
+import Artboard97 from "../../../assets/images/coverImg/13_0.png";
 import Artboard99 from "../../../assets/images/coverImg/Artboard99.png";
 
 
@@ -211,15 +211,18 @@ const HomeDriver = ({ navigation }) => {
                 resizeMode="stretch"
               />
             </Pressable>
-            <Image
-              source={purple} // ใช้ source แทน src
-              style={{ width: '100%', height: '100%' }}
-              resizeMode="stretch"
-            />
-
+            <Pressable style={{ width: '100%', height: '100%' }} onPress={() => Linking.openURL('https://www.youtube.com/channel/UC00_7bash9xUUEVtgQ2LWcA')}>
+              <Image
+                source={purple} // ใช้ source แทน src
+                style={{ width: '100%', height: '100%' }}
+                resizeMode="stretch"
+              />
+            </Pressable>
           </View>
         </View>
-      </Modal>
+      </Modal >
+
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -235,16 +238,20 @@ const HomeDriver = ({ navigation }) => {
               style={styles.artboard90}
               resizeMode="stretch"
             />
-            <Image
-              source={Artboard95} // ใช้ source แทน src
-              style={styles.artboard95}
-              resizeMode="stretch"
-            />
-            <Image
-              source={Artboard96} // ใช้ source แทน src
-              style={styles.artboard96}
-              resizeMode="stretch"
-            />
+            <Pressable style={styles.artboard95} onPress={() => Linking.openURL('https://www.facebook.com/DrivingLicenseChannel')}>
+              <Image
+                source={Artboard95} // ใช้ source แทน src
+                style={{ width: "100%", height: "100%" }}
+                resizeMode="stretch"
+              />
+            </Pressable>
+            <Pressable style={styles.artboard96} onPress={() => Linking.openURL('https://www.youtube.com/channel/UC00_7bash9xUUEVtgQ2LWcA')}>
+              <Image
+                source={Artboard96} // ใช้ source แทน src
+                style={{ width: "100%", height: "100%" }}
+                resizeMode="stretch"
+              />
+            </Pressable>
             <Image
               source={Artboard97} // ใช้ source แทน src
               style={styles.artboard96}
@@ -424,13 +431,13 @@ const styles = StyleSheet.create({
   },
   artboard95: {
     width: "100%",
-    height: 130,
+    height: 110,
     zIndex: 1,
     marginTop: "25%"
   },
   artboard96: {
     width: "100%",
-    height: 130,
+    height: 110,
     zIndex: 1,
     marginTop: 32
   },

@@ -12,6 +12,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
     "ios": {
       "supportsTablet": true
     },
