@@ -326,7 +326,7 @@ const StepsTest = () => {
 
     return (
         <View style={styles.container}>
-            {scoreSteps()/* !stepsImgCountdown ? imageSteps() : isFinished ? scoreSteps() : testSteps() */}
+            {!stepsImgCountdown ? imageSteps() : isFinished ? scoreSteps() : testSteps()}
         </View>
     );
 }
