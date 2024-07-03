@@ -22,9 +22,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/coverImg/3_0.jpg",
+        "foregroundImage": "./assets/images/coverImg/Artboard90.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ththanet.driversLicense"
     },
     "web": {
       "bundler": "metro",
@@ -34,6 +35,14 @@
     "plugins": ["expo-router", "expo-font"],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d0e4c602-55f1-4b12-b923-52775fc91246"
+      }
     }
   }
 }

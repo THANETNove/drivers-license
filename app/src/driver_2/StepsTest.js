@@ -326,7 +326,7 @@ const StepsTest = () => {
 
     return (
         <View style={styles.container}>
-            {!stepsImgCountdown ? imageSteps() : isFinished ? scoreSteps() : testSteps()}
+            {scoreSteps()/* !stepsImgCountdown ? imageSteps() : isFinished ? scoreSteps() : testSteps() */}
         </View>
     );
 }
@@ -436,9 +436,9 @@ const styles = StyleSheet.create({
     attemptsContainer2: {
         flexDirection: 'row',
         justifyContent: "space-evenly",
-        marginTop: 32,
+        marginTop: 8,
         width: "100%",
-        marginBottom: 32
+
     },
     attemptBox: {
         width: 30,
@@ -480,7 +480,7 @@ const styles = StyleSheet.create({
         maxHeight: 150,
     },
     sourceUser: {
-        marginTop: 32,
+        marginTop: 8,
         color: Colors.black,
         fontSize: 48,
         fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
