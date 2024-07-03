@@ -611,7 +611,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end', // เปลี่ยนจาก 'center' เป็น 'flex-end'
     },
     modalView: {
-        paddingTop: 150,
+        paddingTop: 110,
         flex: 1,
         alignItems: 'center',
         shadowColor: '#000',
