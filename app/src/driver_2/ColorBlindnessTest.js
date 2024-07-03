@@ -231,7 +231,7 @@ const ColorBlindnessTest = () => {
                         </TouchableOpacity>
                     </View>
                 ) : (
-                    <View style={styles.stepContainer}>
+                    <View style={styles.stepContainer2}>
                         <Text style={styles.title}>{steps[summaryStep].question}</Text>
                         <Image source={steps[summaryStep].image} style={styles.image} />
                         <Text style={styles.title}>คำตอบของคุณคือ: {answers[steps[summaryStep].step]}</Text>
@@ -276,6 +276,12 @@ const styles = StyleSheet.create({
     stepContainer: {
 
         marginTop: 32,
+        width: '100%',
+        marginBottom: 20,
+    },
+    stepContainer2: {
+
+        marginTop: 0,
         width: '100%',
         marginBottom: 20,
     },
