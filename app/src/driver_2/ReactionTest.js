@@ -392,7 +392,7 @@ const styles = StyleSheet.create({
     buttonContainer2: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: width - 65,
+        width: width - 16,
     },
     scoreContainer: {
         marginTop: 20,
@@ -448,7 +448,7 @@ const styles = StyleSheet.create({
         maxHeight: 150,
     },
     sourceUser: {
-        marginTop: 32,
+        marginTop: 16,
         color: Colors.black,
         fontSize: 48,
         fontFamily: 'SukhumvitSet-Bold', // Use the loaded font
