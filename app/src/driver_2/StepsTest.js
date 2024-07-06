@@ -23,7 +23,7 @@ const StepsTest = () => {
 
     const [score, setScore] = useState(0); // สำหรับนับคะแนน
     const [attempts, setAttempts] = useState(1); // สำหรับนับจำนวนครั้งที่สุ่ม
-    const [countdown, setCountdown] = useState(5); // เวลานับถอยหลัง (5 วินาที)
+    const [countdown, setCountdown] = useState(2); // เวลานับถอยหลัง (5 วินาที)
     const [attemptResults, setAttemptResults] = useState(Array(5).fill(null)); // Initialize with 5 elements
     const [buttonPressed, setButtonPressed] = useState(false); // สำหรับตรวจสอบว่ากดปุ่มแล้วหรือยัง
     const [isFinished, setIsFinished] = useState(false); // สำหรับตรวจสอบว่ากระบวนการเสร็จสิ้นหรือไม่
@@ -37,9 +37,9 @@ const StepsTest = () => {
 
 
     const images = [
-        require('../../../assets/images/coverImg/Artboard01.png'),
-        require('../../../assets/images/coverImg/Artboard02.jpg'),
-        require('../../../assets/images/coverImg/Artboard03.png'), // Ensure this path is correct
+        require('../../../assets/images/coverImg/1_1.jpg'),
+        require('../../../assets/images/coverImg/1_2.jpg'),
+        require('../../../assets/images/coverImg/1_3.jpg'), // Ensure this path is correct
     ];
 
     const progressAnim = useRef(new Animated.Value(5)).current;
@@ -113,7 +113,7 @@ const StepsTest = () => {
                             return attempts;
                         }
                     });
-                    return 5; // Reset countdown to 5
+                    return 2; // Reset countdown to 5
                 }
             });
         }, 1000);
@@ -124,7 +124,7 @@ const StepsTest = () => {
         setButtonIndex(null);
         setScore(0);
         setAttempts(1);
-        setCountdown(5);
+        setCountdown(2);
         setAttemptResults(Array(5).fill(null));
         setButtonPressed(false);
         setIsFinished(false);
@@ -248,7 +248,7 @@ const StepsTest = () => {
                                 styles.progressBar,
                                 {
                                     width: progressAnim.interpolate({
-                                        inputRange: [0, 5],
+                                        inputRange: [0, 2],
                                         outputRange: ['0%', '100%']
                                     })
                                 },
