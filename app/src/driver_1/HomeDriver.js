@@ -126,7 +126,7 @@ const HomeDriver = ({ navigation }) => {
         loop
         width={width}
         height={"100%"}
-        autoPlay={true}
+        autoPlay={false}
         data={images}
         scrollAnimationDuration={1000}
         renderItem={({ item, index }) => (
@@ -273,61 +273,49 @@ const HomeDriver = ({ navigation }) => {
   );
 }
 const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   boxNumber_1: {
-    width: 50,
-    height: 50,
-    position: "absolute",
-    marginLeft: "27%",
-    top: 0,
-    marginTop: "37%",
-
+    width: 45,
+    height: 45,
+    position: 'absolute',
+    top: height * 0.17,
+    left: width * 0.25,
   },
   boxNumber_2: {
-    width: 50,
-    height: 50,
-    position: "absolute",
-    marginRight: "17%",
-    top: 0,
-    right: 0,
-    marginTop: "41%",
-
+    width: 45,
+    height: 45,
+    position: 'absolute',
+    top: height * 0.19,
+    left: width * 0.74,
   },
   boxNumber_3: {
-    width: 50,
-    height: 50,
-    position: "absolute",
-    marginRight: "0%",
-    top: 0,
-    right: 0,
-    marginTop: "67%"
+    width: 45,
+    height: 45,
+    position: 'absolute',
+    top: height * 0.29,
+    left: width * 0.88,
   },
   boxNumber_4: {
-    width: 50,
-    height: 50,
-    position: "absolute",
-    marginRight: "35%",
-    top: 0,
-    right: 0,
-    marginTop: 350
+    width: 45,
+    height: 45,
+    position: 'absolute',
+    top: height * 0.39,
+    left: width * 0.5,
   },
   boxNumber_5: {
-    width: 50,
-    height: 50,
-    position: "absolute",
-    marginRight: "43%",
-    top: 0,
-    right: 0,
-    marginTop: 450
+    width: 45,
+    height: 45,
+    position: 'absolute',
+    top: height * 0.5,
+    left: width * 0.47,
   },
   boxNumber_6: {
-    width: 50,
-    height: 50,
-    position: "absolute",
-    marginRight: "60%",
-    top: 0,
-    right: 0,
-    marginTop: 590
+    width: 45,
+    height: 45,
+    position: 'absolute',
+    top: height * 0.63,
+    left: width * 0.25,
   },
   boxModel: {
     zIndex: 1,
