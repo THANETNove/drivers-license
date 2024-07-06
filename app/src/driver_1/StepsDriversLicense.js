@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Button, StyleSheet, Image, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import Previous from "../../../assets/images/coverImg/Artboard63.png";
 import Next from "../../../assets/images/coverImg/Artboard64.png";
+import ScreenContainer from "../NavigationProvider"; // 
 
 const StepsDriversLicense = () => {
     const [stepsImg, setStepsImg] = useState(0);
@@ -28,54 +29,56 @@ const StepsDriversLicense = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scrollViewContent}>
-                {images.map((img, index) => (
-                    <View key={index} style={stepsImg === index ? styles.imageContainer : styles.hidden}>
-                        {stepsImg === index && (
+        <ScreenContainer>
+            <View style={styles.container}>
+                <ScrollView contentContainerStyle={styles.scrollViewContent}>
+                    {images.map((img, index) => (
+                        <View key={index} style={stepsImg === index ? styles.imageContainer : styles.hidden}>
+                            {stepsImg === index && (
+                                <Image
+                                    source={img}
+                                    style={styles.image}
+                                    resizeMode="stretch"
+                                />
+                            )}
+                        </View>
+                    ))}
+                </ScrollView>
+                <View style={styles.buttonContainer}>
+
+                    <TouchableOpacity onPress={handlePrevious} disabled={stepsImg === 0}>
+                        {stepsImg !== 0 &&
                             <Image
-                                source={img}
-                                style={styles.image}
-                                resizeMode="stretch"
+                                source={Previous} // ภาพปุ่ม Previous
+                                style={[
+                                    styles.buttonImage,
+                                    stepsImg === 0 && styles.disabledButton // ถ้าปุ่มถูกปิดการทำงาน (disabled) ใช้สไตล์นี้
+                                ]}
                             />
-                        )}
-                    </View>
-                ))}
-            </ScrollView>
-            <View style={styles.buttonContainer}>
-
-                <TouchableOpacity onPress={handlePrevious} disabled={stepsImg === 0}>
-                    {stepsImg !== 0 &&
-                        <Image
-                            source={Previous} // ภาพปุ่ม Previous
-                            style={[
-                                styles.buttonImage,
-                                stepsImg === 0 && styles.disabledButton // ถ้าปุ่มถูกปิดการทำงาน (disabled) ใช้สไตล์นี้
-                            ]}
-                        />
-                    }
-                </TouchableOpacity>
+                        }
+                    </TouchableOpacity>
 
 
 
-                <TouchableOpacity onPress={handleNext} disabled={stepsImg === images.length - 1}>
-                    {stepsImg !== images.length - 1 &&
-                        <Image
-                            source={Next} // ภาพปุ่ม Next
-                            style={[
-                                styles.buttonImage,
-                                stepsImg === images.length - 1 && styles.disabledButton // ถ้าปุ่มถูกปิดการทำงาน (disabled) ใช้สไตล์นี้
-                            ]}
-                        />
-                    }
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={handleNext} disabled={stepsImg === images.length - 1}>
+                        {stepsImg !== images.length - 1 &&
+                            <Image
+                                source={Next} // ภาพปุ่ม Next
+                                style={[
+                                    styles.buttonImage,
+                                    stepsImg === images.length - 1 && styles.disabledButton // ถ้าปุ่มถูกปิดการทำงาน (disabled) ใช้สไตล์นี้
+                                ]}
+                            />
+                        }
+                    </TouchableOpacity>
 
 
+                </View>
             </View>
-        </View>
+        </ScreenContainer>
     );
 }
-const width = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         width: '100%',
-        height: "100%", // หรือขนาดที่ต้องการสำหรับภาพ
+        height: height * 0.85, // หรือขนาดที่ต้องการสำหรับภาพ
     },
     hidden: {
         display: 'none',

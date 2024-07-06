@@ -36,16 +36,7 @@ const Capacity = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={styles.boxArtboard5}>
-          <Image
-            source={Artboard5}
-            style={styles.artboard5_1}
-          />
-          <Image
-            source={Artboard5}
-            style={styles.artboard5_1}
-          />
-        </View>
+
 
         <View style={styles.row}>
           <View style={styles.box}>
@@ -69,6 +60,7 @@ const Capacity = ({ navigation }) => {
     </ScreenContainer>
   );
 };
+const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
@@ -77,7 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: Colors.white,
     marginHorizontal: 16,
-    marginTop: "15%",
+    top: height * 0.08,
     paddingTop: 32,
     borderRadius: 6,
     zIndex: 0
@@ -107,10 +99,11 @@ const styles = StyleSheet.create({
   boxArtboard5: {
     width: '100%',
     aspectRatio: 2, // กำหนดอัตราส่วนให้เป็นสองเท่าของความกว้าง
-    marginTop: 160,
+    marginTop: 140,
     position: "absolute",
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 10
   },
   knowing: {
     color: Colors.primary2,
