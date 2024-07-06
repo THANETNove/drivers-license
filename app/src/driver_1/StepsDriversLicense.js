@@ -31,7 +31,9 @@ const StepsDriversLicense = () => {
     return (
         <ScreenContainer>
             <View style={styles.container}>
-                <ScrollView contentContainerStyle={styles.scrollViewContent}>
+                <ScrollView contentContainerStyle={styles.scrollViewContent}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}>
                     {images.map((img, index) => (
                         <View key={index} style={stepsImg === index ? styles.imageContainer : styles.hidden}>
                             {stepsImg === index && (

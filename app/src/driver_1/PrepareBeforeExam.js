@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, Image, Pressable } from 'react-native';
+import { View, Text, Button, ScrollView, StyleSheet, Image, Pressable, Dimensions } from 'react-native';
 import Artboard17_0 from "../../../assets/images/coverImg/Artboard17_0.jpg"
 import Artboard75 from "../../../assets/images/coverImg/Artboard75.png"
+import ScreenContainer from "../NavigationProvider"; // 
+
 
 
 
@@ -11,16 +13,20 @@ const PrepareBeforeExam = () => {
     const [clickBok_1, setClickBok_1] = useState(false);
     const [clickBok_2, setClickBok_2] = useState(false);
     const [clickBok_3, setClickBok_3] = useState(false);
-    console.log("clickBok_1", clickBok_1);
 
+    const { width, height } = Dimensions.get('window');
     return (
-        <View style={styles.container}>
-            <Image
-                source={Artboard17_0} // ใช้ source แทน src
-                style={{ width: '100%', height: '100%', zIndex: 0 }}
-                resizeMode="stretch"
-            />
-            {/*  <Pressable onPress={() => setClickBok_1(!clickBok_1)} style={styles.checkBok_1}>
+        <ScreenContainer>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
+                <View style={styles.container}>
+                    <Image
+                        source={Artboard17_0} // ใช้ source แทน src
+                        style={{ width: '100%', height: height * 0.85, zIndex: 0 }}
+                        resizeMode="stretch"
+                    />
+                    {/*  <Pressable onPress={() => setClickBok_1(!clickBok_1)} style={styles.checkBok_1}>
                 {clickBok_1 && <Image
                     source={Artboard75} // ใช้ source แทน src
                     style={{ width: '100%', height: '100%' }}
@@ -41,7 +47,9 @@ const PrepareBeforeExam = () => {
                     resizeMode="stretch"
                 />}
             </Pressable> */}
-        </View>
+                </View>
+            </ScrollView>
+        </ScreenContainer>
     );
 }
 
