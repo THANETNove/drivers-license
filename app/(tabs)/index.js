@@ -498,7 +498,7 @@ export default function App() {
     </Provider>
   );
 }
-const width = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -510,7 +510,7 @@ const styles = StyleSheet.create({
     height: 60,
     zIndex: 10,
     right: 8,
-    top: 40,
+    top: height * 0.038,
     position: "absolute"
 
   }
