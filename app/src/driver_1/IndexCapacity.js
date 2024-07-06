@@ -1,77 +1,72 @@
 import React from "react";
 import { Colors } from "@/constants/Colors";
-import { Image, ScrollView, View, Text, StyleSheet, Pressable, StatusBar } from "react-native";
+import { Image, ScrollView, View, Text, StyleSheet, Pressable, StatusBar, Dimensions } from "react-native";
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
 
 import Animated51 from "../../../assets/images/coverImg/Artboard51.png";
 import Animated52 from "../../../assets/images/coverImg/Artboard52.png";
 import Animated53 from "../../../assets/images/coverImg/Artboard53.png";
 import Animated54 from "../../../assets/images/coverImg/Artboard54.png";
-import Animated90 from "../../../assets/images/coverImg/Artboard90.png";
-import Artboard5 from "../../../assets/images/coverImg/5.png"
-
+import Artboard5 from "../../../assets/images/coverImg/5.png";
 
 const Capacity = ({ navigation }) => {
-
-
-
   return (
     <ScreenContainer >
-      <ScrollView contentContainerStyle={styles.container}
+      <ScrollView
+        contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}>
-        <Text style={styles.knowing}>รอบรู้เรื่อง การสอบใบขับขี่</Text>
+        <Text style={styles.knowing}>รอบรู้เรื่องใบขับขี่</Text>
         <View style={styles.row}>
           <View style={styles.box}>
             <Pressable onPress={() => navigation.navigate('InterestingDriverLicense')}>
               <Image
-                source={Animated51} // ใช้ source แทน src
-                style={styles.image} // กำหนดขนาดของภาพ
+                source={Animated51}
+                style={styles.image}
               />
             </Pressable>
           </View>
-
           <View style={styles.box}>
             <Pressable onPress={() => navigation.navigate('QualificationsTaker')}>
               <Image
-                source={Animated52} // ใช้ source แทน src
-                style={styles.image} // กำหนดขนาดของภาพ
+                source={Animated52}
+                style={styles.image}
               />
             </Pressable>
           </View>
         </View>
+
         <View style={styles.boxArtboard5}>
           <Image
-            source={Artboard5} // ใช้ source แทน src
-            style={styles.artboard5_1} // กำหนดขนาดของภาพ
+            source={Artboard5}
+            style={styles.artboard5_1}
           />
           <Image
-            source={Artboard5} // ใช้ source แทน src
-            style={styles.artboard5_1} // กำหนดขนาดของภาพ
+            source={Artboard5}
+            style={styles.artboard5_1}
           />
         </View>
+
         <View style={styles.row}>
           <View style={styles.box}>
             <Pressable onPress={() => navigation.navigate('StepsDriversLicense')}>
               <Image
-                source={Animated53} // ใช้ source แทน src
-                style={styles.image} // กำหนดขนาดของภาพ
+                source={Animated53}
+                style={styles.image}
               />
             </Pressable>
           </View>
           <View style={styles.box}>
             <Pressable onPress={() => navigation.navigate('PrepareBeforeExam')}>
               <Image
-                source={Animated54} // ใช้ source แทน src
-                style={styles.image} // กำหนดขนาดของภาพ
+                source={Animated54}
+                style={styles.image}
               />
             </Pressable>
           </View>
-
         </View>
-
       </ScrollView>
-    </ScreenContainer >
+    </ScreenContainer>
   );
 };
 
@@ -87,14 +82,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     zIndex: 0
   },
-  absoluteContainer: {
-    position: 'absolute',
-    top: 32,
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-    zIndex: 10,
-  },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -102,41 +89,36 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   box: {
-    width: '49%',
-    height: 200,
+    width: '48%', // ใช้เปอร์เซ็นต์เพื่อให้ปรับตามขนาดหน้าจอ
+    aspectRatio: 1, // กำหนดอัตราส่วนเพื่อให้ขนาดของ box เป็นสี่เหลี่ยม
+    backgroundColor: 'transparent',
   },
   image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain', // ใช้ 'contain' เพื่อให้ภาพอยู่ภายใน box โดยรักษาสัดส่วนเดิม
+  },
+  artboard5_1: {
     width: "100%",
     height: "100%",
-    resizeMode: "center",
-  },
-  image90: {
-    marginTop: -20,
-    marginLeft: "32%",
-    width: 150,
-    height: 150,
+    resizeMode: "contain", // ใช้ 'contain' เพื่อรักษาสัดส่วนของภาพ
     position: "absolute",
-    zIndex: 10
+  },
+  boxArtboard5: {
+    width: '100%',
+    aspectRatio: 2, // กำหนดอัตราส่วนให้เป็นสองเท่าของความกว้าง
+    marginTop: 160,
+    position: "absolute",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   knowing: {
     color: Colors.primary2,
     textAlign: "center",
     fontSize: 28,
-    fontFamily: 'SukhumvitSet-Bold', // ใช้ฟอนต์ที่โหลด
+    fontFamily: 'SukhumvitSet-Bold',
+
   },
-  artboard5_1: {
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-    zIndex: 10,
-  },
-  boxArtboard5: {
-    marginTop: "48%",
-    width: "100%",
-    height: 120,
-    zIndex: 10,
-    position: "absolute"
-  }
 });
 
 export default Capacity;
