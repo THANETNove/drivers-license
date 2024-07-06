@@ -126,7 +126,7 @@ const HomeDriver = ({ navigation }) => {
         loop
         width={width}
         height={"100%"}
-        autoPlay={false}
+        autoPlay={true}
         data={images}
         scrollAnimationDuration={1000}
         renderItem={({ item, index }) => (
