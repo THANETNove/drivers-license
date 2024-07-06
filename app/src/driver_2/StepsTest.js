@@ -331,7 +331,7 @@ const StepsTest = () => {
     );
 }
 
-const width = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -344,6 +344,7 @@ const styles = StyleSheet.create({
     imageContainer: {
         width: '100%',
         height: "100%",
+        resizeMode: "contain"
     },
     hidden: {
         display: 'none',

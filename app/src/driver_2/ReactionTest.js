@@ -31,7 +31,7 @@ const ReactionTest = () => {
         if (!isPaused) {
             Animated.timing(animation, {
                 toValue: currentPage,
-                duration: 300,
+                duration: 200,
                 useNativeDriver: true,
             }).start();
         }
@@ -64,7 +64,7 @@ const ReactionTest = () => {
             if (page > totalPages) {
                 clearInterval(animationIntervalRef.current);
             }
-        }, 300); // Adjust the interval as needed
+        }, 200); // Adjust the interval as needed
     };
 
     const stopAnimation = () => {
@@ -103,9 +103,9 @@ const ReactionTest = () => {
 
 
     const images = [
-        require('../../../assets/images/coverImg/Artboard1_1.png'),
-        require('../../../assets/images/coverImg/Artboard1_2.png'),
-        require('../../../assets/images/coverImg/Artboard1_3.png'), // Ensure this path is correct
+        require('../../../assets/images/coverImg/2_1.png'),
+        require('../../../assets/images/coverImg/2_2.png'),
+        require('../../../assets/images/coverImg/2_3.png'), // Ensure this path is correct
     ];
     const handleNext = () => {
         if (stepsImg < images.length - 1) {
