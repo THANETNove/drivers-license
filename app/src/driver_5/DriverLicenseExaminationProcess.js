@@ -18,6 +18,8 @@ const DriverLicenseExaminationProcess = () => {
     const video = React.useRef(null);
     const [status, setStatus] = React.useState({});
 
+    const { width, height } = Dimensions.get('window');
+
     return (
         <ScreenContainer >
             <View style={styles.container}>
@@ -50,7 +52,7 @@ const DriverLicenseExaminationProcess = () => {
 
     )
 }
-const width = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -65,12 +67,12 @@ const styles = StyleSheet.create({
     },
     boxVideo: {
         width: width - 64,
-        height: 190,
+        height: 250,
         borderColor: Colors.primary2,
         borderWidth: 1,
         zIndex: 1,
         position: "absolute",
-        bottom: "19%"
+        bottom: "17%"
     },
     video: {
         width: "100%",
