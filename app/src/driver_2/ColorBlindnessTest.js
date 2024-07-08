@@ -21,9 +21,9 @@ const ColorBlindnessTest = () => {
 
 
     const images = [
-        require('../../../assets/images/coverImg/Artboard4-1.png'),
-        require('../../../assets/images/coverImg/Artboard4-2.png'),
-        require('../../../assets/images/coverImg/Artboard4-3.png'), // Ensure this path is correct
+        require('../../../assets/images/coverImg/4_1.png'),
+        require('../../../assets/images/coverImg/4_2.png'),
+        require('../../../assets/images/coverImg/4_3.png'), // Ensure this path is correct
     ];
 
 
