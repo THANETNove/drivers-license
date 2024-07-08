@@ -14,32 +14,50 @@ import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
 
 const DepthPerceptionTest = () => {
     const navigation = useNavigation(); // Initialize navigation
-    const [polePosition, setPolePosition] = useState(30); // For managing the position of the pole
+    const [polePosition, setPolePosition] = useState(40); // For managing the position of the pole
     const [submitted, setSubmitted] = useState(false); // For managing the submission state
     const [stepsImgCountdown, setStepsImgCountdown] = useState(false);
     const [stepsImg, setStepsImg] = useState(0);
     const [isFinished, setIsFinished] = useState(false);
-    const [distance, setDistance] = useState(30);
-    const [isCorrect, setIsCorrect] = useState(30);
+    const [distance, setDistance] = useState(20);
+    const [isCorrect, setIsCorrect] = useState(20);
 
 
 
     const handleMoveForward = () => {
         // Logic for moving the pole forward
-        setPolePosition(prev => Math.max(prev - 5, -40)); // Example logic
+        setPolePosition(prev => Math.max(prev - 5, 0)); // Example logic
     };
 
     const handleMoveBackward = () => {
         // Logic for moving the pole backward
-        setPolePosition(prev => Math.min(prev + 5, 35)); // Example logic
+        setPolePosition(prev => Math.min(prev + 5, 40)); // Example logic
     };
 
     const handleSubmit = () => {
 
+
+
+
         // Define the correct position (example value)
-        const correctPosition = 0; // Adjust this value based on the correct position
-        setIsCorrect(Math.abs(polePosition - correctPosition) < 5); // Example threshold
-        setDistance(correctPosition - polePosition);
+        const correctPosition = 20; // Adjust this value based on the correct position
+
+        setIsCorrect(polePosition - correctPosition == 20);
+
+        let distance2 = correctPosition - polePosition;
+        /*  if (correctPosition - polePosition == 15) {
+             distance2 = -10;
+         }
+         if (correctPosition - polePosition == 10) {
+             distance2 = -20;
+         }
+         if (correctPosition - polePosition == 5) {
+             distance2 = -30;
+         }
+         if (correctPosition - polePosition == 0) {
+             distance2 = -40;
+         } */
+        setDistance(distance2);
         // Logic for handling the submission
         setSubmitted(true);
 
@@ -61,7 +79,7 @@ const DepthPerceptionTest = () => {
     };
     const resetGame = () => {
         setSubmitted(false);
-        setPolePosition(30);
+        setPolePosition(40);
         setIsFinished(false);
     };
 
@@ -71,10 +89,14 @@ const DepthPerceptionTest = () => {
 
 
 
+
     const scoreSteps = () => {
+
         return (
             <ScreenContainer>
-                <View style={styles.boxCenter2}>
+                <ScrollView contentContainerStyle={styles.container}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}>
                     <Image
                         source={Artboard90}
                         style={styles.artboard90}
@@ -84,7 +106,7 @@ const DepthPerceptionTest = () => {
                         ผลการทดสอบ
                     </Text>
                     <Text style={styles.sourceUser}> {distance}  นิ้ว</Text>
-                    {isCorrect ? <Text style={styles.sourceUser}>ผ่านการทดสอบ</Text> : <Text style={styles.sourceUser}>ไม่ผ่านการทดสอบ</Text>}
+                    {polePosition == 20 ? <Text style={styles.sourceUser}>ผ่านการทดสอบ</Text> : <Text style={styles.sourceUser}>ไม่ผ่านการทดสอบ</Text>}
 
                     <View style={styles.attemptsContainer2}>
                         <View style={styles.boxBack}>
@@ -98,7 +120,7 @@ const DepthPerceptionTest = () => {
                             </Pressable>
                         </View>
                     </View>
-                </View>
+                </ScrollView>
             </ScreenContainer>
         )
     }
@@ -107,19 +129,26 @@ const DepthPerceptionTest = () => {
 
 
     const depthKook = () => {
+        const { width, height } = Dimensions.get('window');
+
+
         return (
             <ScreenContainer>
-                <View style={styles.container}>
+                <ScrollView contentContainerStyle={styles.container}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}>
+
+
                     {!submitted && (
                         <>
                             <Image source={Artboard32} style={styles.imageBackground} resizeMode="stretch" />
                             <View style={styles.testingBox}>
-                                <View style={[styles.pole, { transform: [{ translateY: polePosition }, { scale }] }]} >
+                                <View style={[styles.pole, { transform: [{ translateY: polePosition * 2 }, { scale }] }]} >
                                     <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
                                 </View>
-                                <View style={styles.fixedPole} >
+                                {/*  <View style={styles.fixedPole} >
                                     <Image source={Artboard18} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
-                                </View>
+                                </View> */}
                             </View>
                             <View style={styles.buttonContainer}>
                                 <TouchableOpacity onPress={handleMoveForward} style={styles.button}>
@@ -139,7 +168,7 @@ const DepthPerceptionTest = () => {
                         <View style={styles.submittedContainer}>
                             <Image source={TopView} style={styles.topViewImage} resizeMode="stretch" />
                             <View style={styles.sideViewContainer}>
-                                <View style={[styles.poleSideView, { transform: [{ translateY: polePosition * 2.5 }, { scale }] }]} >
+                                <View style={[styles.poleSideView, { transform: [{ translateY: distance * -4 }, { scale }] }]} >
                                     <Image source={Artboard14} style={{ width: "100%", height: "100%" }} resizeMode="stretch" />
                                 </View>
                                 <View style={styles.fixedPoleSideView} >
@@ -148,16 +177,16 @@ const DepthPerceptionTest = () => {
                             </View>
                         </View>
                     )}
-                </View>
+                </ScrollView>
             </ScreenContainer>
 
         )
     }
 
     const images = [
-        require('../../../assets/images/coverImg/Artboard3_1.png'),
-        require('../../../assets/images/coverImg/Artboard3_2.png'),
-        require('../../../assets/images/coverImg/Artboard3_3.png'), // Ensure this path is correct
+        require('../../../assets/images/coverImg/3_1.png'),
+        require('../../../assets/images/coverImg/3_2.png'),
+        require('../../../assets/images/coverImg/3_3.png'), // Ensure this path is correct
     ];
     const imgCount = () => {
         setStepsImgCountdown(true);
@@ -166,7 +195,9 @@ const DepthPerceptionTest = () => {
     const imageSteps = () => {
         return (
             <>
-                <ScrollView contentContainerStyle={styles.scrollViewContent}>
+                <ScrollView contentContainerStyle={styles.scrollViewContent}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}>
                     {images.map((img, index) => (
                         <View key={index} style={stepsImg === index ? styles.imageContainer : styles.hidden}>
                             {stepsImg === index && (
@@ -220,19 +251,20 @@ const DepthPerceptionTest = () => {
     );
 };
 
-const width = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        marginTop: 64,
+
         alignItems: 'center',
-        justifyContent: 'center',
+        paddingBottom: 200
     },
     imageBackground: {
+        top: 0,
         position: 'absolute',
-        top: 32,
-        width: 300,
-        height: 500
+        width: 350,
+        height: 500,
     },
     submittedContainer: {
         position: 'absolute',
@@ -290,19 +322,22 @@ const styles = StyleSheet.create({
         left: 60
     },
     fixedPole: {
-        width: 40,
+
+        width: 50,
         height: 210,
         position: 'absolute',
-        left: 113,
+        left: 115,
     },
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: width * 0.8,
         marginBottom: 0,
-        marginTop: 90
+        marginTop: 100,
+        marginBottom: 32
     },
     button: {
+
         width: 50,
         height: 50,
         backgroundColor: '#90EE90',
@@ -448,7 +483,9 @@ const styles = StyleSheet.create({
     textBack: {
         color: Colors.white,
         fontSize: 30,
-    }
+    },
+
+
 });
 
 export default DepthPerceptionTest;
