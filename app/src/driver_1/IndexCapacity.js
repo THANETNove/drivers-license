@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     zIndex: 0,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   textBottom: {
     marginTop: -8,
