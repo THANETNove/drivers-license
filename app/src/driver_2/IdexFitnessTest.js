@@ -1,6 +1,6 @@
 import React from "react";
 import { Colors } from "@/constants/Colors";
-import { Image, ScrollView, View, Text, StyleSheet, Pressable, StatusBar } from "react-native";
+import { Image, ScrollView, View, Text, StyleSheet, Pressable, StatusBar, Dimensions } from "react-native";
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
 
 import Animated56 from "../../../assets/images/coverImg/Artboard56.png";
@@ -62,17 +62,20 @@ const Capacity = ({ navigation }) => {
     );
 };
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.light_blue,
         marginHorizontal: 16,
         marginTop: "15%",
         paddingTop: 8,
         borderRadius: 6,
-        zIndex: 0
+        zIndex: 0,
+
     },
     absoluteContainer: {
         position: 'absolute',
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
     },
     box: {
         width: '49%',
-        height: 250,
+        height: height / 2 * 0.63,
     },
     image: {
         width: "100%",

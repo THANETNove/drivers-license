@@ -4,8 +4,11 @@ import { View, Text, ScrollView, StyleSheet, Pressable, Dimensions, Image, Butto
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation, useRoute } from '@react-navigation/native'; // ใช้ useNavigation จาก react-navigation
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
-import Artboard15 from "../../../assets/images/coverImg/Artboard57-100.jpg";
-import Artboard16 from "../../../assets/images/coverImg/Artboard59-100.jpg"
+import a5_1_1 from "../../../assets/images/coverImg/5-1_1.png";
+import a5_1_2 from "../../../assets/images/coverImg/5-1_2.png"
+import a5_2_1 from "../../../assets/images/coverImg/5-2_1.png"
+import a5_2_2 from "../../../assets/images/coverImg/5-2_2.png";
+
 import { Video, ResizeMode } from 'expo-av';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
@@ -22,32 +25,25 @@ const DriverLicenseExaminationProcess = () => {
 
     return (
         <ScreenContainer >
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.container}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
                 <Image
-                    source={id && id == 1 ? Artboard15 : Artboard16} // ใช้ source แทน src
+                    source={id && id == 1 ? a5_2_1 : a5_1_1} // ใช้ source แทน src
                     style={styles.imageArt5}
                 />
-                <View style={styles.boxVideo}>
-                    {/*   <Video
-                        ref={video}
-                        style={styles.video}
-                        source={{
-                            uri: 'http://127.0.0.1/project/DriversLicenseImage/video/practiceMotorcycle.mp4',
-                        }}
-                        useNativeControls
-                        resizeMode={ResizeMode.CONTAIN}
-                        isLooping
-                        onPlaybackStatusUpdate={status => setStatus(() => status)}
-                    /> */}
-                    <YoutubePlayer
-                        height={250}
-                        width={width - 64}
-                        videoId={id == 1 ? "o_DmbssHhoE" : "reVUfbP7pWo"} // Replace with your YouTube video ID
-                        play={true} // Autoplay the video
+                <YoutubePlayer
+                    height={250}
+                    width={width - 64}
+                    videoId={id == 1 ? "o_DmbssHhoE" : "reVUfbP7pWo"} // Replace with your YouTube video ID
+                    play={true} // Autoplay the video
 
-                    />
-                </View>
-            </View>
+                />
+                <Image
+                    source={id && id == 1 ? a5_2_2 : a5_1_2} // ใช้ source แทน src
+                    style={styles.imageArt2}
+                />
+            </ScrollView>
         </ScreenContainer>
 
     )
@@ -56,24 +52,26 @@ const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: "center"
+        top: 0,
+        alignItems: "center",
+
+
+
     },
     imageArt5: {
         width: "100%",
-        height: "100%",
-        resizeMode: "stretch",
-        zIndex: 0
+        height: 450,
+        resizeMode: "contain"
+
     },
-    boxVideo: {
-        width: width - 64,
-        height: 250,
-        borderColor: Colors.primary2,
-        borderWidth: 1,
-        zIndex: 1,
-        position: "absolute",
-        bottom: "17%"
+    imageArt2: {
+
+        width: "100%",
+        height: 100,
+        resizeMode: "contain",
+
     },
+
     video: {
         width: "100%",
         height: "100%",
