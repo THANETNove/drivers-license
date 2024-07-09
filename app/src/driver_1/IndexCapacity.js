@@ -8,53 +8,68 @@ import Animated52 from "../../../assets/images/coverImg/Artboard52.png";
 import Animated53 from "../../../assets/images/coverImg/Artboard53.png";
 import Animated54 from "../../../assets/images/coverImg/Artboard54.png";
 import Artboard5 from "../../../assets/images/coverImg/5.png";
+import Artboard86 from "../../../assets/images/coverImg/Artboard86.png";
 
 const Capacity = ({ navigation }) => {
   return (
     <ScreenContainer >
       <ScrollView
-        contentContainerStyle={styles.container}
+
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}>
-        <Text style={styles.knowing}>รอบรู้เรื่องใบขับขี่</Text>
-        <View style={styles.row}>
-          <View style={styles.box}>
-            <Pressable onPress={() => navigation.navigate('InterestingDriverLicense')}>
-              <Image
-                source={Animated51}
-                style={styles.image}
-              />
-            </Pressable>
+        <View style={styles.container}>
+          <Text style={styles.knowing}>รอบรู้เรื่องใบขับขี่</Text>
+          <Image
+            source={Artboard86}
+            style={styles.artboard86}
+          />
+          <View style={styles.row}>
+            <View style={styles.box}>
+              <Pressable onPress={() => navigation.navigate('InterestingDriverLicense')}>
+                <Image
+                  source={Animated51}
+                  style={styles.image}
+                />
+              </Pressable>
+            </View>
+            <View style={styles.box}>
+              <Pressable onPress={() => navigation.navigate('QualificationsTaker')}>
+                <Image
+                  source={Animated52}
+                  style={styles.image}
+                />
+              </Pressable>
+            </View>
           </View>
-          <View style={styles.box}>
-            <Pressable onPress={() => navigation.navigate('QualificationsTaker')}>
-              <Image
-                source={Animated52}
-                style={styles.image}
-              />
-            </Pressable>
+
+
+
+          <View style={styles.row}>
+            <View style={styles.box}>
+              <Pressable onPress={() => navigation.navigate('StepsDriversLicense')}>
+                <Image
+                  source={Animated53}
+                  style={styles.image}
+                />
+              </Pressable>
+            </View>
+            <View style={styles.box}>
+              <Pressable onPress={() => navigation.navigate('PrepareBeforeExam')}>
+                <Image
+                  source={Animated54}
+                  style={styles.image}
+                />
+              </Pressable>
+            </View>
           </View>
+
         </View>
-
-
-
-        <View style={styles.row}>
-          <View style={styles.box}>
-            <Pressable onPress={() => navigation.navigate('StepsDriversLicense')}>
-              <Image
-                source={Animated53}
-                style={styles.image}
-              />
-            </Pressable>
-          </View>
-          <View style={styles.box}>
-            <Pressable onPress={() => navigation.navigate('PrepareBeforeExam')}>
-              <Image
-                source={Animated54}
-                style={styles.image}
-              />
-            </Pressable>
-          </View>
+        <Image
+          source={Artboard5}
+          style={styles.artboard5}
+        />
+        <View style={styles.boxTextBottom}>
+          <Text style={styles.textBottom}>"การเตรียมความพร้อมก่อนสอบเป็นสิ่งสำคัญ"</Text>
         </View>
       </ScrollView>
     </ScreenContainer>
@@ -67,12 +82,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.light_blue,
     marginHorizontal: 16,
     top: height * 0.08,
     paddingTop: 32,
     borderRadius: 6,
-    zIndex: 0
+    zIndex: 0,
+    paddingBottom: 48
   },
   row: {
     flexDirection: 'row',
@@ -112,6 +128,39 @@ const styles = StyleSheet.create({
     fontFamily: 'SukhumvitSet-Bold',
 
   },
+  artboard86: {
+    marginTop: 60,
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    zIndex: 1
+  },
+  artboard5: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    zIndex: 10,
+    bottom: -260,
+    resizeMode: "contain", // ใช้ 'contain' เพื่อรักษาสัดส่วนของภาพ
+  },
+  boxTextBottom: {
+    marginTop: 100,
+    height: 100,
+    backgroundColor: "#E6DFF1",
+    marginHorizontal: 16,
+    paddingTop: 32,
+    borderRadius: 6,
+    zIndex: 0,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  textBottom: {
+    marginTop: -8,
+    color: Colors.black,
+    textAlign: "center",
+    fontSize: 20,
+    fontFamily: 'SukhumvitSet-Bold',
+  }
 });
 
 export default Capacity;

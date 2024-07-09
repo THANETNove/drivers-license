@@ -31,5 +31,6 @@ export const Colors = {
   black:"#000",
   light_green:"#d4edda",
   light_red:"#f8d7da",
+  light_blue:"#E5ECFA",
   
 };
