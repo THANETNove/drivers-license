@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     container: {
         top: 0,
         alignItems: "center",
-
+        backgroundColor: Colors.light_blue
 
 
     },

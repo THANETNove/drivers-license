@@ -25,6 +25,7 @@ const DriverLicenseExaminationProcess = () => {
 
     return (
         <ScreenContainer >
+
             <ScrollView contentContainerStyle={styles.container}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}>
@@ -44,6 +45,7 @@ const DriverLicenseExaminationProcess = () => {
                     style={styles.imageArt2}
                 />
             </ScrollView>
+
         </ScreenContainer>
 
     )
@@ -53,11 +55,11 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         top: 0,
+
         alignItems: "center",
-
-
-
+        backgroundColor: Colors.light_blue
     },
+
     imageArt5: {
         width: "100%",
         height: 450,
