@@ -1,4 +1,4 @@
-// useRewardedAd.js
+/* // useRewardedAd.js
 import { useState, useEffect } from 'react';
 import { RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads';
 import { View, StyleSheet, Text, Platform } from 'react-native';
@@ -23,7 +23,7 @@ export const useRewardedAd = () => {
         const unsubscribeEarned = rewarded.addAdEventListener(
             RewardedAdEventType.EARNED_REWARD,
             reward => {
-                /*  console.log('User earned reward of ', reward); */
+                // console.log('User earned reward of ', reward);
                 setLoadedPlay(false);
             },
         );
@@ -58,3 +58,4 @@ export const useRewardedAd = () => {
 
     return { showAd, loaded, loadedPlay, resetLoadedPlay };
 };
+ */

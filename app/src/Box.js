@@ -1,4 +1,4 @@
-// Box.js
+/* // Box.js
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Platform } from 'react-native';
 import { Colors } from "@/constants/Colors";
@@ -45,3 +45,4 @@ const styles = StyleSheet.create({
 });
 
 export default Box;
+ */

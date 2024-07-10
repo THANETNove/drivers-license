@@ -15,6 +15,16 @@ import { selectUser, setIndexImage } from '../../../redux/userSlice';
 
 import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
 
+const getRandomNumber = (exclude) => {
+    let newNumber;
+    do {
+        newNumber = Math.floor(Math.random() * 3) + 1;
+    } while (newNumber === exclude);
+
+    return newNumber;
+};
+
+
 
 const StepsTest = () => {
     const navigation = useNavigation(); // Initialize navigation
@@ -24,7 +34,7 @@ const StepsTest = () => {
     const [buttonIndex, setButtonIndex] = useState(null);
 
     const [score, setScore] = useState(0); // สำหรับนับคะแนน
-    const [attempts, setAttempts] = useState(1); // สำหรับนับจำนวนครั้งที่สุ่ม
+    const [attempts, setAttempts] = useState(0); // สำหรับนับจำนวนครั้งที่สุ่ม
     const [countdown, setCountdown] = useState(2); // เวลานับถอยหลัง (5 วินาที)
     const [attemptResults, setAttemptResults] = useState(Array(5).fill(null)); // Initialize with 5 elements
     const [buttonPressed, setButtonPressed] = useState(false); // สำหรับตรวจสอบว่ากดปุ่มแล้วหรือยัง
@@ -36,6 +46,10 @@ const StepsTest = () => {
     const { indIma } = useSelector(selectUser); // ดึงค่า indexImage จาก Redux state
     const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
 
+    const [count, setCount] = useState(0);
+    const [isCounting, setIsCounting] = useState(false);
+    const [prevRandom, setPrevRandom] = useState(null);
+    const progressAnim = useRef(new Animated.Value(0)).current;
 
 
     const images = [
@@ -44,8 +58,6 @@ const StepsTest = () => {
         require('../../../assets/images/coverImg/1_3.jpg'), // Ensure this path is correct
     ];
 
-    const progressAnim = useRef(new Animated.Value(5)).current;
-
     const imagesRandom = [
         { source: Artboard6_1, id: 1 },
         { source: Artboard6_2, id: 2 },
@@ -53,85 +65,96 @@ const StepsTest = () => {
     ];
 
 
-    const getRandomImage = () => {
-
-        const filteredImages = imagesRandom.filter(image =>
-            (randomImage ? image.id !== indIma : true)
-        );
-
-        const randomIndex = Math.floor(Math.random() * filteredImages.length);
-
-        if (filteredImages.length > 0) {
-            const selectedImage = filteredImages[randomIndex];
-
-
-            setRandomImage(selectedImage);
-            setButtonIndex(selectedImage.id);
-
-            dispatch(setIndexImage(selectedImage.id)); // ส่ง action ไปยัง Redux
-
-        }
-    };
-
     useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsCounting(true);
+        }, 2000);
 
-    }, []);
-
-
-    useEffect(() => {
-        if (stepsImgCountdown) {
-            const timer = setTimeout(startCountdown, 1000); // Wait 1 second before starting the countdown
-            return () => clearTimeout(timer);
-        }
+        return () => clearTimeout(timer);
     }, [stepsImgCountdown]);
 
     useEffect(() => {
-        // ทำ Progress Bar เคลื่อนที่
-        Animated.timing(progressAnim, {
-            toValue: countdown,
-            duration: 1000,
-            useNativeDriver: false,
-        }).start();
-    }, [countdown]);
 
-    const startCountdown = () => {
+        console.log("stepsImgCountdown", stepsImgCountdown);
+        let interval;
+        if (isCounting && stepsImgCountdown) {
+            interval = setInterval(() => {
+                setCount(prevCount => {
+                    if (prevCount >= 4) {
+                        clearInterval(interval);
+                        setIsCounting(false); // Stop counting
+                        return prevCount;
+                    }
+                    return prevCount + 1;
+                });
+                setAttempts(prevCount => {
+                    if (prevCount >= 5) {
 
-        getRandomImage(); // เรียกใช้ getRandomImage ด้วยค่า indexImage ปัจจุบัน
+                        return prevCount;
+                    }
+                    return prevCount + 1;
+                });
 
-        countdownIntervalRef.current = setInterval(() => {
-            setCountdown(prev => {
-                if (prev > 0) {
-                    return prev - 1;
-                } else {
-                    // Update attempts when countdown reaches 0
-                    setAttempts(attempts => {
-                        if (attempts < 5) {
-                            setButtonPressed(false); // Reset button press state for the new attempt
-                            getRandomImage(indIma);
-                            return attempts + 1;
-                        } else {
-                            clearInterval(countdownIntervalRef.current);
-                            setIsFinished(true); // Mark the process as finished
-                            return attempts;
-                        }
-                    });
-                    return 2; // Reset countdown to 5
-                }
-            });
-        }, 1000);
-    };
+                setButtonPressed(false); // Reset button press state for next attempt
+                const newRandom = getRandomNumber(prevRandom);
+                setPrevRandom(newRandom);
+
+                progressAnim.setValue(0); // Reset animation value
+                Animated.timing(progressAnim, {
+                    toValue: 1,
+                    duration: 2000,
+                    useNativeDriver: false,
+                }).start();
+            }, 2000);
+        }
+        return () => clearInterval(interval);
+    }, [isCounting, stepsImgCountdown, prevRandom]);
+
+
+    useEffect(() => {
+        if (!isCounting) {
+            Animated.timing(progressAnim, {
+                toValue: 0,
+                duration: 500,
+                useNativeDriver: false,
+            }).start();
+        }
+    }, [isCounting, stepsImgCountdown]);
+
+    useEffect(() => {
+
+        if (!isCounting && attempts) {
+
+            setTimeout(() => {
+                setIsFinished(true);
+
+            }, 3000);
+        }
+    }, [!isCounting, attempts]);
+
+    const animatedWidth = progressAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['100%', '0%'],
+    });
+
+
 
     const resetGame = () => {
         resetLoadedPlay();
+        setCount(0);
+        setIsCounting(true);
+        setPrevRandom(null);
         setRandomImage(null);
         setButtonIndex(null);
+        setIsFinished(false);
+        setStepsImgCountdown(true);
         setScore(0);
-        setAttempts(1);
+        setAttempts(0);
         setCountdown(2);
         setAttemptResults(Array(5).fill(null));
         setButtonPressed(false);
         setIsFinished(false);
-        const timer = setTimeout(startCountdown, 1000); // Wait 1 second before starting the countdown
+
         return () => clearTimeout(timer);
     };
 
@@ -148,8 +171,10 @@ const StepsTest = () => {
     };
 
     const handleButtonPress = (index) => {
+
+        console.log(index, prevRandom);
         if (!buttonPressed) {
-            const isCorrect = index === buttonIndex;
+            const isCorrect = index === prevRandom;
             setScore(prev => prev + (isCorrect ? 1 : 0));
             setAttemptResults(prev => {
                 const updatedResults = [...prev];
@@ -159,6 +184,8 @@ const StepsTest = () => {
             setButtonPressed(true); // Mark the button as pressed for the current attempt
         }
     };
+
+
 
     const scoreSteps = () => {
 
@@ -223,7 +250,7 @@ const StepsTest = () => {
     }
 
     const testSteps = () => {
-
+        console.log("isCounting", isCounting);
 
 
 
@@ -235,14 +262,15 @@ const StepsTest = () => {
                         style={styles.artboard6}
                         resizeMode="stretch"
                     />
-                    {randomImage && (
-                        <Image
-                            source={randomImage.source}
-                            style={randomImage.id === 1 ? styles.artboard6_1 : randomImage.id === 2 ? styles.artboard6_2 : styles.artboard6_3}
-                            resizeMode="stretch"
-                        />
-                    )}
-                    <Text style={{ fontSize: 20, color: "#FFF", marginTop: 22 }}>{`ครั้งที่: ${attempts}/5`}</Text>
+
+                    <Image
+                        source={prevRandom === 1 ? Artboard6_1 : prevRandom === 2 ? Artboard6_2 : Artboard6_3}
+
+                        style={prevRandom === 1 ? styles.artboard6_1 : prevRandom === 2 ? styles.artboard6_2 : styles.artboard6_3}
+                        resizeMode="stretch"
+                    />
+
+                    <Text style={{ fontSize: 20, color: "#FFF", marginTop: 22 }}>{`ครั้งที่ : ${attempts}/5`}</Text>
                     <View style={styles.attemptsContainer}>
                         {attemptResults.map((result, index) => (
                             <View
@@ -259,8 +287,13 @@ const StepsTest = () => {
                             </View>
                         ))}
                     </View>
+                    {/*     <Text style={styles.countText}>Count: {count}</Text>
+                    <Text style={styles.randomText}>Random: {prevRandom}</Text> */}
+                    {/*   <View style={styles.progressBar}>
+                        <Animated.View style={[styles.progress, { width: animatedWidth }]} />
+                    </View> */}
                     <View style={styles.progressContainer}>
-                        <Animated.View
+                        {/*  <Animated.View
                             style={[
                                 styles.progressBar,
                                 {
@@ -270,7 +303,9 @@ const StepsTest = () => {
                                     })
                                 },
                             ]}
-                        />
+                            
+                        /> */}
+                        <Animated.View style={[styles.progressBar, { width: animatedWidth }]} />
                     </View>
                     <View style={styles.boxButton}>
                         <View style={styles.buttonContainer2}>
