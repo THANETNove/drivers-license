@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16,
-    zIndex: 0,
+    zIndex: 20,
   },
   box: {
     width: '48%', // ใช้เปอร์เซ็นต์เพื่อให้ปรับตามขนาดหน้าจอ
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'contain', // ใช้ 'contain' เพื่อให้ภาพอยู่ภายใน box โดยรักษาสัดส่วนเดิม
+    zIndex: 30
   },
   artboard5_1: {
     width: "100%",
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 10
+    zIndex: 0
   },
   knowing: {
     color: Colors.primary2,
@@ -136,15 +137,14 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
   artboard5: {
+    marginTop: -32,
     width: "100%",
-    height: "100%",
-    position: "absolute",
-    zIndex: 10,
-    bottom: -260,
+    height: 250,
+    zIndex: 1,
     resizeMode: "contain", // ใช้ 'contain' เพื่อรักษาสัดส่วนของภาพ
   },
   boxTextBottom: {
-    marginTop: 100,
+    marginTop: -110,
     height: 100,
     backgroundColor: "#E6DFF1",
     marginHorizontal: 16,
