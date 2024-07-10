@@ -1,15 +1,17 @@
 // useRewardedAd.js
 import { useState, useEffect } from 'react';
 import { RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads';
+import { View, StyleSheet, Text, Platform } from 'react-native';
 
-const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+
+const adUnitId = __DEV__ ? TestIds.REWARDED : Platform.OS ? 'ca-app-pub-6813229715486122/9822306975' : 'ca-app-pub-6813229715486122/9847740591';
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
     keywords: ['fashion', 'clothing'],
 });
 
 export const useRewardedAd = () => {
-    const [loaded, setLoaded] = useState(true);
+    const [loaded, setLoaded] = useState(false);
     const [loadedPlay, setLoadedPlay] = useState(true);
 
     useEffect(() => {
@@ -29,10 +31,13 @@ export const useRewardedAd = () => {
 
         // Unsubscribe from events on unmount
         return () => {
+            setLoadedPlay(true)
             unsubscribeLoaded();
             unsubscribeEarned();
+
+
         };
-    }, []);
+    }, [loaded]);
 
     const showAd = () => {
         if (loaded) {
@@ -42,5 +47,10 @@ export const useRewardedAd = () => {
         }
     };
 
-    return { showAd, loaded, loadedPlay };
+    const resetLoadedPlay = () => {
+        setLoadedPlay(true); // เมื่อต้องการรีเซ็ต loadedPlay เป็น true อีกครั้ง
+    };
+
+
+    return { showAd, loaded, loadedPlay, resetLoadedPlay };
 };

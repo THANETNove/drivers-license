@@ -34,7 +34,7 @@ const StepsTest = () => {
     const attemptsIntervalRef = useRef(null);
     const countdownIntervalRef = useRef(null);
     const { indexImage } = useSelector(selectUser); // ดึงค่า indexImage จาก Redux state
-    const { showAd, loaded, loadedPlay } = useRewardedAd();
+    const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
 
 
 
@@ -122,6 +122,7 @@ const StepsTest = () => {
     };
 
     const resetGame = () => {
+        resetLoadedPlay();
         setRandomImage(null);
         setButtonIndex(null);
         setScore(0);
@@ -162,13 +163,7 @@ const StepsTest = () => {
     const scoreSteps = () => {
 
 
-
-
-
         console.log("loadedPlay", loadedPlay);
-
-
-
         return (
             <ScreenContainer>
                 <View style={styles.boxCenter2}>
@@ -201,7 +196,14 @@ const StepsTest = () => {
 
                     <View style={styles.attemptsContainer2}>
                         <View style={styles.boxBack}>
-                            <Pressable onPress={() => navigation.goBack()}>
+                            <Pressable /* onPress={() => navigation.goBack()} */
+                                onPress={() => {
+                                    if (!loadedPlay) {
+                                        navigation.goBack();
+                                    } else {
+                                        showAd();
+                                    }
+                                }}>
                                 <Text style={styles.textBack}>กลับสู่เมนู</Text>
                             </Pressable>
                         </View>
