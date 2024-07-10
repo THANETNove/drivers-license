@@ -13,6 +13,8 @@ import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser, setIndexImage } from '../../../redux/userSlice';
 
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
+
 
 const StepsTest = () => {
     const navigation = useNavigation(); // Initialize navigation
@@ -32,7 +34,7 @@ const StepsTest = () => {
     const attemptsIntervalRef = useRef(null);
     const countdownIntervalRef = useRef(null);
     const { indexImage } = useSelector(selectUser); // ดึงค่า indexImage จาก Redux state
-
+    const { showAd, loaded, loadedPlay } = useRewardedAd();
 
 
 
@@ -158,6 +160,15 @@ const StepsTest = () => {
     };
 
     const scoreSteps = () => {
+
+
+
+
+
+        console.log("loadedPlay", loadedPlay);
+
+
+
         return (
             <ScreenContainer>
                 <View style={styles.boxCenter2}>
@@ -195,7 +206,13 @@ const StepsTest = () => {
                             </Pressable>
                         </View>
                         <View style={styles.boxBack}>
-                            <Pressable onPress={resetGame}>
+                            <Pressable onPress={() => {
+                                if (!loadedPlay) {
+                                    resetGame();
+                                } else {
+                                    showAd();
+                                }
+                            }}>
                                 <Text style={styles.textBack}>ทดสอบใหม่</Text>
                             </Pressable>
                         </View>
@@ -327,6 +344,7 @@ const StepsTest = () => {
     return (
         <View style={styles.container}>
             {!stepsImgCountdown ? imageSteps() : isFinished ? scoreSteps() : testSteps()}
+
         </View>
     );
 }
