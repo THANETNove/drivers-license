@@ -493,7 +493,7 @@ export default function App() {
             })}
           />
         </Stack.Navigator>
-        {/*    <Box /> */}
+        <Box />
       </View>
     </Provider>
   );
