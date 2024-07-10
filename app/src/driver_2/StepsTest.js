@@ -33,7 +33,7 @@ const StepsTest = () => {
     const [stepsImgCountdown, setStepsImgCountdown] = useState(false);
     const attemptsIntervalRef = useRef(null);
     const countdownIntervalRef = useRef(null);
-    const { indexImage } = useSelector(selectUser); // ดึงค่า indexImage จาก Redux state
+    const { indIma } = useSelector(selectUser); // ดึงค่า indexImage จาก Redux state
     const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
 
 
@@ -53,10 +53,10 @@ const StepsTest = () => {
     ];
 
 
-    const getRandomImage = (idImage) => {
+    const getRandomImage = () => {
 
         const filteredImages = imagesRandom.filter(image =>
-            (randomImage ? image.id !== indexImage : true)
+            (randomImage ? image.id !== indIma : true)
         );
 
         const randomIndex = Math.floor(Math.random() * filteredImages.length);
@@ -75,7 +75,7 @@ const StepsTest = () => {
 
     useEffect(() => {
 
-    }, [indexImage]);
+    }, []);
 
 
     useEffect(() => {
@@ -96,7 +96,7 @@ const StepsTest = () => {
 
     const startCountdown = () => {
 
-        getRandomImage(indexImage); // เรียกใช้ getRandomImage ด้วยค่า indexImage ปัจจุบัน
+        getRandomImage(); // เรียกใช้ getRandomImage ด้วยค่า indexImage ปัจจุบัน
 
         countdownIntervalRef.current = setInterval(() => {
             setCountdown(prev => {
@@ -107,7 +107,7 @@ const StepsTest = () => {
                     setAttempts(attempts => {
                         if (attempts < 5) {
                             setButtonPressed(false); // Reset button press state for the new attempt
-                            getRandomImage(indexImage);
+                            getRandomImage(indIma);
                             return attempts + 1;
                         } else {
                             clearInterval(countdownIntervalRef.current);

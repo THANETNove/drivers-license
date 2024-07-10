@@ -4,7 +4,7 @@ const initialState = {
     user: null,
     loading: false,
     error: null,
-    indexImage: 0 // ค่าเริ่มต้นของ indexImage
+    indIma: 0 // ค่าเริ่มต้นของ indexImage
 };
 
 const userSlice = createSlice({
@@ -21,7 +21,7 @@ const userSlice = createSlice({
             state.error = action.payload;
         },
         setIndexImage: (state, action) => {
-            state.indexImage = action.payload;
+            state.indIma = action.payload;
         },
     },
 });
