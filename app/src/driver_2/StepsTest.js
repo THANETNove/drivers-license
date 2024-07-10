@@ -162,8 +162,6 @@ const StepsTest = () => {
 
     const scoreSteps = () => {
 
-
-        console.log("loadedPlay", loadedPlay);
         return (
             <ScreenContainer>
                 <View style={styles.boxCenter2}>
@@ -195,29 +193,29 @@ const StepsTest = () => {
                     {score >= 3 ? <Text style={styles.sourceUser}>ผ่านการทดสอบ</Text> : <Text style={styles.sourceUser}>ไม่ผ่านการทดสอบ</Text>}
 
                     <View style={styles.attemptsContainer2}>
-                        <View style={styles.boxBack}>
-                            <Pressable /* onPress={() => navigation.goBack()} */
-                                onPress={() => {
-                                    if (!loadedPlay) {
-                                        navigation.goBack();
-                                    } else {
-                                        showAd();
-                                    }
-                                }}>
-                                <Text style={styles.textBack}>กลับสู่เมนู</Text>
-                            </Pressable>
-                        </View>
-                        <View style={styles.boxBack}>
-                            <Pressable onPress={() => {
+
+                        <Pressable style={styles.boxBack}
+                            onPress={() => {
                                 if (!loadedPlay) {
-                                    resetGame();
+                                    navigation.goBack();
                                 } else {
                                     showAd();
                                 }
                             }}>
-                                <Text style={styles.textBack}>ทดสอบใหม่</Text>
-                            </Pressable>
-                        </View>
+                            <Text style={styles.textBack}>กลับสู่เมนู</Text>
+                        </Pressable>
+
+
+                        <Pressable style={styles.boxBack} onPress={() => {
+                            if (!loadedPlay) {
+                                resetGame();
+                            } else {
+                                showAd();
+                            }
+                        }}>
+                            <Text style={styles.textBack}>ทดสอบใหม่</Text>
+                        </Pressable>
+
                     </View>
                 </View>
             </ScreenContainer>
