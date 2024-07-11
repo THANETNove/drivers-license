@@ -12,6 +12,7 @@ import Category_5 from '../questionsCategory/category_5.json'; // ปรับ�
 import Previous from "../../../assets/images/coverImg/Artboard63.png";
 import Next from "../../../assets/images/coverImg/Artboard64.png";
 import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
 
 
 const Questions_3 = ({ route, navigation }) => {
@@ -23,6 +24,7 @@ const Questions_3 = ({ route, navigation }) => {
     const [score, setScore] = useState(0);
     const [results, setResults] = useState({});
     const [statusTakeTheExam, setStatusTakeTheExam] = useState(true);
+    const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
 
     useEffect(() => {
         // Load questions from JSON file
@@ -171,7 +173,14 @@ const Questions_3 = ({ route, navigation }) => {
 
                     {
                         currentQuestionIndex === questions.length - 1 &&
-                        <Pressable style={styles.button} onPress={calculateScore}>
+                        <Pressable style={styles.button} /* onPress={calculateScore} */
+                            onPress={() => {
+                                if (!loadedPlay) {
+                                    calculateScore();
+                                } else {
+                                    showAd();
+                                }
+                            }}>
                             <Text style={styles.buttonText}>ตรวจสอบคะแนน</Text>
                         </Pressable>
                     }
