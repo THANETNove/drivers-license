@@ -119,8 +119,6 @@ const RandomQuestions = ({ route, navigation }) => {
 
 
 
-    console.log("selectedAnswers", selectedAnswers);
-
 
     const takeTheExam = () => {
         return (

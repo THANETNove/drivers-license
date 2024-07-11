@@ -9,7 +9,7 @@ const Category = ({ route, navigation }) => {
 
     const { category, categoryIndex, selectedSet, indexSet } = route.params;
 
-    console.log("set", category, categoryIndex, selectedSet, indexSet);
+
 
     const buttons = [
         {

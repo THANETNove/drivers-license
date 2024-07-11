@@ -152,10 +152,6 @@ const RandomQuestions = ({ route, navigation }) => {
     }, [selectedAnswers]);
 
 
-
-
-    console.log('answerDetails', answerDetails);
-
     const takeTheExam = () => {
         return (
             <View style={styles.container}>

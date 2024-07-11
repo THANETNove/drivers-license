@@ -74,8 +74,6 @@ const StepsTest = () => {
     }, [stepsImgCountdown]);
 
     useEffect(() => {
-
-        console.log("stepsImgCountdown", stepsImgCountdown);
         let interval;
         if (isCounting && stepsImgCountdown) {
             interval = setInterval(() => {
@@ -172,7 +170,6 @@ const StepsTest = () => {
 
     const handleButtonPress = (index) => {
 
-        console.log(index, prevRandom);
         if (!buttonPressed) {
             const isCorrect = index === prevRandom;
             setScore(prev => prev + (isCorrect ? 1 : 0));
@@ -250,9 +247,6 @@ const StepsTest = () => {
     }
 
     const testSteps = () => {
-        console.log("isCounting", isCounting);
-
-
 
         return (
             <ScreenContainer>

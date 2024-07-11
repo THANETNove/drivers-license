@@ -61,9 +61,7 @@ const Examination = () => {
                                                     selectedSet: set,
                                                     indexSet: setIndex + 1
                                                 });
-                                                console.log("loadedPlay", loadedPlay);
                                             } else {
-                                                console.log("loadedPlay", loadedPlay);
                                                 showAd();
                                             }
                                         }}

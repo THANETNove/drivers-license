@@ -7,10 +7,11 @@ import Animated56 from "../../../assets/images/coverImg/Artboard56.png";
 import Animated57 from "../../../assets/images/coverImg/Artboard57.png";
 import Animated58 from "../../../assets/images/coverImg/Artboard58.png";
 import Animated59 from "../../../assets/images/coverImg/Artboard59.png";
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
 
 
 const Capacity = ({ navigation }) => {
-
+    const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
 
 
     return (
@@ -20,7 +21,16 @@ const Capacity = ({ navigation }) => {
                 showsHorizontalScrollIndicator={false}>
                 <View style={styles.row}>
                     <View style={styles.box}>
-                        <Pressable onPress={() => navigation.navigate('StepsTest')}>
+                        <Pressable
+                            onPress={() => {
+                                if (!loadedPlay) {
+                                    navigation.navigate('StepsTest');
+                                } else {
+                                  
+                                    showAd();
+                                }
+                            }}
+                        /* onPress={() => navigation.navigate('StepsTest')} */>
                             <Image
                                 source={Animated56} // ใช้ source แทน src
                                 style={styles.image} // กำหนดขนาดของภาพ
