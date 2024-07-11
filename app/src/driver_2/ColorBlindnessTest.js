@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Colors } from '@/constants/Colors';
 import Previous from "../../../assets/images/coverImg/Artboard63.png";
 import Next from "../../../assets/images/coverImg/Artboard64.png";
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
 
 
 const ColorBlindnessTest = () => {
@@ -16,7 +17,7 @@ const ColorBlindnessTest = () => {
     const [summaryStep, setSummaryStep] = useState(0);
     const [stepsImg, setStepsImg] = useState(0);
     const [stepsImgCountdown, setStepsImgCountdown] = useState(false);
-
+    const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
 
 
 
@@ -222,10 +223,26 @@ const ColorBlindnessTest = () => {
                                 </View>
                             ))}
                         </View>
+
                         <TouchableOpacity
                             style={[styles.button, !answers[steps[currentStep]?.step] && styles.buttonDisabled]}
-                            onPress={handleNext}
-                            disabled={!answers[steps[currentStep]?.step]}
+                            /*    onPress={handleNext} */
+
+                            onPress={() => {
+                                if (currentStep < steps.length - 1) {
+                                    handleNext();
+                                } else {
+                                    if (loadedPlay) {
+                                        showAd();
+                                    } else {
+                                        handleNext();
+                                    }
+
+
+                                }
+                            }}
+
+                        /*  disabled={!answers[steps[currentStep]?.step]} */
                         >
                             <Text style={styles.buttonText}>{currentStep < steps.length - 1 ? 'ข้อถัดไป' : 'Submit'}</Text>
                         </TouchableOpacity>
@@ -249,8 +266,9 @@ const ColorBlindnessTest = () => {
                             <Text style={styles.buttonText}>กลับสู่เมนู</Text>
                         </TouchableOpacity>
                     </View>
-                )}
-            </ScrollView>
+                )
+                }
+            </ScrollView >
         )
     }
 

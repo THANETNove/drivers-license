@@ -11,9 +11,12 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
 });
 
 
+
 export const useRewardedAd = () => {
     const [loaded, setLoaded] = useState(false);
     const [loadedPlay, setLoadedPlay] = useState(true);
+
+
 
 
     useEffect(() => {
