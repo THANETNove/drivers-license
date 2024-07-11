@@ -10,6 +10,9 @@ import Previous from "../../../assets/images/coverImg/Artboard63.png";
 import Next from "../../../assets/images/coverImg/Artboard64.png";
 import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
 
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
+
+
 const ReactionTest = () => {
     const navigation = useNavigation(); // Initialize navigation
     const [score, setScore] = useState(0); // For counting score
@@ -26,6 +29,8 @@ const ReactionTest = () => {
     const [stepsImg, setStepsImg] = useState(0);
     const [stepsImgCountdown, setStepsImgCountdown] = useState(false);
     const animationIntervalRef = useRef(null);
+    const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
+
 
     useEffect(() => {
         if (!isPaused) {
@@ -94,8 +99,10 @@ const ReactionTest = () => {
     };
 
     const resetGame = () => {
+        resetLoadedPlay();
         setAnimationRuns(0);
         setAttempts(0);
+        setCanStop(false);
         setAttemptResults(Array(3).fill(null));
         setIsFinished(false);
         setScore(0);
@@ -151,16 +158,28 @@ const ReactionTest = () => {
                     {score >= 2 ? <Text style={styles.sourceUser}>ผ่านการทดสอบ</Text> : <Text style={styles.sourceUser}>ไม่ผ่านการทดสอบ</Text>}
 
                     <View style={styles.buttonContainer2}>
-                        <View style={styles.boxBack}>
-                            <Pressable onPress={() => navigation.goBack()}>
-                                <Text style={styles.textBack}>กลับสู่เมนู</Text>
-                            </Pressable>
-                        </View>
-                        <View style={styles.boxBack}>
-                            <Pressable onPress={resetGame}>
-                                <Text style={styles.textBack}>ทดสอบใหม่</Text>
-                            </Pressable>
-                        </View>
+
+                        <Pressable style={styles.boxBack} onPress={() => {
+                            if (!loadedPlay) {
+                                navigation.goBack();
+                            } else {
+                                showAd();
+                            }
+                        }}>
+                            <Text style={styles.textBack}>กลับสู่เมนู</Text>
+                        </Pressable>
+
+
+                        <Pressable style={styles.boxBack} onPress={() => {
+                            if (!loadedPlay) {
+                                resetGame();
+                            } else {
+                                showAd();
+                            }
+                        }}>
+                            <Text style={styles.textBack}>ทดสอบใหม่</Text>
+                        </Pressable>
+
                     </View>
                 </View>
             </ScreenContainer>
