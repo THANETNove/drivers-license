@@ -9,8 +9,11 @@ import Animated53 from "../../../assets/images/coverImg/Artboard53.png";
 import Animated54 from "../../../assets/images/coverImg/Artboard54.png";
 import Artboard5 from "../../../assets/images/coverImg/5.png";
 import Artboard86 from "../../../assets/images/coverImg/Artboard86.png";
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
+
 
 const Capacity = ({ navigation }) => {
+  const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
   return (
     <ScreenContainer >
       <ScrollView
@@ -25,7 +28,14 @@ const Capacity = ({ navigation }) => {
           />
           <View style={styles.row}>
             <View style={styles.box}>
-              <Pressable onPress={() => navigation.navigate('InterestingDriverLicense')}>
+              <Pressable
+                onPress={() => {
+                  if (!loadedPlay) {
+                    navigation.navigate('InterestingDriverLicense');
+                  } else {
+                    showAd();
+                  }
+                }}>
                 <Image
                   source={Animated51}
                   style={styles.image}
@@ -33,7 +43,14 @@ const Capacity = ({ navigation }) => {
               </Pressable>
             </View>
             <View style={styles.box}>
-              <Pressable onPress={() => navigation.navigate('QualificationsTaker')}>
+              <Pressable
+                onPress={() => {
+                  if (!loadedPlay) {
+                    navigation.navigate('QualificationsTaker');
+                  } else {
+                    showAd();
+                  }
+                }}>
                 <Image
                   source={Animated52}
                   style={styles.image}
@@ -46,7 +63,15 @@ const Capacity = ({ navigation }) => {
 
           <View style={styles.row}>
             <View style={styles.box}>
-              <Pressable onPress={() => navigation.navigate('StepsDriversLicense')}>
+              <Pressable
+                onPress={() => {
+                  if (!loadedPlay) {
+                    navigation.navigate('StepsDriversLicense');
+                  } else {
+                    showAd();
+                  }
+                }}
+              >
                 <Image
                   source={Animated53}
                   style={styles.image}
@@ -54,7 +79,15 @@ const Capacity = ({ navigation }) => {
               </Pressable>
             </View>
             <View style={styles.box}>
-              <Pressable onPress={() => navigation.navigate('PrepareBeforeExam')}>
+              <Pressable
+                onPress={() => {
+                  if (!loadedPlay) {
+                    navigation.navigate('PrepareBeforeExam');
+                  } else {
+                    showAd();
+                  }
+                }}
+              >
                 <Image
                   source={Animated54}
                   style={styles.image}

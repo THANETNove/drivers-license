@@ -47,12 +47,6 @@ const Examination = () => {
                                 <View style={styles.boxSet}>
                                     <Pressable
                                         key={setIndex}
-                                        /*    onPress={() => navigation.navigate('Questions', {
-                                               category: categoric.category,
-                                               categoryIndex: categoric.categoryIndex,
-                                               selectedSet: set,
-                                               indexSet: setIndex + 1
-                                           })} */
                                         onPress={() => {
                                             if (!loadedPlay) {
                                                 navigation.navigate('Questions', {

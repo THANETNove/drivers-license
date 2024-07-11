@@ -29,10 +29,7 @@ const ClipTeachingPracticePoses = () => {
 
                         showAd();
                     }
-                }}
-            /* onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 1 })} */ style={styles.box_1} />
-
-
+                }} style={styles.box_1} />
             <Pressable onPress={() => {
                 if (!loadedPlay) {
                     navigation.navigate('DriverLicenseExaminationProcess', { id: 2 });
@@ -41,8 +38,7 @@ const ClipTeachingPracticePoses = () => {
 
                     showAd();
                 }
-            }}
-                /* onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 2 })} */ style={styles.box_2} />
+            }} style={styles.box_2} />
 
 
 
