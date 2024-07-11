@@ -6,30 +6,40 @@ import { View, StyleSheet, Text, Platform } from 'react-native';
 const adUnitId = __DEV__ ? TestIds.REWARDED : Platform.OS ? 'ca-app-pub-6813229715486122/9822306975' : 'ca-app-pub-6813229715486122/9847740591';
 
 
-const rewarded = RewardedAd.createForAdRequest(adUnitId, {
+/* const rewarded = RewardedAd.createForAdRequest(adUnitId, {
+    keywords: ['fashion', 'clothing'],
+}); */
+const createRewardedAd = () => RewardedAd.createForAdRequest(adUnitId, {
     keywords: ['fashion', 'clothing'],
 });
+
 
 
 
 export const useRewardedAd = () => {
     const [loaded, setLoaded] = useState(false);
     const [loadedPlay, setLoadedPlay] = useState(true);
+    const [rewarded, setRewarded] = useState(createRewardedAd());
 
 
 
 
     useEffect(() => {
-        const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
-            setLoaded(true);
-        });
-        const unsubscribeEarned = rewarded.addAdEventListener(
-            RewardedAdEventType.EARNED_REWARD,
-            reward => {
-                /*  console.log('User earned reward of ', reward); */
-                setLoadedPlay(false);
-            },
-        );
+        /*   const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
+              setLoaded(true);
+          });
+          const unsubscribeEarned = rewarded.addAdEventListener(
+              RewardedAdEventType.EARNED_REWARD,
+              reward => {
+                  setLoadedPlay(false);
+              },
+          ); */
+
+        const onAdLoaded = () => setLoaded(true);
+        const onAdEarned = () => setLoadedPlay(false);
+
+        const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, onAdLoaded);
+        const unsubscribeEarned = rewarded.addAdEventListener(RewardedAdEventType.EARNED_REWARD, onAdEarned);
 
         // Start loading the rewarded ad straight away
         rewarded.load();
