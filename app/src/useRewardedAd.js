@@ -45,12 +45,14 @@ export const useRewardedAd = () => {
 
     const showAd = () => {
 
-        /*  if (loaded) {
-             rewarded.show();
-         } else {
-             rewarded.load();
-         } */
-        rewarded.show();
+        if (loaded) {
+            /*  rewarded.show(); */
+            rewarded.show().then(() => {
+                rewarded.load();
+            });
+        } else {
+            rewarded.load();
+        }
     };
 
     const resetLoadedPlay = () => {

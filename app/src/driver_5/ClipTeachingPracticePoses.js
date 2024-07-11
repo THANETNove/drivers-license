@@ -7,12 +7,12 @@ import Artboard7_100 from "../../../assets/images/coverImg/Artboard7-100.jpg";
 import Artboard5_64 from "../../../assets/images/coverImg/Artboard5_64.png";
 
 import { useNavigation } from '@react-navigation/native'; // ใช้ useNavigation จาก react-navigation
-
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
 
 
 const ClipTeachingPracticePoses = () => {
     const navigation = useNavigation();
-
+    const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
     return (
         <ScreenContainer>
 
@@ -20,10 +20,29 @@ const ClipTeachingPracticePoses = () => {
                 source={Artboard7_100} // ใช้ source แทน src
                 style={styles.artboard7_100}
             />
-            <Pressable onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 1 })} style={styles.box_1} />
+            <Pressable
+                onPress={() => {
+                    if (!loadedPlay) {
+                        navigation.navigate('DriverLicenseExaminationProcess', { id: 1 });
+
+                    } else {
+
+                        showAd();
+                    }
+                }}
+            /* onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 1 })} */ style={styles.box_1} />
 
 
-            <Pressable onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 2 })} style={styles.box_2} />
+            <Pressable onPress={() => {
+                if (!loadedPlay) {
+                    navigation.navigate('DriverLicenseExaminationProcess', { id: 2 });
+
+                } else {
+
+                    showAd();
+                }
+            }}
+                /* onPress={() => navigation.navigate('DriverLicenseExaminationProcess', { id: 2 })} */ style={styles.box_2} />
 
 
 

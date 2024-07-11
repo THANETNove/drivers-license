@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
 import Artboard7_100 from "../../../assets/images/coverImg/Artboard8-100.jpg";
 import Artboard5_64 from "../../../assets/images/coverImg/Artboard5_64.png";
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
 
 import { useNavigation } from '@react-navigation/native'; // ใช้ useNavigation จาก react-navigation
 
@@ -12,6 +13,7 @@ import { useNavigation } from '@react-navigation/native'; // ใช้ useNaviga
 
 const ClipTeachingPracticePoses = () => {
     const navigation = useNavigation();
+    const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
 
     return (
         <ScreenContainer>
@@ -20,10 +22,30 @@ const ClipTeachingPracticePoses = () => {
                 source={Artboard7_100} // ใช้ source แทน src
                 style={styles.artboard7_100}
             />
-            <Pressable onPress={() => navigation.navigate('RenewDriverLicenseProcess', { id: 1 })} style={styles.box_1} />
+            <Pressable
+                onPress={() => {
+                    if (!loadedPlay) {
+                        navigation.navigate('RenewDriverLicenseProcess', { id: 1 });
+
+                    } else {
+
+                        showAd();
+                    }
+                }}
+            /* onPress={() => navigation.navigate('RenewDriverLicenseProcess', { id: 1 })} */ style={styles.box_1} />
 
 
-            <Pressable onPress={() => navigation.navigate('RenewDriverLicenseProcess', { id: 2 })} style={styles.box_2} />
+            <Pressable
+                onPress={() => {
+                    if (!loadedPlay) {
+                        navigation.navigate('RenewDriverLicenseProcess', { id: 2 });
+
+                    } else {
+
+                        showAd();
+                    }
+                }}
+            /* onPress={() => navigation.navigate('RenewDriverLicenseProcess', { id: 2 })} */ style={styles.box_2} />
 
 
 
