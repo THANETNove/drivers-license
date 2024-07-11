@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native'; // ใช้ useNavigation จาก react-navigation
 import { Colors } from "@/constants/Colors"; // ปรับเส้นทางตามที่ถูกต้อง
 import ScreenContainer from "../NavigationProvider"; // ปรับเส้นทางตามที่ถูกต้อง
 import categories from "../categoriesArray"; // ปรับเส้นทางตามที่ถูกต้อง
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
 
 const Examination = () => {
     const navigation = useNavigation();
-
+    const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
     // ปรับโครงสร้างของปุ่มให้ sets เป็น array
+
+
 
 
     return (
@@ -44,12 +47,26 @@ const Examination = () => {
                                 <View style={styles.boxSet}>
                                     <Pressable
                                         key={setIndex}
-                                        onPress={() => navigation.navigate('Questions', {
-                                            category: categoric.category,
-                                            categoryIndex: categoric.categoryIndex,
-                                            selectedSet: set,
-                                            indexSet: setIndex + 1
-                                        })}
+                                        /*    onPress={() => navigation.navigate('Questions', {
+                                               category: categoric.category,
+                                               categoryIndex: categoric.categoryIndex,
+                                               selectedSet: set,
+                                               indexSet: setIndex + 1
+                                           })} */
+                                        onPress={() => {
+                                            if (!loadedPlay) {
+                                                navigation.navigate('Questions', {
+                                                    category: categoric.category,
+                                                    categoryIndex: categoric.categoryIndex,
+                                                    selectedSet: set,
+                                                    indexSet: setIndex + 1
+                                                });
+                                                console.log("loadedPlay", loadedPlay);
+                                            } else {
+                                                console.log("loadedPlay", loadedPlay);
+                                                showAd();
+                                            }
+                                        }}
                                     >
 
                                         <View style={styles.categorySet}>

@@ -12,7 +12,7 @@ import Category_2 from '../questionsCategory/category_2.json'; // ปรับ�
 import Category_3 from '../questionsCategory/category_3.json'; // ปรับเส้นทางให้ถูกต้อง
 import Category_4 from '../questionsCategory/category_4.json'; // ปรับเส้นทางให้ถูกต้อง
 import Category_5 from '../questionsCategory/category_5.json'; // ปรับเส้นทางให้ถูกต้อง
-
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
 
 
 
@@ -23,14 +23,15 @@ const Questions = ({ route, navigation }) => {
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [score, setScore] = useState(0);
     const [results, setResults] = useState({});
+    const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
+
+
+
 
     useEffect(() => {
-        // Load questions from JSON file
 
 
         if (categoryIndex == 1) {
-            console.log("11",);
-
             setQuestions(Category_1[indexSet - 1]);
         }
         if (categoryIndex == 2) {
