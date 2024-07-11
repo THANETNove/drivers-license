@@ -14,6 +14,8 @@ import Next from "../../../assets/images/coverImg/Artboard64.png";
 import Artboard90 from "../../../assets/images/coverImg/Artboard90.png";
 import Artboard75 from "../../../assets/images/coverImg/Artboard75.png";
 import red_cross from "../../../assets/images/coverImg/red_cross.webp";
+import { useRewardedAd } from '../useRewardedAd'; // นำเข้า useRewardedAd
+
 
 
 const RandomQuestions = ({ route, navigation }) => {
@@ -27,6 +29,7 @@ const RandomQuestions = ({ route, navigation }) => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [answerDetails, setAnswerDetails] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
+    const { showAd, loaded, loadedPlay, resetLoadedPlay } = useRewardedAd();
 
     useEffect(() => {
         // Function to flatten nested arrays
@@ -240,7 +243,14 @@ const RandomQuestions = ({ route, navigation }) => {
                         disabled={!isButtonDisabled} >
                         <Text style={styles.buttonText}>ตรวจสอบ</Text>
                     </Pressable>
-                    <Pressable style={styles.button} onPress={() => navigation.goBack()}>
+                    <Pressable style={styles.button}/*  onPress={() => navigation.goBack()} */
+                        onPress={() => {
+                            if (!loadedPlay) {
+                                navigation.goBack();
+                            } else {
+                                showAd();
+                            }
+                        }}>
                         <Text style={styles.buttonText}>กลับสู่เมนู</Text>
                     </Pressable>
 
